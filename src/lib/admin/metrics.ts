@@ -67,7 +67,10 @@ export function computeAdminMetrics(input: AdminInput) {
 
   // Funil das aulas
   const doneByLesson = new Map<string, number>();
-  for (const l of input.lessons) if (l.done) doneByLesson.set(l.lessonId, (doneByLesson.get(l.lessonId) ?? 0) + 1);
+  // Ramos do rizoma ficam no mesmo lugar, com prefixo "ramo-"; contados à parte.
+  const isBranch = (id: string) => id.startsWith('ramo-');
+  for (const l of input.lessons) if (l.done && !isBranch(l.lessonId)) doneByLesson.set(l.lessonId, (doneByLesson.get(l.lessonId) ?? 0) + 1);
+  const branchesDone = input.lessons.filter((l) => l.done && isBranch(l.lessonId)).length;
   const funnel = input.lessonOrder.map((l) => ({ ...l, users: doneByLesson.get(l.id) ?? 0 }));
 
   // Tópicos: questões, acerto de primeira e alunos por nível do treino
@@ -99,7 +102,7 @@ export function computeAdminMetrics(input: AdminInput) {
 
   // Alunos (mais recentes primeiro)
   const lessonsDone = new Map<string, number>();
-  for (const l of input.lessons) if (l.done) lessonsDone.set(l.userId, (lessonsDone.get(l.userId) ?? 0) + 1);
+  for (const l of input.lessons) if (l.done && !isBranch(l.lessonId)) lessonsDone.set(l.userId, (lessonsDone.get(l.userId) ?? 0) + 1);
   const students = [...input.users]
     .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
     .map((u) => {
@@ -121,6 +124,7 @@ export function computeAdminMetrics(input: AdminInput) {
       questions: totalQuestions,
       accuracy: totalQuestions ? totalCorrect / totalQuestions : null,
       lessonsDone: [...doneByLesson.values()].reduce((s, x) => s + x, 0),
+      branchesDone,
       xp: input.days.reduce((s, d) => s + d.xp, 0),
     },
     activeByDay,

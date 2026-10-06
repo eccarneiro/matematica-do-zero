@@ -22,6 +22,7 @@ const input: AdminInput = {
     { userId: 'a', lessonId: 'l2', done: true },
     { userId: 'b', lessonId: 'l1', done: true },
     { userId: 'b', lessonId: 'l2', done: false },
+    { userId: 'b', lessonId: 'ramo-quipus', done: true },
   ],
   topics: [
     { userId: 'a', topicId: 't1', correct: 8, total: 10, level: 2 },
@@ -35,7 +36,7 @@ describe('computeAdminMetrics', () => {
   const m = computeAdminMetrics(input);
 
   it('conta cadastrados, ativos e novos', () => {
-    expect(m.totals).toMatchObject({ users: 3, activeToday: 1, active7: 2, active30: 2, new7: 2, xp: 140, lessonsDone: 3, questions: 12 });
+    expect(m.totals).toMatchObject({ users: 3, activeToday: 1, active7: 2, active30: 2, new7: 2, xp: 140, lessonsDone: 3, branchesDone: 1, questions: 12 });
     expect(m.totals.accuracy).toBeCloseTo(9 / 12);
   });
 

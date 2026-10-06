@@ -63,10 +63,14 @@ export const progressStore = {
     return () => changeListeners.delete(l);
   },
 
-  /** Marca a aula; a primeira conclusão vale XP. Devolve o XP ganho. */
+  /**
+   * Marca a aula (ou o ramo, com id "ramo-…"); a primeira conclusão vale XP.
+   * Devolve o XP ganho.
+   */
   setLessonDone(id: string, done: boolean): number {
     const p = read();
-    const xp = done && !p.lessons[id]?.done ? XP.lessonDone : 0;
+    const reward = id.startsWith('ramo-') ? XP.branchDone : XP.lessonDone;
+    const xp = done && !p.lessons[id]?.done ? reward : 0;
     write(
       { ...p, lessons: { ...p.lessons, [id]: { done, updatedAt: Date.now() } }, days: xp ? addXp(p.days, xp) : p.days },
       { kind: 'lesson', id },

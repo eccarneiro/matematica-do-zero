@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { IconPractice, IconSearch, IconTrail, IconUser } from '@/components/ui/icons';
+import { IconMap, IconPractice, IconSearch, IconTrail, IconUser } from '@/components/ui/icons';
 import { NAV_ITEMS } from './nav';
 import { StatChips } from './GameStats';
 import { ThemeToggle } from './ThemeToggle';
 import { FeedbackButton } from '@/components/feedback/FeedbackButton';
 
-const ICONS = { trail: IconTrail, practice: IconPractice, search: IconSearch, user: IconUser } as const;
+const ICONS = { trail: IconTrail, map: IconMap, practice: IconPractice, search: IconSearch, user: IconUser } as const;
 
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
@@ -77,7 +77,7 @@ export function TabBar() {
   return (
     <nav
       aria-label="Navegação"
-      className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t-2 border-line bg-surface px-2 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t-2 border-line bg-surface px-2 pt-1.5 pb-[calc(6px+env(safe-area-inset-bottom))] md:hidden"
     >
       {NAV_ITEMS.map((item) => {
         const active = item.match(pathname);
@@ -90,7 +90,7 @@ export function TabBar() {
             aria-label={item.label}
             className="flex flex-col items-center gap-0.5 py-1 text-[0.72rem] font-extrabold no-underline"
           >
-            <span className={`grid h-9 w-14 place-items-center rounded-xl border-2 ${active ? 'border-edge bg-indigo-soft text-indigo shadow-card' : 'border-transparent text-ink-3'}`}>
+            <span className={`grid h-9 w-12 place-items-center rounded-xl border-2 ${active ? 'border-edge bg-indigo-soft text-indigo shadow-card' : 'border-transparent text-ink-3'}`}>
               <Icon className="size-6" />
             </span>
             <span className={active ? 'text-ink' : 'text-ink-3'}>{item.label}</span>

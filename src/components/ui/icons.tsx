@@ -11,6 +11,16 @@ export const IconTrail = ({ className }: P) => (
   </svg>
 );
 
+export const IconMap = ({ className }: P) => (
+  <svg viewBox="0 0 24 24" aria-hidden className={className} {...stroke}>
+    <circle cx="6" cy="6" r="2.2" />
+    <circle cx="18" cy="8" r="2.2" />
+    <circle cx="8" cy="18" r="2.2" />
+    <circle cx="17" cy="17" r="1.6" />
+    <path d="M8 7l8 .8M7 8l.6 7.8M10 17.6l5.4-.4M17.6 10.2l-.4 5.2" />
+  </svg>
+);
+
 export const IconPractice = ({ className }: P) => (
   <svg viewBox="0 0 24 24" aria-hidden className={className} {...stroke}>
     <path d="M4 12h2m12 0h2M6.5 8v8M17.5 8v8M9 10v4M15 10v4M9 12h6" />

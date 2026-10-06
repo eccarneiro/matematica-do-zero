@@ -8,6 +8,7 @@ import { useMounted } from '@/lib/useMounted';
 import { XP } from '@/progress/model';
 import { useProgress } from '@/progress/store';
 import { Stamp } from '@/components/dashboard/Stamp';
+import { BRANCH_KINDS, branchKey, branchesFrom } from '@/content/branches';
 import { buildTrail, type NodeState, type TrailNode, type TrailUnit } from './trailModel';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
@@ -115,12 +116,14 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
           <Link href={`/aula/${lesson.id}`} className="text-[0.9rem] font-extrabold no-underline">Visitar fora de ordem ›</Link>
         )}
       </div>
+      <div className="md:hidden"><BranchChips lessonId={lesson.id} align="start" /></div>
     </article>
   );
   const place = (
     <div className={`hidden md:block ${side === 'left' ? 'text-left' : 'text-right'}`}>
       <p className={`font-display text-[2.2rem] leading-none font-bold ${isWalked(state) ? 'text-ink' : 'text-ink-3'}`}>{lesson.year}</p>
       <p className="mt-1 text-[0.75rem] font-extrabold tracking-[0.2em] text-ink-3 uppercase">{lesson.place}</p>
+      <BranchChips lessonId={lesson.id} align={side === 'left' ? 'start' : 'end'} />
     </div>
   );
 
@@ -171,6 +174,37 @@ function ReviewStop({ node, walkedBelow, last }: { node: Extract<TrailNode, { ki
         )}
       </div>
     </li>
+  );
+}
+
+/** Ramos laterais que saem de uma parada (rizoma). */
+function BranchChips({ lessonId, align }: { lessonId: string; align: 'start' | 'end' }) {
+  const progress = useProgress();
+  const list = branchesFrom(lessonId);
+  if (!list.length) return null;
+  return (
+    <ul className={`mt-3 flex flex-wrap gap-1.5 ${align === 'end' ? 'justify-end' : ''}`} aria-label="Ramos para aprofundar">
+      {list.map((b) => {
+        const k = BRANCH_KINDS[b.kind];
+        const done = !!progress.lessons[branchKey(b.id)]?.done;
+        const label = (
+          <>
+            <span aria-hidden>{done ? '✓' : k.icon}</span>
+            <span className="max-w-[220px] truncate">{b.title}</span>
+          </>
+        );
+        const cls = 'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.78rem] font-bold';
+        return (
+          <li key={b.id} className={`c-${k.color}`}>
+            {b.ready ? (
+              <Link href={`/ramo/${b.id}`} title={`${k.label}: ${b.title}`} className={`${cls} no-underline transition hover:-translate-y-px ${done ? 'border-accent bg-accent text-on-accent' : 'border-accent/40 bg-accent-soft text-accent'}`}>{label}</Link>
+            ) : (
+              <span title={`${k.label} (em breve)`} className={`${cls} border-dashed border-edge text-ink-3`}>{label}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

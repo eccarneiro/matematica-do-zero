@@ -32,7 +32,7 @@ export const LEVEL_UP_STREAK = 5;
 /** Acertos de primeira necessários no treino para concluir uma aula. */
 export const LESSON_GOAL = 5;
 export const DAILY_GOAL_XP = 50;
-export const XP = { firstTry: 10, secondTry: 5, lessonDone: 20 } as const;
+export const XP = { firstTry: 10, secondTry: 5, lessonDone: 20, branchDone: 15 } as const;
 
 export const emptyProgress = (): Progress => ({ lessons: {}, topics: {}, days: {} });
 

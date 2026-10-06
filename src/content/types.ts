@@ -62,3 +62,56 @@ export interface LessonContent {
   History: ComponentType;
   Idea: ComponentType;
 }
+
+/** Referência que comprova uma informação (ver issue #2). */
+export interface Source {
+  title: string;
+  /** Autor ou instituição. */
+  author: string;
+  kind: 'livro' | 'artigo' | 'museu' | 'enciclopédia' | 'fonte primária' | 'norma';
+  year?: string;
+  /** Só URLs conferidas (abrem e são o conteúdo certo). */
+  url?: string;
+}
+
+/**
+ * Tipos de ramo do rizoma. Os de leitura ("culturas", "filosofia",
+ * "conexao") são cartões; "aprofundar" e "desafio" trazem exercícios.
+ */
+export type BranchKind = 'aprofundar' | 'culturas' | 'filosofia' | 'conexao' | 'desafio';
+
+export const READING_KINDS: readonly BranchKind[] = ['culturas', 'filosofia', 'conexao'];
+
+/** Ramo lateral: aprofundamento opcional que sai de uma ou mais aulas. */
+export interface BranchRef {
+  id: string;
+  title: string;
+  kind: BranchKind;
+  summary: string;
+  /** Aulas do tronco de onde o ramo sai. */
+  from: string[];
+  /** Outras aulas ou ramos com que ele se conecta (arestas do rizoma). */
+  links: string[];
+  ready?: boolean;
+}
+
+/** Pergunta fixa de um ramo (diferente do treino infinito das aulas). */
+export interface QuizQuestion {
+  prompt: string;
+  answer: import('@/lib/math/answer').ExpectedAnswer;
+  /** Resposta como alguém digitaria (os testes conferem que é aceita). */
+  answerText?: string;
+  /** Explicação mostrada depois de responder. */
+  explanation: string;
+  keys?: import('@/generators/types').Key[];
+}
+
+export interface BranchMeta {
+  sources: Source[];
+  quiz?: QuizQuestion[];
+}
+
+export interface BranchContent {
+  meta: BranchMeta;
+  Body: ComponentType;
+}
