@@ -69,10 +69,10 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-on-accent: var(--on-accent);
-  --color-right: var(--right);
-  --color-right-soft: var(--right-soft);
-  --color-wrong: var(--wrong);
-  --color-wrong-soft: var(--wrong-soft);
+  --color-success: var(--right);
+  --color-success-soft: var(--right-soft);
+  --color-danger: var(--wrong);
+  --color-danger-soft: var(--wrong-soft);
   --color-warn: var(--warn);
   --color-warn-soft: var(--warn-soft);
   --color-coral: var(--coral);

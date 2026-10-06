@@ -228,7 +228,7 @@ function Choices({ state, onPick }: { state: PracticeState; onPick: (i: number) 
             disabled={state.finished}
             onClick={() => onPick(i)}
             className={`min-h-[52px] cursor-pointer rounded-[14px] border-2 px-3 py-2.5 text-[1.05rem] ${
-              isRight ? 'border-right bg-right-soft' : isWrong ? 'border-wrong bg-wrong-soft' : 'border-line bg-surface'
+              isRight ? 'border-success bg-success-soft' : isWrong ? 'border-danger bg-danger-soft' : 'border-line bg-surface'
             }`}
           >
             <MathText text={opt} />
@@ -295,8 +295,8 @@ function AnswerFields({
 
 function FeedbackBox({ feedback }: { feedback: NonNullable<PracticeState['feedback']> }) {
   const tone = {
-    right: 'bg-right-soft text-right',
-    wrong: 'bg-wrong-soft text-ink [&_b]:text-wrong',
+    right: 'bg-success-soft text-success',
+    wrong: 'bg-danger-soft text-ink [&_b]:text-danger',
     warn: 'bg-warn-soft text-ink',
   }[feedback.tone];
   return (
