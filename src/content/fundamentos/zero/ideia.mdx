@@ -1,0 +1,74 @@
+import { ValorPosicional } from '@/components/interactives/ValorPosicional';
+
+### Dez algarismos para qualquer número
+
+Com apenas dez símbolos, $0, 1, 2, \dots, 9$, conseguimos escrever qualquer número, por maior que seja. O segredo é que **o valor de um algarismo depende da posição** em que ele está. No número $555$, os três algarismos são iguais, mas valem coisas diferentes:
+
+$$
+555 = 500 + 50 + 5
+$$
+
+Isso é o **sistema de numeração decimal**, ou de **base 10**. As posições se chamam **casas** e, da direita para a esquerda, são:
+
+- **unidades** (vale $1$),
+- **dezenas** (vale $10$),
+- **centenas** (vale $100$),
+- **unidades de milhar** (vale $1{.}000$), e assim por diante.
+
+Cada casa vale **10 vezes** a casa à sua direita. Por isso, juntar 10 unidades é o mesmo que ter 1 dezena, e 10 dezenas formam 1 centena: é a "troca de 10 por 1".
+
+### O zero guarda o lugar
+
+E se uma casa não tiver nada? Pense em três centenas e cinco unidades, sem nenhuma dezena. Se escrevêssemos só "35", o $3$ cairia para a casa das dezenas e o número mudaria. A solução é colocar um **zero** na casa vazia:
+
+$$
+305 \quad\text{não é}\quad 35
+$$
+
+O zero funciona como um **guardador de lugar**: sozinho ele não acrescenta nada, mas segura cada algarismo na posição certa. Experimente: zere a casa das dezenas, passe do 9 para ver a troca e observe o que o zero faz.
+
+<ValorPosicional />
+
+### A forma decomposta
+
+Escrever um número como soma de suas casas é a **forma decomposta**. As casas vazias aparecem com o zero:
+
+$$
+\begin{aligned}
+3{.}045 &= 3 \cdot 1{.}000 + 0 \cdot 100 \\
+&\quad + 4 \cdot 10 + 5 \\
+&= 3{.}000 + 40 + 5
+\end{aligned}
+$$
+
+A parcela $0 \cdot 100$ vale zero e pode sumir da soma, mas o zero **não pode sumir do número**. Sem ele, $3{.}045$ viraria $345$.
+
+Compare com os romanos, que não tinham zero nem valor posicional: $3{.}045$ era MMMXLV. Cada símbolo tem um valor fixo, e fazer uma conta como MMMXLV vezes XII no papel é um pesadelo. Com casas e zero, a mesma conta usa sempre as mesmas regras, casa por casa.
+
+### O zero como número
+
+Além de guardar lugar, o zero é um **número**, o número de coisas de uma caixa vazia. E ele tem regras próprias:
+
+$$
+\begin{aligned}
+a + 0 &= a \\
+a - 0 &= a \\
+a - a &= 0 \\
+a \times 0 &= 0 \\
+0 \div a &= 0
+\end{aligned}
+$$
+
+(Na última, $a$ não pode ser zero; logo abaixo veremos por quê.) Somar ou tirar zero não muda nada. Multiplicar por zero sempre dá zero: $7$ grupos sem nada dentro somam nada. E repartir nada entre $5$ pessoas dá nada para cada uma: $0 \div 5 = 0$.
+
+### Por que não se divide por zero
+
+Dividir é desfazer a multiplicação. Dizer que $12 \div 3 = 4$ é o mesmo que dizer que $4 \times 3 = 12$. Então, quanto seria $5 \div 0$? Precisaríamos de um número que, **vezes zero**, desse $5$:
+
+$$
+? \times 0 = 5
+$$
+
+Só que qualquer número vezes zero dá zero, nunca $5$. Não existe resposta. E $0 \div 0$? Aí o problema é o contrário: $1 \times 0 = 0$, $7 \times 0 = 0$, $100 \times 0 = 0$... **todo** número serviria, e uma conta precisa ter uma resposta só. Por isso, em matemática, **a divisão por zero não é definida**.
+
+> **Cuidado com o erro comum:** $0 \div 5 = 0$ (repartir nada), mas $5 \div 0$ **não existe**. E não confunda o zero do meio com o zero à esquerda: em $305$ o zero é essencial, mas $007$ é só $7$, porque zeros à esquerda não guardam lugar de nada.

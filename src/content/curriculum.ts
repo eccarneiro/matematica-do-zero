@@ -17,7 +17,7 @@ export const curriculum: CourseModule[] = [
       { id: 'operacoes', topic: 'operacoes', ready: true, title: 'As quatro operações',
         summary: 'Somar, subtrair, multiplicar, dividir e a ordem certa de fazer as contas.',
         keywords: 'adição subtração multiplicação divisão resto expressões numéricas ordem das operações parênteses tabuada' },
-      { id: 'zero', title: 'O zero',
+      { id: 'zero', topic: 'zero', ready: true, title: 'O zero',
         summary: 'O número que é “nada” e mudou a matemática para sempre.',
         keywords: 'zero valor posicional sistema decimal algarismos indo-arábico divisão por zero Brahmagupta' },
       { id: 'fracoes', title: 'Frações',

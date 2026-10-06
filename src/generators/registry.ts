@@ -4,6 +4,7 @@ import type { Generator } from './types';
 export const generatorLoaders = {
   inteiros: () => import('./inteiros'),
   operacoes: () => import('./operacoes'),
+  zero: () => import('./zero'),
 } satisfies Record<string, () => Promise<{ default: Generator }>>;
 
 export type TopicId = keyof typeof generatorLoaders;
