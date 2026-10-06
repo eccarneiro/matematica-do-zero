@@ -44,6 +44,11 @@ const loaders: Record<string, () => Promise<LessonContent>> = {
     () => import('./fundamentos/porcentagem/historia.mdx'),
     () => import('./fundamentos/porcentagem/ideia.mdx'),
   ),
+  'potencias-raizes': lesson(
+    () => import('./fundamentos/potencias-raizes/meta'),
+    () => import('./fundamentos/potencias-raizes/historia.mdx'),
+    () => import('./fundamentos/potencias-raizes/ideia.mdx'),
+  ),
 };
 
 export function hasLessonContent(lessonId: string): boolean {

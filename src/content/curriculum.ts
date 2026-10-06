@@ -29,7 +29,7 @@ export const curriculum: CourseModule[] = [
       { id: 'porcentagem', topic: 'porcentagem', ready: true, title: 'Porcentagem',
         summary: 'Uma fração com denominador 100 que está em todo lugar.',
         keywords: 'porcentagem por cento desconto aumento juros taxa' },
-      { id: 'potencias-raizes', title: 'Potências e raízes',
+      { id: 'potencias-raizes', topic: 'potencias', ready: true, title: 'Potências e raízes',
         summary: 'Multiplicações repetidas e o caminho de volta.',
         keywords: 'potência expoente base raiz quadrada cúbica radiciação notação científica' },
     ],

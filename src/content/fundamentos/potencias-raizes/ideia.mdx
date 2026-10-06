@@ -1,0 +1,94 @@
+import { QuadradoPotencia } from '@/components/interactives/QuadradoPotencia';
+
+### Potência é multiplicação repetida
+
+Assim como a multiplicação é uma soma repetida, a **potência** é uma multiplicação repetida:
+
+$$
+2^5 = \underbrace{2 \cdot 2 \cdot 2 \cdot 2 \cdot 2}_{5\ \text{fatores}} = 32
+$$
+
+O número de baixo é a **base** (quem se repete) e o de cima é o **expoente** (quantas vezes ela aparece). Lemos "dois elevado à quinta". Dois casos têm nome próprio, vindos da geometria:
+
+- $a^2$ é "$a$ **ao quadrado**": a área de um quadrado de lado $a$.
+- $a^3$ é "$a$ **ao cubo**": o volume de um cubo de aresta $a$.
+
+### A raiz desfaz a potência
+
+A **raiz quadrada** responde à pergunta ao contrário: *que número positivo, ao quadrado, dá 49?* Como $7^2 = 49$, temos $\sqrt{49} = 7$. No quadrado, é voltar da área para o lado.
+
+Números como $1, 4, 9, 16, 25, 36, \dots$ são os **quadrados perfeitos**: têm raiz inteira. Do mesmo jeito, a **raiz cúbica** desfaz o cubo: $\sqrt[3]{64} = 4$, porque $4^3 = 64$.
+
+Experimente: no modo quadrado, mude o lado e veja a área; no modo dobrar, veja como dobrar várias vezes cresce rápido.
+
+<QuadradoPotencia />
+
+### Sinais: os parênteses mandam
+
+Com base negativa, cada par de sinais de menos se cancela. Expoente **par** dá resultado positivo; expoente **ímpar** mantém o sinal:
+
+$$
+\begin{aligned}
+(-2)^2 &= (-2)\cdot(-2) = 4\\
+(-2)^3 &= (-2)\cdot(-2)\cdot(-2) = -8
+\end{aligned}
+$$
+
+Mas atenção: sem parênteses, o expoente vale **só para o número**, e o sinal fica de fora. Então $-2^2 = -(2 \cdot 2) = -4$.
+
+### Expoente 1, zero e negativo
+
+Olhe o padrão: cada vez que o expoente desce 1, **dividimos pela base**.
+
+$$
+\begin{aligned}
+2^3 &= 8 & 2^2 &= 4\\
+2^1 &= 2 & 2^0 &= 1\\
+2^{-1} &= \tfrac{1}{2} & 2^{-2} &= \tfrac{1}{4}
+\end{aligned}
+$$
+
+Daí saem três regras (para $a \neq 0$):
+
+- $a^1 = a$: a base aparece uma vez só.
+- $a^0 = 1$: é $a \div a$.
+- $a^{-n} = \dfrac{1}{a^n}$: expoente negativo inverte a base. Por exemplo, $2^{-3} = \tfrac{1}{8}$.
+
+### Propriedades: contar fatores
+
+Com a **mesma base**, basta contar quantos fatores sobram:
+
+$$
+\begin{aligned}
+a^m \cdot a^n &= a^{m+n} & 2^3 \cdot 2^4 &= 2^7\\
+a^m \div a^n &= a^{m-n} & 5^6 \div 5^2 &= 5^4\\
+(a^m)^n &= a^{m \cdot n} & (3^2)^3 &= 3^6
+\end{aligned}
+$$
+
+Na primeira, são 3 fatores 2 seguidos de mais 4: ao todo, 7. Na divisão, os fatores de cima cancelam com os de baixo. Na potência de potência, são 3 grupos de 2 fatores.
+
+### Potências de 10 e notação científica
+
+Com base 10, o expoente conta os zeros: $10^4 = 10\,000$ e $10^{-3} = 0{,}001$. A **notação científica** escreve qualquer número como algo entre 1 e 10 vezes uma potência de 10:
+
+$$
+\begin{aligned}
+3\,400\,000 &= 3{,}4 \times 10^6\\
+0{,}00052 &= 5{,}2 \times 10^{-4}
+\end{aligned}
+$$
+
+O expoente é quantas casas a vírgula andou: positivo para números grandes, negativo para números pequenos.
+
+### Simplificar e estimar raízes
+
+A raiz de um produto é o produto das raízes. Para simplificar, procure o **maior quadrado perfeito** escondido dentro da raiz:
+
+$$
+\sqrt{72} = \sqrt{36 \cdot 2} = \sqrt{36}\cdot\sqrt{2} = 6\sqrt{2}
+$$
+
+E quando a raiz não é exata? Encaixe entre quadrados perfeitos vizinhos. Como $49 < 50 < 64$, temos $7 < \sqrt{50} < 8$, e bem pertinho do 7, já que 50 está colado no 49.
+
+> **Cuidado com os erros mais comuns:** $2^3$ não é $2 \cdot 3$: é $2 \cdot 2 \cdot 2 = 8$. E $-3^2 = -9$, enquanto $(-3)^2 = 9$. Por fim, a raiz **não** se distribui na soma: $\sqrt{9 + 16} = \sqrt{25} = 5$, mas $\sqrt{9} + \sqrt{16} = 3 + 4 = 7$.
