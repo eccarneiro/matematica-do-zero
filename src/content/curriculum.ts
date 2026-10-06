@@ -20,7 +20,7 @@ export const curriculum: CourseModule[] = [
       { id: 'zero', topic: 'zero', ready: true, title: 'O zero',
         summary: 'O número que é “nada” e mudou a matemática para sempre.',
         keywords: 'zero valor posicional sistema decimal algarismos indo-arábico divisão por zero Brahmagupta' },
-      { id: 'fracoes', title: 'Frações',
+      { id: 'fracoes', topic: 'fracoes', ready: true, title: 'Frações',
         summary: 'Partes de um todo: dividir, comparar e operar.',
         keywords: 'frações numerador denominador equivalentes simplificar soma mmc pizza egito' },
       { id: 'decimais', title: 'Números decimais',

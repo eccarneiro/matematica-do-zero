@@ -29,6 +29,11 @@ const loaders: Record<string, () => Promise<LessonContent>> = {
     () => import('./fundamentos/zero/historia.mdx'),
     () => import('./fundamentos/zero/ideia.mdx'),
   ),
+  'fracoes': lesson(
+    () => import('./fundamentos/fracoes/meta'),
+    () => import('./fundamentos/fracoes/historia.mdx'),
+    () => import('./fundamentos/fracoes/ideia.mdx'),
+  ),
 };
 
 export function hasLessonContent(lessonId: string): boolean {

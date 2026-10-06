@@ -1,0 +1,108 @@
+import { PizzaFracoes } from '@/components/interactives/PizzaFracoes';
+
+### Uma fração é uma parte de um todo
+
+Corte uma pizza em 4 pedaços **iguais** e coma 3. Você comeu $\tfrac{3}{4}$ (três quartos) da pizza:
+
+$$
+\frac{3}{4}
+$$
+
+- O **denominador** (embaixo, o 4) diz em quantos pedaços iguais o todo foi cortado.
+- O **numerador** (em cima, o 3) diz quantos pedaços você pegou.
+
+A palavra importante é **iguais**: um quarto só é um quarto se os quatro pedaços tiverem o mesmo tamanho. Experimente: escolha em quantas partes cortar e toque nos pedaços para pintar.
+
+<PizzaFracoes />
+
+Repare em dois casos especiais. Pintando todos os pedaços, $\tfrac{4}{4} = 1$: a pizza inteira. E com mais pedaços do que uma pizza tem, como $\tfrac{7}{4}$, você precisa de uma segunda pizza: isso é uma **fração imprópria**, maior que 1.
+
+### Uma fração também é uma divisão
+
+Se 3 pizzas são divididas igualmente entre 4 amigos, cada um fica com $\tfrac{3}{4}$ de pizza. O traço da fração é um sinal de dividir:
+
+$$
+\frac{3}{4} = 3 \div 4 = 0{,}75
+$$
+
+### Fração de uma quantidade
+
+Quanto é $\tfrac{3}{4}$ de 20 balas? Faça o que a fração manda: o **denominador** diz para dividir 20 em 4 partes iguais ($20 \div 4 = 5$) e o **numerador** diz para pegar 3 delas ($3 \cdot 5 = 15$).
+
+$$
+\frac{3}{4} \text{ de } 20 = 15
+$$
+
+### Frações equivalentes e simplificação
+
+Na pizza acima, abra **"Ver frações equivalentes"** com metade pintada. Cortando cada pedaço em dois, a parte pintada continua a mesma, mas agora são 2 de 4, ou 4 de 8:
+
+$$
+\frac{1}{2} = \frac{2}{4} = \frac{4}{8}
+$$
+
+Frações que representam a mesma quantidade são **equivalentes**. A regra: multiplicar (ou dividir) o numerador e o denominador **pelo mesmo número** não muda o valor da fração. Fazer o caminho de volta, dividindo, é **simplificar**:
+
+$$
+\frac{18}{24} = \frac{18 \div 6}{24 \div 6} = \frac{3}{4}
+$$
+
+Uma fração está na **forma mais simples** (irredutível) quando nenhum número além do 1 divide o numerador e o denominador ao mesmo tempo.
+
+### Comparar frações
+
+- **Mesmo denominador:** os pedaços têm o mesmo tamanho, então ganha quem tem mais. $\tfrac{5}{8} > \tfrac{3}{8}$.
+- **Mesmo numerador:** quanto maior o denominador, menor o pedaço. Uma pizza dividida entre 5 rende fatias menores do que dividida entre 3: $\tfrac{1}{3} > \tfrac{1}{5}$.
+- **Tudo diferente:** reescreva as duas com o mesmo denominador e compare os numeradores. $\tfrac{2}{3} = \tfrac{8}{12}$ e $\tfrac{3}{4} = \tfrac{9}{12}$, logo $\tfrac{3}{4} > \tfrac{2}{3}$.
+
+### Somar e subtrair
+
+Com o **mesmo denominador**, os pedaços são do mesmo tamanho: some (ou subtraia) os numeradores e mantenha o denominador. Dois quintos mais um quinto são três quintos:
+
+$$
+\frac{2}{5} + \frac{1}{5} = \frac{3}{5}
+$$
+
+Com **denominadores diferentes**, não dá para juntar direto: meios e terços são pedaços de tamanhos diferentes. Primeiro corte tudo em pedaços de um tamanho comum. O melhor tamanho vem do **mmc** (mínimo múltiplo comum) dos denominadores. Para $\tfrac{1}{2} + \tfrac{1}{3}$, o $\text{mmc}(2, 3) = 6$:
+
+$$
+\begin{aligned}
+\frac{1}{2} + \frac{1}{3} &= \frac{3}{6} + \frac{2}{6}\\
+&= \frac{5}{6}
+\end{aligned}
+$$
+
+### Multiplicar: fração de uma fração
+
+Quanto é a metade de $\tfrac{3}{4}$ de pizza? "De" vira vezes, e a conta é feita em linha: numerador com numerador, denominador com denominador.
+
+$$
+\frac{1}{2} \cdot \frac{3}{4} = \frac{1 \cdot 3}{2 \cdot 4} = \frac{3}{8}
+$$
+
+Faz sentido: cortando cada um dos 4 quartos ao meio, a pizza fica com 8 pedaços, e a metade dos 3 quartos são 3 desses pedaços.
+
+### Dividir: quantas vezes cabe?
+
+Quanto é $3 \div \tfrac{1}{4}$? Pense na pergunta "**quantos quartos cabem em 3 pizzas?**". Cada pizza tem 4 quartos, então em 3 pizzas cabem $3 \cdot 4 = 12$. Dividir por $\tfrac{1}{4}$ deu o mesmo que multiplicar por 4.
+
+Isso vale sempre: **dividir por uma fração é multiplicar pelo seu inverso** (a fração virada de cabeça para baixo).
+
+$$
+\begin{aligned}
+\frac{2}{3} \div \frac{4}{5} &= \frac{2}{3} \cdot \frac{5}{4}\\
+&= \frac{10}{12} = \frac{5}{6}
+\end{aligned}
+$$
+
+### Números mistos
+
+Uma fração imprópria pode ser escrita como **inteiros mais uma fração**. Em $\tfrac{7}{4}$ há 4 quartos que formam uma pizza inteira e sobram 3 quartos:
+
+$$
+\frac{7}{4} = 1\tfrac{3}{4}
+$$
+
+Lê-se "um inteiro e três quartos".
+
+> **Cuidado com o erro comum:** não se somam frações somando "em cima com em cima e embaixo com embaixo". $\tfrac{1}{2} + \tfrac{1}{3}$ **não** é $\tfrac{2}{5}$. Veja que $\tfrac{2}{5}$ é menor que $\tfrac{1}{2}$, uma das parcelas: somar mais um pedaço não pode diminuir! A resposta certa é $\tfrac{5}{6}$. (Na multiplicação, aí sim, é em linha.)
