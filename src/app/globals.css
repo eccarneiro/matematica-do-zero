@@ -1,26 +1,161 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+
+/* O tema é definido por data-theme no <html> (script inline no layout). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #fbf7f1;
+  --surface: #ffffff;
+  --surface-2: #f4eee5;
+  --ink: #1d2130;
+  --ink-2: #5b6070;
+  --ink-3: #82879a;
+  --line: #e8e0d4;
+  --on-accent: #ffffff;
+  --shadow-card: 0 1px 2px rgb(40 30 10 / 0.05), 0 6px 24px -12px rgb(40 30 10 / 0.18);
+
+  --coral: #d9573a; --coral-soft: #fde9e2;
+  --violet: #6d4fe0; --violet-soft: #ece8fd;
+  --teal: #0d8478; --teal-soft: #dcf3f0;
+  --amber: #b5740a; --amber-soft: #fbefd6;
+  --blue: #2766c9; --blue-soft: #e1ecfb;
+  --right: #1a8a55; --right-soft: #def5e9;
+  --wrong: #c93b53; --wrong-soft: #fde4e8;
+  --warn: #9a6512; --warn-soft: #fcf1dc;
+
+  --accent: var(--coral);
+  --accent-soft: var(--coral-soft);
+  color-scheme: light;
 }
+
+[data-theme='dark'] {
+  --bg: #14161c;
+  --surface: #1c1f27;
+  --surface-2: #252935;
+  --ink: #eceae6;
+  --ink-2: #a9adb8;
+  --ink-3: #868b97;
+  --line: #2f3442;
+  --on-accent: #15171d;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 28px -14px rgb(0 0 0 / 0.6);
+
+  --coral: #ff8a6b; --coral-soft: #3a2420;
+  --violet: #a493ff; --violet-soft: #2a2546;
+  --teal: #3fcfc0; --teal-soft: #17332f;
+  --amber: #f2b247; --amber-soft: #382c16;
+  --blue: #6ea4ff; --blue-soft: #1c2a44;
+  --right: #4fd497; --right-soft: #173327;
+  --wrong: #ff7a90; --wrong-soft: #3d1d24;
+  --warn: #f2b247; --warn-soft: #382c16;
+  color-scheme: dark;
+}
+
+/* Cor de destaque por módulo */
+.c-coral { --accent: var(--coral); --accent-soft: var(--coral-soft); }
+.c-violet { --accent: var(--violet); --accent-soft: var(--violet-soft); }
+.c-teal { --accent: var(--teal); --accent-soft: var(--teal-soft); }
+.c-amber { --accent: var(--amber); --accent-soft: var(--amber-soft); }
+.c-blue { --accent: var(--blue); --accent-soft: var(--blue-soft); }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-right: var(--right);
+  --color-right-soft: var(--right-soft);
+  --color-wrong: var(--wrong);
+  --color-wrong-soft: var(--wrong-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --shadow-card: var(--shadow-card);
+  --font-sans: var(--font-lexend), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7.5rem;
   }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  b, strong { font-weight: 600; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-1.5 rounded-full border-[1.5px] border-transparent px-5 py-2.5 text-[0.97rem] leading-tight font-medium no-underline transition active:scale-[0.97] disabled:cursor-default disabled:opacity-50;
+  }
+  .btn-primary { @apply bg-accent text-on-accent; }
+  .btn-ghost { @apply border-line text-ink hover:bg-surface-2; }
+  .btn-soft { @apply bg-accent-soft text-accent; }
+  .card { @apply rounded-[18px] border border-line bg-surface shadow-card; }
+  .eyebrow { @apply mb-2 text-[0.78rem] font-semibold tracking-[0.1em] text-accent uppercase; }
+  .badge { @apply rounded-full bg-surface-2 px-2.5 py-0.5 text-[0.7rem] font-medium tracking-[0.06em] whitespace-nowrap text-ink-3 uppercase; }
+  .pill { @apply inline-block rounded-full bg-accent-soft px-3 py-0.5 text-[0.82rem] font-medium text-accent; }
+
+  /* Texto corrido das aulas (MDX) */
+  .prose { @apply max-w-[68ch]; }
+  .prose > * + * { margin-top: 1em; }
+  .prose h3 { @apply mt-8 text-[1.2rem]; }
+  .prose ul, .prose ol { padding-left: 1.3em; }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose li + li { margin-top: 0.35em; }
+  .prose li::marker { color: var(--accent); }
+  .prose blockquote { @apply rounded-xl bg-accent-soft px-4 py-3; }
+  .prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+
+  /* Cores de SVG que acompanham o tema */
+  .s-ink { stroke: var(--ink); } .f-ink { fill: var(--ink); }
+  .s-ink2 { stroke: var(--ink-2); } .f-ink2 { fill: var(--ink-2); }
+  .s-line { stroke: var(--line); } .f-line { fill: var(--line); }
+  .s-acc { stroke: var(--accent); } .f-acc { fill: var(--accent); }
+  .f-acc-soft { fill: var(--accent-soft); }
+  .f-surface { fill: var(--surface); } .f-surface2 { fill: var(--surface-2); }
+  .s-blue { stroke: var(--blue); } .f-blue { fill: var(--blue); }
+  .s-wrong { stroke: var(--wrong); } .f-wrong { fill: var(--wrong); }
+  .s-right { stroke: var(--right); } .f-right { fill: var(--right); }
+  svg text { font-family: var(--font-sans); }
+}
+
+@keyframes shake {
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-3px); }
+}
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.04); }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
