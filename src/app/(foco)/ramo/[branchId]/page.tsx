@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BranchView, type LinkTarget } from '@/components/branch/BranchView';
-import { branches, findBranch, getBranchContent } from '@/content/branches';
+import { branchDepth, branches, branchesFrom, findBranch, getBranchContent } from '@/content/branches';
 import { findLesson } from '@/content/curriculum';
 
 export const dynamicParams = false;
@@ -38,6 +38,8 @@ export default async function BranchPage({ params }: PageProps<'/ramo/[branchId]
       summary={branch.summary}
       from={branch.from.map(target)}
       links={branch.links.map(target)}
+      deeper={branchesFrom(branch.id).map((b) => target(b.id))}
+      depth={branchDepth(branch.id)}
       quiz={meta.quiz}
       sources={meta.sources}
     >

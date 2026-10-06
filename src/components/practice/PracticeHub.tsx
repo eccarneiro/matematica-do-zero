@@ -14,6 +14,8 @@ interface HubLesson {
   title: string;
   symbol: string;
   topic: TopicId;
+  kinds?: string[];
+  section?: string;
   color: ModuleColor;
 }
 

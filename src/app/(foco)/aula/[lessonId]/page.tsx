@@ -25,23 +25,27 @@ export default async function LessonPage({ params }: PageProps<'/aula/[lessonId]
   const { meta, History, Idea } = content;
   const next = mod.lessons[index + 1];
 
+  // Etapas opcionais só entram quando a micro-aula tem conteúdo para elas.
+  const parts: { id: string; name: string; content?: React.ReactNode }[] = [
+    { id: 'historia', name: 'A história', content: <HistoryStep meta={meta} History={History} /> },
+    { id: 'ideia', name: 'A ideia', content: <IdeaStep Idea={Idea} /> },
+    ...(meta.uses?.length ? [{ id: 'uso', name: 'Pra que serve hoje', content: <UsesStep uses={meta.uses} /> }] : []),
+    ...(meta.think ? [{ id: 'pensar', name: 'Pra pensar', content: <ThinkStep think={meta.think} /> }] : []),
+    ...(meta.videos?.length ? [{ id: 'videos', name: 'Videoaulas', content: <VideosStep videos={meta.videos} /> }] : []),
+    { id: 'exemplos', name: 'Exemplos resolvidos', content: <ExamplesStep meta={meta} /> },
+    ...(lesson.topic ? [{ id: 'treino', name: 'Treino' }] : []),
+  ];
+  const steps = parts.map((p, i) => ({ id: p.id, label: `${i + 1} · ${p.name}`, content: p.content }));
+
   return (
     <div className={`c-${mod.color}`}>
       <LessonPlayer
         lessonId={lesson.id}
         title={lesson.title}
         stop={{ symbol: lesson.symbol, year: lesson.year, place: lesson.place, title: lesson.title }}
-        topic={lesson.topic ? { topic: lesson.topic, title: lesson.title } : undefined}
+        topic={lesson.topic ? { topic: lesson.topic, title: lesson.title, kinds: lesson.kinds } : undefined}
         nextLesson={next?.ready ? { id: next.id, title: next.title } : undefined}
-        steps={[
-          { id: 'historia', label: '1 · A história', content: <HistoryStep meta={meta} History={History} /> },
-          { id: 'ideia', label: '2 · A ideia', content: <IdeaStep Idea={Idea} /> },
-          { id: 'uso', label: '3 · Pra que serve hoje', content: <UsesStep meta={meta} /> },
-          { id: 'pensar', label: '4 · Pra pensar', content: <ThinkStep meta={meta} /> },
-          { id: 'videos', label: '5 · Videoaulas', content: <VideosStep meta={meta} /> },
-          { id: 'exemplos', label: '6 · Exemplos resolvidos', content: <ExamplesStep meta={meta} /> },
-          { id: 'treino', label: '7 · Treino' },
-        ]}
+        steps={steps}
       />
     </div>
   );

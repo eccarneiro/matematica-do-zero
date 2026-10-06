@@ -16,8 +16,9 @@ export interface TrailUnit {
 }
 
 /**
- * Uma estrela de revisão a cada REVIEW_EVERY aulas e outra no fim da unidade
- * (sem revisão intermediária a menos de 2 aulas do fim, para não ficarem coladas).
+ * Revisões: com seções, uma no fim de cada seção (só com as micro-aulas dela).
+ * Sem seções, uma a cada REVIEW_EVERY aulas e outra no fim da unidade (sem
+ * revisão intermediária a menos de 2 aulas do fim, para não ficarem coladas).
  */
 export const REVIEW_EVERY = 3;
 
@@ -28,15 +29,20 @@ export function buildTrail(curriculum: CourseModule[], progress: Progress): Trai
 
   return curriculum.map((module) => {
     const nodes: TrailNode[] = [];
-    const seen: LessonRef[] = [];
+    let seen: LessonRef[] = [];
     module.lessons.forEach((lesson, i) => {
       const state: NodeState = !lesson.ready ? 'soon' : isDone(lesson) ? 'done' : lesson === current ? 'current' : 'open';
       nodes.push({ kind: 'lesson', lesson, state });
       seen.push(lesson);
+      const next = module.lessons[i + 1];
       const last = i === module.lessons.length - 1;
       const remaining = module.lessons.length - (i + 1);
-      if (last || ((i + 1) % REVIEW_EVERY === 0 && remaining >= 2)) {
-        const practiced = seen.filter((l) => l.ready && l.topic);
+      const sectionEnd = lesson.section ? next?.section !== lesson.section : false;
+      const everyThree = !lesson.section && (i + 1) % REVIEW_EVERY === 0 && remaining >= 2;
+      if (last || sectionEnd || everyThree) {
+        // Com seções, a revisão é só da seção; sem seções, de tudo o que veio antes.
+        const pool = lesson.section ? seen.filter((l) => l.section === lesson.section) : seen;
+        const practiced = pool.filter((l) => l.ready && l.topic);
         const allDone = practiced.length > 0 && practiced.every(isDone);
         nodes.push({
           kind: 'review',
@@ -44,6 +50,7 @@ export function buildTrail(curriculum: CourseModule[], progress: Progress): Trai
           lessonIds: practiced.map((l) => l.id),
           state: practiced.length < 2 ? 'soon' : allDone ? 'done' : 'open',
         });
+        if (lesson.section) seen = [];
       }
     });
     const ready = module.lessons.filter((l) => l.ready);

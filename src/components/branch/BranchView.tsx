@@ -21,7 +21,7 @@ export interface LinkTarget {
 
 /** Ramo do rizoma: texto, exercícios (quando houver), fontes e conexões. */
 export function BranchView({
-  id, title, kind, summary, from, links, quiz, sources, children,
+  id, title, kind, summary, from, links, deeper, depth, quiz, sources, children,
 }: {
   id: string;
   title: string;
@@ -29,6 +29,10 @@ export function BranchView({
   summary: string;
   from: LinkTarget[];
   links: LinkTarget[];
+  /** Ramos que saem deste (o próximo nível de profundidade). */
+  deeper: LinkTarget[];
+  /** 1 = sai de uma aula; 2 = sai de um ramo… */
+  depth: number;
   quiz?: QuizQuestion[];
   sources: Source[];
   children: React.ReactNode;
@@ -105,7 +109,10 @@ export function BranchView({
       <FocusHeader wide closeHref="/mapa" />
       <div className="mx-auto flex w-full max-w-[1320px] flex-1 justify-center gap-10 px-4 pb-16 lg:px-8">
         <article className="max-w-[760px] min-w-0 flex-1">
-          <p className="pill">{info.icon} {info.label}</p>
+          <p className="flex flex-wrap items-center gap-2">
+            <span className="pill">{info.icon} {info.label}</span>
+            <span className="pill bg-surface-2 text-ink-2" title="Quanto mais fundo, mais longe do tronco">Profundidade {depth}</span>
+          </p>
           <h1 className="mt-3 text-[clamp(1.8rem,5vw,2.5rem)]">{title}</h1>
           <p className="mt-2 text-[1.1rem] text-ink-2">{summary}</p>
           <p className="mt-3 text-[0.9rem] text-ink-3">
@@ -123,6 +130,36 @@ export function BranchView({
               <BranchQuiz questions={quiz} onFinish={() => setQuizDone(true)} />
             </section>
           )}
+
+          <section className="mt-10 rounded-2xl border border-dashed border-accent/50 bg-accent-soft/40 p-5">
+            <h2 className="text-[1.3rem]">Aprofundar mais</h2>
+            {deeper.length ? (
+              <>
+                <p className="mb-3 text-[0.92rem] text-ink-2">Este ramo se abre em outros. Cada um vai um nível mais fundo.</p>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {deeper.map((d) => {
+                    const k = d.kind === 'aula' ? null : BRANCH_KINDS[d.kind];
+                    const body = (
+                      <>
+                        <span aria-hidden className="text-[1.1rem]">{k?.icon ?? '📍'}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[0.72rem] font-bold text-ink-3">{k?.label} · profundidade {depth + 1}</span>
+                          <span className="block font-bold">{d.title}</span>
+                        </span>
+                      </>
+                    );
+                    return (
+                      <li key={d.id} className="min-w-0">
+                        {d.href ? <Link href={d.href} className="tile flex items-center gap-3 px-3 py-2.5">{body}</Link> : <div className="flex items-center gap-3 rounded-2xl border border-dashed border-edge px-3 py-2.5 text-ink-3">{body}<span className="badge">em breve</span></div>}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <p className="text-[0.92rem] text-ink-2">Ainda não há ramos mais fundos saindo daqui. Tem uma ideia de aprofundamento? Conte pelo botão de feedback.</p>
+            )}
+          </section>
 
           <section className="mt-10 border-t border-line pt-6">
             <h2 className="mb-3 text-[1.2rem]">Fontes</h2>

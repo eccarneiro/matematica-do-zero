@@ -41,12 +41,12 @@ export function IdeaStep({ Idea }: { Idea: ComponentType }) {
 }
 
 /** 3 · Pra que serve hoje. */
-export function UsesStep({ meta }: { meta: LessonMeta }) {
+export function UsesStep({ uses }: { uses: NonNullable<LessonMeta['uses']> }) {
   return (
     <div>
       <h2 className="mb-5 text-[1.7rem]">Onde isso aparece na sua vida</h2>
       <div className="grid gap-3 sm:grid-cols-2">
-        {meta.uses.map((u, i) => (
+        {uses.map((u, i) => (
           <div key={u.title} className="card flex gap-4 p-4" style={{ animation: `fade-in .35s ${i * 0.06}s ease both` }}>
             <span aria-hidden className="grid size-14 flex-none place-items-center rounded-2xl bg-accent-soft text-[1.8rem]">{u.icon}</span>
             <div>
@@ -61,26 +61,26 @@ export function UsesStep({ meta }: { meta: LessonMeta }) {
 }
 
 /** 4 · Pra pensar: a pergunta filosófica. */
-export function ThinkStep({ meta }: { meta: LessonMeta }) {
+export function ThinkStep({ think }: { think: NonNullable<LessonMeta['think']> }) {
   return (
     <div className="relative overflow-hidden rounded-3xl bg-ink px-6 py-8 text-bg sm:px-8">
       <span aria-hidden className="absolute -top-14 -right-3 font-serif text-[13rem] leading-none text-accent opacity-30">?</span>
       <p className="relative text-[0.75rem] font-extrabold tracking-[0.16em] uppercase opacity-70">Uma pergunta sem resposta pronta</p>
-      <MathText as="p" text={meta.think.question} className="relative mt-3 font-serif text-[1.7rem] leading-tight font-semibold italic" />
-      <MathText as="p" text={meta.think.text} className="relative mt-4 text-[1.02rem] leading-relaxed opacity-85" />
+      <MathText as="p" text={think.question} className="relative mt-3 font-serif text-[1.7rem] leading-tight font-semibold italic" />
+      <MathText as="p" text={think.text} className="relative mt-4 text-[1.02rem] leading-relaxed opacity-85" />
       <p className="relative mt-6 text-[0.85rem] font-bold opacity-60">Pare um minuto e pense na sua resposta antes de continuar.</p>
     </div>
   );
 }
 
 /** 5 · Videoaulas. */
-export function VideosStep({ meta }: { meta: LessonMeta }) {
+export function VideosStep({ videos }: { videos: NonNullable<LessonMeta['videos']> }) {
   return (
     <div>
       <h2 className="mb-1 text-[1.7rem]">Quer ver alguém explicando?</h2>
       <p className="mb-5 text-ink-2">Videoaulas em português de professores que admiramos. São opcionais: pode seguir quando quiser.</p>
       <div className="grid gap-5">
-        {meta.videos.map((v) => (
+        {videos.map((v) => (
           <VideoEmbed key={v.id} video={v} />
         ))}
       </div>

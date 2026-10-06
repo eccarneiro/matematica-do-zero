@@ -19,6 +19,13 @@ export interface LessonRef {
   /** Época e lugar da parada no itinerário pela história (ex.: "628", "Índia"). */
   year: string;
   place: string;
+  /** Seção do capítulo (micro-aulas são agrupadas em seções). */
+  section?: string;
+  /**
+   * Tipos de questão (q.data.kind) do gerador que esta micro-aula treina.
+   * Sem isso, o treino usa todos os tipos do tópico.
+   */
+  kinds?: string[];
 }
 
 export interface CourseModule {
@@ -50,9 +57,10 @@ export interface LessonMeta {
     where: string;
     who?: string;
   };
-  uses: { icon: string; title: string; text: string }[];
-  think: { question: string; text: string };
-  videos: Video[];
+  /** Etapas opcionais: só aparecem quando a micro-aula tem conteúdo para elas. */
+  uses?: { icon: string; title: string; text: string }[];
+  think?: { question: string; text: string };
+  videos?: Video[];
   examples: { problem: string; steps: string[] }[];
 }
 
@@ -88,7 +96,10 @@ export interface BranchRef {
   title: string;
   kind: BranchKind;
   summary: string;
-  /** Aulas do tronco de onde o ramo sai. */
+  /**
+   * De onde o ramo sai: aulas do tronco ou outros ramos (ramos de ramos,
+   * para aprofundar sempre mais).
+   */
   from: string[];
   /** Outras aulas ou ramos com que ele se conecta (arestas do rizoma). */
   links: string[];

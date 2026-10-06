@@ -19,13 +19,20 @@ export const branches: BranchRef[] = [
     id: 'contar-sem-numeros', kind: 'culturas', ready: true,
     title: 'Contar sem números: riscos, pedrinhas e nós',
     summary: 'Antes dos algarismos, contar era fazer corresponder: uma marca para cada coisa.',
-    from: ['numeros-inteiros'], links: ['o-zero-e-natural', 'zero-maia'],
+    from: ['naturais'], links: ['o-zero-e-natural', 'zero-maia'],
   },
   {
     id: 'o-zero-e-natural', kind: 'filosofia', ready: true,
     title: 'O 0 é natural? E o 1 é número?',
     summary: 'Por que os naturais começavam no 1 e hoje muitas vezes começam no 0.',
-    from: ['numeros-inteiros'], links: ['zero', 'contar-sem-numeros', 'dividir-por-zero'],
+    from: ['naturais'], links: ['zero', 'contar-sem-numeros', 'dividir-por-zero'],
+  },
+  // Profundidade 2: sai do ramo "O 0 é natural?"
+  {
+    id: 'axiomas-de-peano', kind: 'aprofundar', ready: true,
+    title: 'Os axiomas de Peano',
+    summary: 'Cinco regras que constroem todos os naturais a partir do 1 e do "próximo".',
+    from: ['o-zero-e-natural'], links: ['naturais'],
   },
   // As quatro operações
   {
@@ -119,6 +126,7 @@ function branch(meta: Loader<BranchMeta>, body: Loader<ComponentType>) {
 // Conteúdo dos ramos publicados (importações explícitas para o bundler).
 const loaders: Record<string, () => Promise<BranchContent>> = {
   'contar-sem-numeros': branch(() => import('./ramos/contar-sem-numeros/meta'), () => import('./ramos/contar-sem-numeros/texto.mdx')),
+  'axiomas-de-peano': branch(() => import('./ramos/axiomas-de-peano/meta'), () => import('./ramos/axiomas-de-peano/texto.mdx')),
   'o-zero-e-natural': branch(() => import('./ramos/o-zero-e-natural/meta'), () => import('./ramos/o-zero-e-natural/texto.mdx')),
   'multiplicacao-egipcia': branch(() => import('./ramos/multiplicacao-egipcia/meta'), () => import('./ramos/multiplicacao-egipcia/texto.mdx')),
   'quatro-quatros': branch(() => import('./ramos/quatro-quatros/meta'), () => import('./ramos/quatro-quatros/texto.mdx')),
@@ -138,8 +146,17 @@ export function findBranch(id: string): BranchRef | undefined {
   return branches.find((b) => b.id === id);
 }
 
-export function branchesFrom(lessonId: string): BranchRef[] {
-  return branches.filter((b) => b.from.includes(lessonId));
+/** Ramos que saem diretamente de uma aula ou de um ramo. */
+export function branchesFrom(id: string): BranchRef[] {
+  return branches.filter((b) => b.from.includes(id));
+}
+
+/** Profundidade do ramo: 1 = sai de uma aula; 2 = sai de um ramo; e assim por diante. */
+export function branchDepth(id: string, seen = new Set<string>()): number {
+  const b = findBranch(id);
+  if (!b || seen.has(id)) return 0;
+  seen.add(id);
+  return 1 + Math.max(0, ...b.from.map((f) => branchDepth(f, seen)));
 }
 
 export function hasBranchContent(id: string): boolean {

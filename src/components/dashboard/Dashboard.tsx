@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { curriculum } from '@/content/curriculum';
 import { LEVEL_NAMES } from '@/generators/types';
+import { TOPIC_TITLES } from '@/generators/registry';
 import { useMounted } from '@/lib/useMounted';
 import { useProgress } from '@/progress/store';
 import { useGameStats } from '@/progress/useGameStats';
@@ -147,7 +148,10 @@ export function Passport() {
 export function Mastery() {
   const progress = useProgress();
   const mounted = useMounted();
-  const lessons = curriculum.flatMap((m) => m.lessons.filter((l) => l.ready && l.topic).map((l) => ({ m, l })));
+  // Um item por tópico de treino (várias micro-aulas compartilham o mesmo tópico).
+  const lessons = curriculum
+    .flatMap((m) => m.lessons.filter((l) => l.ready && l.topic).map((l) => ({ m, l })))
+    .filter(({ l }, i, arr) => arr.findIndex((x) => x.l.topic === l.topic) === i);
   return (
     <div className="card p-5">
       <div className="mb-3 flex items-baseline justify-between">
@@ -161,7 +165,7 @@ export function Mastery() {
           return (
             <li key={l.id} className={`c-${m.color}`}>
               <div className="mb-1 flex items-center justify-between gap-2 text-[0.88rem]">
-                <span className="truncate font-extrabold"><span className="mr-1.5 font-display text-accent">{l.symbol}</span>{l.title}</span>
+                <span className="truncate font-extrabold">{TOPIC_TITLES[l.topic!]}</span>
                 <span className="flex-none text-[0.75rem] font-extrabold text-ink-3">{t?.total ? LEVEL_NAMES[t.level] : '—'}</span>
               </div>
               <div className="h-2.5 overflow-hidden rounded-full bg-surface-2">

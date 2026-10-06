@@ -64,8 +64,9 @@ export function layoutRhizome(graph: ReturnType<typeof buildRhizome>, ticks = 40
   const lessons = new Map(graph.nodes.flatMap((n) => (n.type === 'lesson' ? [[n.id, n] as const] : [])));
   const parent = new Map(graph.edges.filter((e) => e.kind === 'ramo').map((e) => [e.target, e.source]));
   const lanes = Math.max(...[...lessons.values()].map((l) => l.chapter)) + 1;
+  const rootLesson = (id: string, guard = 0): ReturnType<typeof lessons.get> => lessons.get(id) ?? (guard < 20 ? rootLesson(parent.get(id) ?? '', guard + 1) : undefined);
   const sim: SimNode[] = graph.nodes.map((n, i) => {
-    const anchor = n.type === 'lesson' ? n : lessons.get(parent.get(n.id) ?? '')!;
+    const anchor = n.type === 'lesson' ? n : rootLesson(parent.get(n.id) ?? '')!;
     const fx0 = (anchor.chapter - (lanes - 1) / 2) * LANE;
     const fy0 = anchor.step * FLOW;
     const side = i % 2 ? 1 : -1;

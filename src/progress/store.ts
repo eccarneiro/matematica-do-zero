@@ -5,7 +5,8 @@
 
 import { useSyncExternalStore } from 'react';
 import type { Level } from '@/generators/types';
-import { addXp, emptyProgress, emptyStats, mergeProgress, recordResult, XP, type Progress, type TopicStats } from './model';
+import { legacyLessons } from '@/content/curriculum';
+import { addXp, emptyProgress, emptyStats, mergeProgress, migrateLegacyLessons, recordResult, XP, type Progress, type TopicStats } from './model';
 
 const KEY = 'mdz:progress:v1';
 const SERVER_SNAPSHOT = emptyProgress();
@@ -23,6 +24,7 @@ function read(): Progress {
     const raw = localStorage.getItem(KEY);
     state = raw ? { ...emptyProgress(), ...JSON.parse(raw) } : emptyProgress();
     state!.days ??= {};
+    state = migrateLegacyLessons(state!, legacyLessons);
   } catch {
     state = emptyProgress();
   }
@@ -101,7 +103,7 @@ export const progressStore = {
 
   /** Junta com o progresso vindo da nuvem (sem disparar envio de volta). */
   merge(remote: Progress) {
-    write(mergeProgress(read(), remote));
+    write(migrateLegacyLessons(mergeProgress(read(), remote), legacyLessons));
   },
 
   reset() {

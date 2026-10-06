@@ -20,7 +20,7 @@ export default async function TopicPracticePage({ params }: PageProps<'/treino/[
   const { module: mod, lesson } = found;
   return (
     <div className={`c-${mod.color}`}>
-      <PracticeScreen topics={[{ topic: lesson.topic!, title: lesson.title }]} title={lesson.title} />
+      <PracticeScreen topics={[{ topic: lesson.topic!, title: lesson.title, kinds: lesson.kinds }]} title={lesson.title} />
     </div>
   );
 }

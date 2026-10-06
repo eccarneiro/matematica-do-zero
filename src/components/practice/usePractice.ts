@@ -4,12 +4,15 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { checkAnswer } from '@/lib/math/answer';
 import { makeRng } from '@/lib/math/random';
 import { loadGenerator, type TopicId } from '@/generators/registry';
+import { generateFiltered } from '@/generators/filter';
 import { LEVEL_NAMES, type Generator, type Level, type Question } from '@/generators/types';
 import { progressStore } from '@/progress/store';
 
 export interface PracticeTopic {
   topic: TopicId;
   title: string;
+  /** Tipos de questão desta micro-aula (vazio = todos os do tópico). */
+  kinds?: string[];
 }
 
 export type Feedback = { tone: 'right' | 'wrong' | 'warn'; title: string; text?: string; levelUp?: string; xp?: number };
@@ -46,21 +49,22 @@ export function usePractice(topics: PracticeTopic[], onResult?: (outcome: Outcom
   const [generators, setGenerators] = useState<Generator[] | null>(null);
   const [current, setCurrent] = useState<PracticeState | null>(null);
   const [session, setSession] = useState({ correct: 0, total: 0 });
-  const topicKey = topics.map((t) => t.topic).join(',');
-  const topicIds = useMemo(() => topicKey.split(',') as TopicId[], [topicKey]);
+  const topicKey = topics.map((t) => `${t.topic}:${(t.kinds ?? []).join('+')}`).join(',');
+  const topicIds = useMemo(() => topicKey.split(',').map((k) => k.split(':')[0]) as TopicId[], [topicKey]);
+  const kindsOf = useMemo(() => topicKey.split(',').map((k) => k.split(':')[1]?.split('+').filter(Boolean) ?? []), [topicKey]);
 
   const makeQuestion = useCallback(
     (gens: Generator[]): PracticeState => {
       const topicIndex = rng.int(0, gens.length - 1);
       const level = progressStore.topic(topicIds[topicIndex]).level;
-      const question = gens[topicIndex].generate(level, rng);
+      const question = generateFiltered(gens[topicIndex], level, rng, kindsOf[topicIndex]);
       const fields = question.answer.type === 'fields' ? question.answer.fields.length : 1;
       return {
         topicIndex, level, question, attempts: 0, finished: false, choice: null, wrongChoices: [],
         values: Array(fields).fill(''), feedback: null, showSolution: false, shake: 0,
       };
     },
-    [rng, topicIds],
+    [rng, topicIds, kindsOf],
   );
 
   // Carrega os geradores (sob demanda) sempre que a lista de tópicos muda.
