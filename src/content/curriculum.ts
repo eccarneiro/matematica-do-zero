@@ -12,9 +12,27 @@ export const curriculum: CourseModule[] = [
     eras: 'Mesopotâmia · Egito · Índia · Bagdá',
     color: 'indigo',
     lessons: [
-      { id: 'numeros-inteiros', symbol: '±', year: '20 000 a.C.', place: 'Ishango', title: 'Números naturais e inteiros', topic: 'inteiros', ready: true,
-        summary: 'Contar, ordenar e ir além do zero com os negativos.',
-        keywords: 'naturais inteiros negativos reta numérica sinais soma subtração comparar oposto módulo' },
+      // Seção: Números
+      { id: 'naturais', symbol: 'ℕ', year: '20 000 a.C.', place: 'Ishango', section: 'Números',
+        topic: 'naturais', ready: true, title: 'Números naturais: contar',
+        summary: 'Uma marca para cada coisa: a ideia mais antiga da matemática.',
+        keywords: 'naturais contar contagem sucessor antecessor ishango zero convenção' },
+      { id: 'reta-inteiros', symbol: 'ℤ', year: 'séc. I', place: 'China', section: 'Números',
+        topic: 'inteiros', kinds: ['int-reta', 'max'], ready: true, title: 'A reta numérica e os negativos',
+        summary: 'Abaixo de zero: dívidas, temperaturas e os inteiros.',
+        keywords: 'inteiros negativos reta numérica comparar maior menor' },
+      { id: 'oposto-modulo', symbol: '|x|', year: '1685', place: 'Inglaterra', section: 'Números',
+        topic: 'inteiros', kinds: ['int-oposto', 'int-modulo', 'max'], ready: true, title: 'Oposto e módulo',
+        summary: 'O espelho do outro lado do zero e a distância até ele.',
+        keywords: 'oposto simétrico módulo valor absoluto distância comparar' },
+      { id: 'somar-inteiros', symbol: '±', year: '628', place: 'Índia', section: 'Números',
+        topic: 'inteiros', kinds: ['sum'], ready: true, title: 'Somar e subtrair inteiros',
+        summary: 'Andar para a direita, andar para a esquerda.',
+        keywords: 'soma subtração inteiros sinais reta numérica temperatura saldo' },
+      { id: 'sinais', symbol: '−·−', year: '1544', place: 'Alemanha', section: 'Números',
+        topic: 'inteiros', kinds: ['mul', 'div'], ready: true, title: 'Multiplicar e dividir: o jogo de sinais',
+        summary: 'Por que menos com menos dá mais (na multiplicação).',
+        keywords: 'multiplicação divisão inteiros jogo de sinais regra dos sinais' },
       { id: 'operacoes', symbol: '×', year: '1800 a.C.', place: 'Babilônia', topic: 'operacoes', ready: true, title: 'As quatro operações',
         summary: 'Somar, subtrair, multiplicar, dividir e a ordem certa de fazer as contas.',
         keywords: 'adição subtração multiplicação divisão resto expressões numéricas ordem das operações parênteses tabuada' },
@@ -97,6 +115,14 @@ export const curriculum: CourseModule[] = [
     ],
   },
 ];
+
+/**
+ * Aulas antigas que foram divididas em micro-aulas (issue #3). Usado para
+ * migrar o progresso salvo e redirecionar links antigos.
+ */
+export const legacyLessons: Record<string, string[]> = {
+  'numeros-inteiros': ['naturais', 'reta-inteiros', 'oposto-modulo', 'somar-inteiros', 'sinais'],
+};
 
 export function getModule(moduleId: string): CourseModule | undefined {
   return curriculum.find((m) => m.id === moduleId);

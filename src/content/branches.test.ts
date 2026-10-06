@@ -27,10 +27,10 @@ describe('rizoma', () => {
     }
   });
 
-  it('toda origem é uma aula e toda conexão existe (sem ligação quebrada)', () => {
+  it('toda origem é uma aula ou outro ramo, e toda conexão existe (sem ligação quebrada)', () => {
     for (const b of branches) {
       expect(b.from.length, b.id).toBeGreaterThan(0);
-      for (const f of b.from) expect(lessonIds.has(f), `${b.id} → from ${f}`).toBe(true);
+      for (const f of b.from) expect(lessonIds.has(f) || branchIds.has(f), `${b.id} → from ${f}`).toBe(true);
       for (const l of b.links) {
         expect(lessonIds.has(l) || branchIds.has(l), `${b.id} → link ${l}`).toBe(true);
         expect(l, `${b.id} liga a si mesmo`).not.toBe(b.id);
@@ -38,9 +38,23 @@ describe('rizoma', () => {
     }
   });
 
-  it('cada aula publicada do Módulo 1 tem pelo menos 2 ramos', () => {
-    for (const lesson of curriculum[0].lessons.filter((l) => l.ready)) {
-      expect(branches.filter((b) => b.from.includes(lesson.id)).length, lesson.id).toBeGreaterThanOrEqual(2);
+  it('ramos de ramos não formam ciclo e todo ramo chega a uma aula', () => {
+    const reachesLesson = (id: string, path: string[]): boolean => {
+      expect(path, `ciclo: ${[...path, id].join(' → ')}`).not.toContain(id);
+      if (lessonIds.has(id)) return true;
+      return branches.find((b) => b.id === id)!.from.every((f) => reachesLesson(f, [...path, id]));
+    };
+    for (const b of branches) expect(reachesLesson(b.id, [])).toBe(true);
+  });
+
+  it('cada seção publicada do Módulo 1 tem pelo menos 2 ramos', () => {
+    const sections = new Map<string, string[]>();
+    for (const l of curriculum[0].lessons.filter((x) => x.ready)) {
+      const key = l.section ?? l.id;
+      sections.set(key, [...(sections.get(key) ?? []), l.id]);
+    }
+    for (const [section, ids] of sections) {
+      expect(branches.filter((b) => b.from.some((f) => ids.includes(f))).length, section).toBeGreaterThanOrEqual(2);
     }
   });
 

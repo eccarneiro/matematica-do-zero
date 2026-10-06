@@ -10,6 +10,8 @@ export default function PracticeHubPage() {
     title: lesson.title,
     symbol: lesson.symbol,
     topic: lesson.topic,
+    kinds: lesson.kinds,
+    section: lesson.section,
     color: mod.color,
   }));
   return (

@@ -35,6 +35,15 @@ describe('buildTrail', () => {
     expect(buildTrail(four, emptyProgress())[0].nodes.map((n) => n.kind)).toEqual(['lesson', 'lesson', 'lesson', 'lesson', 'review']);
   });
 
+  it('com seções, revisa no fim de cada seção só as micro-aulas dela', () => {
+    const sec = (id: string, section: string) => ({ ...lesson(id), section });
+    const course2 = [mod('m', [sec('a', 'S1'), sec('b', 'S1'), sec('c', 'S2'), sec('d', 'S2'), sec('e', 'S2')])];
+    const [m] = buildTrail(course2, emptyProgress());
+    expect(m.nodes.map((n) => n.kind)).toEqual(['lesson', 'lesson', 'review', 'lesson', 'lesson', 'lesson', 'review']);
+    const reviews = m.nodes.filter((n) => n.kind === 'review');
+    expect(reviews.map((r) => r.kind === 'review' && r.lessonIds)).toEqual([['a', 'b'], ['c', 'd', 'e']]);
+  });
+
   it('revisão fica concluída quando todas as aulas anteriores estão', () => {
     const [m1] = buildTrail(course, done('a', 'b', 'c'));
     const review = m1.nodes[3];

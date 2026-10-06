@@ -1,0 +1,32 @@
+### Dá para definir "número" do zero?
+
+Todo mundo sabe contar, mas o que **é**, exatamente, um número natural? No fim do século XIX, os matemáticos quiseram responder a isso sem apelar para a intuição: construir os naturais a partir de umas poucas regras e deduzir todo o resto delas. Em 1889, o italiano **Giuseppe Peano** publicou uma lista curta de regras, os **axiomas de Peano**, que fazem exatamente isso.
+
+### As regras, em linguagem simples
+
+Na forma original, Peano começava no **1** (lembra do ramo "O 0 é natural?"). Hoje é comum apresentar a mesma ideia começando no 0. Usando o 1, como ele:
+
+1. **1 é um número natural.**
+2. Todo natural $n$ tem um **sucessor**, $n'$ (o "próximo"), que também é natural.
+3. **1 não é sucessor** de nenhum natural: a fila tem um começo.
+4. Se dois naturais têm o **mesmo sucessor**, eles são iguais: a fila nunca se junta.
+5. **Indução:** se um conjunto contém o 1 e, sempre que contém um número, contém também o sucessor dele, então esse conjunto contém **todos** os naturais.
+
+Repare que não aparece "+", nem "×", nem nenhum número além do 1. O $2$ é só um nome para $1'$, o $3$ é um nome para $1''$, e assim por diante. A soma e a multiplicação são **definidas** depois, a partir do sucessor.
+
+### A indução é um efeito dominó
+
+A regra 5 é a mais poderosa. Imagine uma fila infinita de dominós:
+
+- o **primeiro** cai (a afirmação vale para o 1);
+- **cada** dominó que cai derruba o próximo (se vale para $n$, vale para $n'$).
+
+Então **todos** caem, mesmo sendo infinitos. É assim que os matemáticos provam coisas "para todo número natural" sem testar um por um. Por exemplo: a soma $1 + 2 + \dots + n$ é sempre $\tfrac{n(n+1)}{2}$. Vale para $n = 1$, e, se vale para um $n$, somando $n+1$ dos dois lados vale para o próximo. Pronto, vale para todos.
+
+### Por que isso importa
+
+- As regras são **poucas e precisas**: dá para checar com rigor tudo o que se deduz delas.
+- Elas capturam a ideia de "**contar sem fim**": sempre existe um próximo, e a fila nunca dá voltas.
+- A indução virou uma das ferramentas mais usadas da matemática e da computação (para provar que um programa termina, por exemplo).
+
+> Pense: as regras de Peano descrevem os números que já usávamos, ou criam esses números? É a pergunta "inventada ou descoberta" de novo, agora sobre a base de tudo.

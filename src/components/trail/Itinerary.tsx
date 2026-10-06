@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { curriculum } from '@/content/curriculum';
 import type { LessonRef } from '@/content/types';
 import { useMounted } from '@/lib/useMounted';
@@ -64,10 +64,14 @@ function Route({ unit }: { unit: TrailUnit }) {
       {unit.nodes.map((node, i) => {
         const last = i === unit.nodes.length - 1;
         const nextWalked = !last && isWalked(unit.nodes[i + 1].state);
-        return node.kind === 'review' ? (
-          <ReviewStop key={node.id} node={node} walkedBelow={nextWalked} last={last} />
-        ) : (
-          <Stop key={node.lesson.id} lesson={node.lesson} state={node.state} side={i % 2 ? 'right' : 'left'} walkedBelow={nextWalked} last={last} />
+        if (node.kind === 'review') return <ReviewStop key={node.id} node={node} walkedBelow={nextWalked} last={last} />;
+        const prev = unit.nodes.slice(0, i).reverse().find((n) => n.kind === 'lesson');
+        const startsSection = node.lesson.section && (!prev || prev.kind !== 'lesson' || prev.lesson.section !== node.lesson.section);
+        return (
+          <Fragment key={node.lesson.id}>
+            {startsSection && <SectionMark unit={unit} section={node.lesson.section!} walked={isWalked(node.state)} />}
+            <Stop lesson={node.lesson} state={node.state} side={i % 2 ? 'right' : 'left'} walkedBelow={nextWalked} last={last} />
+          </Fragment>
         );
       })}
     </ol>
@@ -173,6 +177,29 @@ function ReviewStop({ node, walkedBelow, last }: { node: Extract<TrailNode, { ki
           </Link>
         )}
       </div>
+    </li>
+  );
+}
+
+/** Marco de início de seção na rota (micro-aulas agrupadas). */
+function SectionMark({ unit, section, walked }: { unit: TrailUnit; section: string; walked: boolean }) {
+  const progress = useProgress();
+  const lessons = unit.module.lessons.filter((l) => l.section === section && l.ready);
+  const done = lessons.filter((l) => progress.lessons[l.id]?.done).length;
+  return (
+    <li className="relative grid grid-cols-[64px_minmax(0,1fr)] items-center gap-x-4 pt-3 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:gap-x-6">
+      <div className="relative grid h-full min-h-12 place-items-center lg:col-start-2">
+        <RouteLine walked={walked} half="top" />
+        <RouteLine walked={walked} half="bottom" />
+        <span className="relative h-3 w-10 rounded-full bg-accent" />
+      </div>
+      <div className="lg:col-span-1 lg:col-start-1 lg:row-start-1 lg:text-right">
+        <p className="text-[0.7rem] font-extrabold tracking-[0.18em] text-ink-3 uppercase">Seção</p>
+        <p className="font-display text-[1.25rem] leading-tight font-bold">{section}</p>
+      </div>
+      <p className="col-start-2 text-[0.85rem] font-bold text-ink-3 lg:col-start-3 lg:row-start-1">
+        {done}/{lessons.length} micro-aulas
+      </p>
     </li>
   );
 }

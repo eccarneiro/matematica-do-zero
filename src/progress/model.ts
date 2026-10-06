@@ -30,7 +30,7 @@ export interface Progress {
 
 export const LEVEL_UP_STREAK = 5;
 /** Acertos de primeira necessários no treino para concluir uma aula. */
-export const LESSON_GOAL = 5;
+export const LESSON_GOAL = 3;
 export const DAILY_GOAL_XP = 50;
 export const XP = { firstTry: 10, secondTry: 5, lessonDone: 20, branchDone: 15 } as const;
 
@@ -156,4 +156,22 @@ export function recentDays(days: Record<string, number>, n = 7, today = new Date
     const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (n - 1 - i));
     return { key: dayKey(d), date: d, xp: days[dayKey(d)] ?? 0 };
   });
+}
+
+/**
+ * Aulas antigas que viraram micro-aulas: quem concluiu a antiga ganha todas
+ * as novas (com a mesma data, sem XP extra). A antiga continua no registro.
+ */
+export function migrateLegacyLessons(p: Progress, legacy: Record<string, string[]>): Progress {
+  let lessons = p.lessons;
+  for (const [oldId, newIds] of Object.entries(legacy)) {
+    const old = p.lessons[oldId];
+    if (!old?.done) continue;
+    for (const id of newIds) {
+      if (lessons[id]) continue; // já tem registro próprio: respeita
+      if (lessons === p.lessons) lessons = { ...p.lessons };
+      lessons[id] = { done: true, updatedAt: old.updatedAt };
+    }
+  }
+  return lessons === p.lessons ? p : { ...p, lessons };
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addXp, dayKey, dayStreak, emptyStats, mergeProgress, playerLevel, recentDays, recordResult, totalXp, LEVEL_UP_STREAK, type Progress, type TopicStats } from './model';
+import { addXp, dayKey, dayStreak, emptyStats, mergeProgress, migrateLegacyLessons, playerLevel, recentDays, recordResult, totalXp, LEVEL_UP_STREAK, type Progress, type TopicStats } from './model';
 
 describe('recordResult', () => {
   it('sobe de nível após acertos seguidos de primeira', () => {
@@ -81,5 +81,22 @@ describe('últimos dias', () => {
     const week = recentDays({ '2026-10-06': 20, '2026-10-01': 5 }, 7, new Date(2026, 9, 6));
     expect(week.map((d) => d.key)).toEqual(['2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03', '2026-10-04', '2026-10-05', '2026-10-06']);
     expect(week.map((d) => d.xp)).toEqual([0, 5, 0, 0, 0, 0, 20]);
+  });
+});
+
+describe('migração das aulas antigas para micro-aulas', () => {
+  const legacy = { fracoes: ['f1', 'f2', 'f3'] };
+  it('quem concluiu a aula antiga ganha as micro-aulas, sem mudar o XP', () => {
+    const p: Progress = { lessons: { fracoes: { done: true, updatedAt: 5 } }, topics: {}, days: { '2026-10-01': 40 } };
+    const m = migrateLegacyLessons(p, legacy);
+    expect(Object.keys(m.lessons).sort()).toEqual(['f1', 'f2', 'f3', 'fracoes']);
+    expect(m.lessons.f2).toEqual({ done: true, updatedAt: 5 });
+    expect(m.days).toEqual(p.days);
+  });
+  it('não sobrescreve micro-aula já registrada e não faz nada sem a antiga', () => {
+    const p: Progress = { lessons: { fracoes: { done: true, updatedAt: 5 }, f1: { done: false, updatedAt: 9 } }, topics: {}, days: {} };
+    expect(migrateLegacyLessons(p, legacy).lessons.f1).toEqual({ done: false, updatedAt: 9 });
+    const empty: Progress = { lessons: {}, topics: {}, days: {} };
+    expect(migrateLegacyLessons(empty, legacy)).toBe(empty);
   });
 });

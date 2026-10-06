@@ -14,10 +14,30 @@ function lesson(meta: Loader<LessonMeta>, history: Loader<ComponentType>, idea: 
 // Conteúdo das aulas publicadas. As importações ficam explícitas para o
 // bundler saber exatamente quais arquivos incluir.
 const loaders: Record<string, () => Promise<LessonContent>> = {
-  'numeros-inteiros': lesson(
-    () => import('./fundamentos/numeros-inteiros/meta'),
-    () => import('./fundamentos/numeros-inteiros/historia.mdx'),
-    () => import('./fundamentos/numeros-inteiros/ideia.mdx'),
+  'naturais': lesson(
+    () => import('./fundamentos/naturais/meta'),
+    () => import('./fundamentos/naturais/historia.mdx'),
+    () => import('./fundamentos/naturais/ideia.mdx'),
+  ),
+  'reta-inteiros': lesson(
+    () => import('./fundamentos/reta-inteiros/meta'),
+    () => import('./fundamentos/reta-inteiros/historia.mdx'),
+    () => import('./fundamentos/reta-inteiros/ideia.mdx'),
+  ),
+  'oposto-modulo': lesson(
+    () => import('./fundamentos/oposto-modulo/meta'),
+    () => import('./fundamentos/oposto-modulo/historia.mdx'),
+    () => import('./fundamentos/oposto-modulo/ideia.mdx'),
+  ),
+  'somar-inteiros': lesson(
+    () => import('./fundamentos/somar-inteiros/meta'),
+    () => import('./fundamentos/somar-inteiros/historia.mdx'),
+    () => import('./fundamentos/somar-inteiros/ideia.mdx'),
+  ),
+  'sinais': lesson(
+    () => import('./fundamentos/sinais/meta'),
+    () => import('./fundamentos/sinais/historia.mdx'),
+    () => import('./fundamentos/sinais/ideia.mdx'),
   ),
   'operacoes': lesson(
     () => import('./fundamentos/operacoes/meta'),

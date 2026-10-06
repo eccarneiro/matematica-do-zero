@@ -135,10 +135,112 @@ function bank(rng: Rng): Question {
   };
 }
 
+/** Figura: reta numérica de `min` a `max` com um ponto marcado (rótulos de 5 em 5). */
+function numberLineSvg(min: number, max: number, point: number): string {
+  const W = 340, P = 16, Y = 46;
+  const x = (v: number) => P + ((v - min) / (max - min)) * (W - 2 * P);
+  let ticks = '';
+  for (let v = min; v <= max; v++) {
+    const big = v % 5 === 0;
+    ticks += `<line x1="${x(v)}" x2="${x(v)}" y1="${Y - (big ? 8 : 5)}" y2="${Y + (big ? 8 : 5)}" class="s-ink2" stroke-width="${v === 0 ? 2.5 : 1.3}"/>`;
+    if (big) ticks += `<text x="${x(v)}" y="${Y + 26}" text-anchor="middle" font-size="12" class="f-ink2">${v < 0 ? '−' + -v : v}</text>`;
+  }
+  return `<svg viewBox="0 0 ${W} 84" role="img" aria-label="Reta numérica com um ponto marcado"><line x1="${P - 8}" x2="${W - P + 8}" y1="${Y}" y2="${Y}" class="s-ink2" stroke-width="2"/>${ticks}<circle cx="${x(point)}" cy="${Y}" r="7" class="f-acc"/><text x="${x(point)}" y="${Y - 16}" text-anchor="middle" font-size="15" font-weight="800" class="f-acc">?</text></svg>`;
+}
+
+function locate(rng: Rng, level: number): Question {
+  const [min, max] = level === 1 ? [-10, 10] : [-15, 15];
+  let p: number;
+  do p = rng.int(min + 1, max - 1);
+  while (p % 5 === 0 && level > 1);
+  return {
+    prompt: 'Que número inteiro está marcado na reta?',
+    figure: numberLineSvg(min, max, p),
+    answer: intAnswer(p),
+    answerText: pn(p),
+    answerDisplay: m(tn(p)),
+    hint: 'Ache o rótulo mais próximo (os números de 5 em 5) e conte os tracinhos até o ponto. À esquerda do zero, os números são negativos.',
+    steps: [
+      `O rótulo mais próximo é ${m(tn(Math.round(p / 5) * 5))}.`,
+      `Contando os tracinhos a partir dele, o ponto fica em ${m(tn(p))}.`,
+    ],
+    data: { kind: 'int-reta', point: p, result: p },
+  };
+}
+
+function opposite(rng: Rng, level: number): Question {
+  const n = rng.nonZero(-(level === 1 ? 20 : 300), level === 1 ? 20 : 300);
+  const twice = level === 3 && rng.chance(0.5);
+  const result = twice ? n : -n;
+  const expr = twice ? `-(${tn(-n)})` : `-(${tn(n)})`;
+  return {
+    prompt: twice ? `Qual é o oposto do oposto de ${m(tn(n))}? Em outras palavras, quanto vale ${m(`-(-(${tn(n)}))`)}?` : `Qual é o <b>oposto</b> de ${m(tn(n))}?`,
+    answer: intAnswer(result),
+    answerText: pn(result),
+    answerDisplay: m(tn(result)),
+    hint: 'O oposto é o "espelho" do outro lado do zero: mesma distância, sinal trocado.',
+    steps: twice
+      ? [`O oposto de ${m(tn(n))} é ${m(tn(-n))}.`, `O oposto desse é de novo ${m(tn(n))}: espelhar duas vezes volta ao lugar.`]
+      : [`Trocar o sinal: ${m(`${expr} = ${tn(result)}`)}.`, `Os dois estão à mesma distância do zero (${m(String(Math.abs(n)))}), um de cada lado.`],
+    data: { kind: 'int-oposto', n, twice, result },
+  };
+}
+
+function absolute(rng: Rng, level: number): Question {
+  if (level === 3) {
+    // distância entre dois inteiros: |a − b|
+    const a = rng.int(-25, 25);
+    let b: number;
+    do b = rng.int(-25, 25);
+    while (b === a);
+    const result = Math.abs(a - b);
+    return {
+      prompt: `Qual é a <b>distância</b> entre ${m(tn(a))} e ${m(tn(b))} na reta numérica? Ou seja, quanto vale ${m(`|${tn(a)} - ${par(b)}|`)}?`,
+      answer: intAnswer(result),
+      answerText: pn(result),
+      answerDisplay: m(tn(result)),
+      hint: 'A distância entre dois números é o módulo da diferença: subtraia e tire o sinal.',
+      steps: [
+        `Diferença: ${m(`${tn(a)} - ${par(b)} = ${tn(a - b)}`)}.`,
+        `Distância é sempre positiva: ${m(`|${tn(a - b)}| = ${result}`)}.`,
+      ],
+      data: { kind: 'int-modulo', a, b, form: 'distancia', result },
+    };
+  }
+  if (level === 2) {
+    const a = rng.nonZero(-30, 30), b = rng.nonZero(-30, 30);
+    const result = Math.abs(a) + Math.abs(b);
+    return {
+      prompt: `Calcule: ${M(`|${tn(a)}| + |${tn(b)}|`)}`,
+      answer: intAnswer(result),
+      answerText: pn(result),
+      answerDisplay: m(tn(result)),
+      hint: 'O módulo é a distância até o zero, sempre positiva. Calcule cada módulo e depois some.',
+      steps: [`${m(`|${tn(a)}| = ${Math.abs(a)}`)} e ${m(`|${tn(b)}| = ${Math.abs(b)}`)}.`, `Somando: ${m(`${Math.abs(a)} + ${Math.abs(b)} = ${result}`)}.`],
+      data: { kind: 'int-modulo', a, b, form: 'soma', result },
+    };
+  }
+  const n = rng.nonZero(-20, 20);
+  return {
+    prompt: `Quanto vale ${m(`|${tn(n)}|`)} (o módulo de ${m(tn(n))})?`,
+    answer: intAnswer(Math.abs(n)),
+    answerText: pn(Math.abs(n)),
+    answerDisplay: m(String(Math.abs(n))),
+    hint: 'Módulo é a distância até o zero, então nunca é negativo.',
+    steps: [`${m(tn(n))} está a ${Math.abs(n)} casas do zero.`, `Logo, ${m(`|${tn(n)}| = ${Math.abs(n)}`)}.`],
+    data: { kind: 'int-modulo', a: n, form: 'simples', result: Math.abs(n) },
+  };
+}
+
 const inteiros: Generator = {
   id: 'inteiros',
   title: 'Números inteiros',
   generate(level, rng) {
+    // Tipos da reta, do oposto e do módulo (micro-aulas "A reta numérica" e "Oposto e módulo")
+    const extra = rng.next();
+    if (extra < 0.12) return locate(rng, level);
+    if (extra < 0.2) return opposite(rng, level);
+    if (extra < 0.28) return absolute(rng, level);
     if (level === 1) {
       if (rng.chance(0.25)) return compare(rng, 12);
       let a: number;

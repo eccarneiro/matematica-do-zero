@@ -14,7 +14,7 @@ export function ReviewPractice() {
       <PracticeScreen
         closeHref="/"
         title="Revisão"
-        topics={lessons.map(({ lesson }) => ({ topic: lesson.topic, title: lesson.title }))}
+        topics={lessons.map(({ lesson }) => ({ topic: lesson.topic, title: lesson.title, kinds: lesson.kinds }))}
       />
     </div>
   );
