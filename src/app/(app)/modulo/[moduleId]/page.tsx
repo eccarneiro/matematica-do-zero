@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { curriculum, getModule } from '@/content/curriculum';
-import { ModuleCard } from '@/components/trail/ModuleCard';
+import { ModuleGuide } from '@/components/trail/ModuleGuide';
 
 export const dynamicParams = false;
 
@@ -19,11 +19,9 @@ export default async function ModulePage({ params }: PageProps<'/modulo/[moduleI
   const courseModule = getModule((await params).moduleId);
   if (!courseModule) notFound();
   return (
-    <>
-      <nav className="mb-3.5 text-sm text-ink-3">
-        <Link href="/" className="text-ink-2 no-underline">Trilha</Link> › <span>Módulo {courseModule.number}</span>
-      </nav>
-      <ModuleCard module={courseModule} asPage />
-    </>
+    <div className="mx-auto max-w-[620px]">
+      <Link href="/" className="mb-4 inline-block text-[0.85rem] font-extrabold tracking-wide text-ink-3 uppercase no-underline">‹ Trilha</Link>
+      <ModuleGuide module={courseModule} />
+    </div>
   );
 }

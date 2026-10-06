@@ -8,17 +8,15 @@ export default function PracticeHubPage() {
   const lessons = practiceLessons().map(({ module: mod, lesson }) => ({
     id: lesson.id,
     title: lesson.title,
+    symbol: lesson.symbol,
     topic: lesson.topic,
     color: mod.color,
   }));
   return (
-    <>
-      <h1 className="mb-3 text-[clamp(1.6rem,5vw,2.2rem)]">Treino</h1>
-      <p className="mb-2 max-w-[60ch] text-[1.05rem] text-ink-2">
-        Escolha um tópico para treinar, ou misture vários para revisar. No treino misto, cada questão sorteia o
-        tópico e usa o nível que você já alcançou nele.
-      </p>
+    <div className="mx-auto max-w-[620px]">
+      <h1 className="mb-1 text-[2rem]">Treino</h1>
+      <p className="mb-6 text-ink-2">Questões novas a cada vez, sem fim. Acertos de primeira valem 10 XP.</p>
       <PracticeHub lessons={lessons} />
-    </>
+    </div>
   );
 }

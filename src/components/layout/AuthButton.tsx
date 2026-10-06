@@ -1,62 +1,60 @@
 'use client';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useEffect, useRef, useState } from 'react';
 import { useAuthEnabled } from './Providers';
 
-export function AuthButton() {
-  return useAuthEnabled() ? <SessionButton /> : null;
+/** Cartão de conta do perfil: login com Google para salvar o progresso na nuvem. */
+export function AccountCard() {
+  return useAuthEnabled() ? <SessionCard /> : <Card title="Visitante" text="Seu progresso fica salvo neste aparelho. O login para sincronizar entre aparelhos chega em breve." />;
 }
 
-function SessionButton() {
-  const { data: session, status } = useSession();
-  const [open, setOpen] = useState(false);
-  const menu = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: MouseEvent) => { if (!menu.current?.contains(e.target as Node)) setOpen(false); };
-    document.addEventListener('click', close);
-    return () => document.removeEventListener('click', close);
-  }, [open]);
-
-  if (status === 'loading') return <span className="size-10 rounded-full bg-surface-2" aria-hidden />;
-
-  if (!session) {
-    return (
-      <button type="button" onClick={() => signIn('google')} className="btn btn-ghost min-h-10 px-3.5 py-2 text-sm" title="Entre com o Google para salvar seu progresso na nuvem">
-        Entrar
-      </button>
-    );
-  }
-
-  const { name, email, image } = session.user;
+function Card({ title, text, image, action }: { title: string; text: string; image?: string | null; action?: React.ReactNode }) {
   return (
-    <div ref={menu} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-label="Minha conta"
-        className="grid size-10 cursor-pointer place-items-center overflow-hidden rounded-full border border-line bg-surface-2 font-medium"
-      >
+    <div className="card flex flex-wrap items-center gap-4 p-5">
+      <span className="grid size-16 flex-none place-items-center overflow-hidden rounded-full bg-accent-soft font-serif text-2xl font-bold text-accent">
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element -- avatar externo pequeno
           <img src={image} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
         ) : (
-          (name ?? email ?? '?').slice(0, 1).toUpperCase()
+          title.slice(0, 1).toUpperCase()
         )}
-      </button>
-      {open && (
-        <div className="card absolute top-12 right-0 z-30 w-64 p-4 text-sm">
-          <p className="font-medium">{name}</p>
-          <p className="mb-3 truncate text-ink-3">{email}</p>
-          <p className="mb-3 text-ink-2">Seu progresso está salvo na nuvem e sincroniza entre aparelhos.</p>
-          <button type="button" onClick={() => signOut()} className="btn btn-ghost min-h-10 w-full py-2">
-            Sair
-          </button>
-        </div>
-      )}
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[1.3rem] font-black">{title}</p>
+        <p className="text-[0.92rem] text-ink-2">{text}</p>
+      </div>
+      {action && <div className="w-full sm:w-auto">{action}</div>}
     </div>
+  );
+}
+
+function SessionCard() {
+  const { data: session, status } = useSession();
+  if (status === 'loading') return <div className="card h-28 animate-pulse" />;
+  if (!session) {
+    return (
+      <Card
+        title="Visitante"
+        text="Entre com o Google para salvar seu progresso na nuvem e continuar em qualquer aparelho."
+        action={
+          <button type="button" onClick={() => signIn('google')} className="btn btn-primary c-blue w-full">
+            Entrar com Google
+          </button>
+        }
+      />
+    );
+  }
+  const { name, email, image } = session.user;
+  return (
+    <Card
+      title={name ?? email ?? 'Você'}
+      text="Progresso salvo na nuvem e sincronizado entre aparelhos."
+      image={image}
+      action={
+        <button type="button" onClick={() => signOut()} className="btn btn-ghost w-full">
+          Sair
+        </button>
+      }
+    />
   );
 }

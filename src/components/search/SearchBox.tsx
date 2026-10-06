@@ -41,19 +41,22 @@ export function SearchBox() {
         placeholder="Ex.: frações, Pitágoras, derivada…"
         aria-label="Buscar assunto"
         autoComplete="off"
-        className="w-full rounded-full border-2 border-line bg-surface px-[18px] py-3.5 text-[1.1rem] font-normal text-ink outline-none focus:border-coral"
+        className="w-full rounded-2xl border-2 border-line bg-surface px-5 py-4 text-[1.15rem] font-bold text-ink shadow-[0_3px_0_var(--line)] outline-none placeholder:text-ink-3 focus:border-coral"
       />
-      <ul className="mt-4 grid gap-2" aria-live="polite">
+      <ul className="mt-5 grid gap-3" aria-live="polite">
         {results.length === 0 && <li className="text-ink-2">Nada encontrado. Tente outra palavra.</li>}
         {results.map(({ module, lesson }) => {
           const body = (
             <>
-              <span className="text-[0.72rem] font-semibold tracking-[0.08em] text-accent uppercase">{module.title}</span>
-              <span className="flex-1">{lesson.title}</span>
+              <span className={`grid size-12 flex-none place-items-center rounded-full font-serif text-[1.15rem] font-bold ${lesson.ready ? 'bg-accent text-on-accent' : 'bg-surface-2 text-ink-3'}`}>{lesson.symbol}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[0.7rem] font-black tracking-[0.12em] text-accent uppercase">{module.title}</span>
+                <span className="block font-extrabold">{lesson.title}</span>
+              </span>
               {!lesson.ready && <span className="badge">em breve</span>}
             </>
           );
-          const cls = `c-${module.color} flex flex-wrap items-center gap-2.5 rounded-xl border border-line bg-surface px-4 py-3.5`;
+          const cls = `c-${module.color} card flex items-center gap-3.5 px-4 py-3`;
           return (
             <li key={lesson.id}>
               {lesson.ready ? (

@@ -35,7 +35,8 @@ function expression(terms: Term[]): Question {
   const simple = signed.map((v, i) => (i === 0 ? tn(v) : v < 0 ? `- ${tn(-v)}` : `+ ${tn(v)}`)).join(' ');
 
   const steps: string[] = [];
-  if (terms.some((t, i) => i > 0 && (t.op === '-' || t.v < 0))) {
+  // Só reescreve quando há número negativo depois do primeiro (ex.: 3 − (−5)).
+  if (terms.some((t, i) => i > 0 && t.v < 0)) {
     steps.push(`Subtrair é somar o oposto, e ${m('+(-a)')} é o mesmo que ${m('-a')}. Reescrevendo: ${m(simple)}.`);
   }
   if (signed.length > 2) {

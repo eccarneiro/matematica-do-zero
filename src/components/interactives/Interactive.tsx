@@ -1,12 +1,12 @@
 /** Moldura comum dos desenhos interativos. */
 export function Interactive({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <figure className="card not-prose my-6 p-3.5">
-      <figcaption className="mb-2 flex items-center gap-1.5 text-[0.78rem] font-semibold tracking-[0.08em] text-accent uppercase before:size-2 before:rounded-full before:bg-accent">
+    <figure className="card not-prose my-7 p-4 shadow-[0_4px_0_var(--line)]">
+      <figcaption className="mb-3 flex items-center gap-2 text-[0.75rem] font-black tracking-[0.14em] text-accent uppercase before:content-['✦']">
         {title}
       </figcaption>
       {children}
-      {hint && <p className="mt-2 text-center text-[0.82rem] text-ink-3">{hint}</p>}
+      {hint && <p className="mt-3 text-center text-[0.82rem] font-bold text-ink-3">{hint}</p>}
     </figure>
   );
 }
@@ -19,13 +19,13 @@ export function Slider({
 }) {
   return (
     <label className="flex flex-wrap items-center gap-2.5">
-      <span className="min-w-[7.5em] text-[0.9rem] text-ink-2">{label}</span>
+      <span className="min-w-[7.5em] text-[0.9rem] font-bold text-ink-2">{label}</span>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="h-7 min-w-[140px] flex-1 accent-accent"
       />
-      <output className="min-w-[3ch] text-right font-semibold text-ink tabular-nums">{format(value)}</output>
+      <output className="min-w-[3ch] text-right font-black text-ink tabular-nums">{format(value)}</output>
     </label>
   );
 }
@@ -42,7 +42,7 @@ export function Toggle<T extends string>({
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={`min-h-10 cursor-pointer rounded-full border-[1.5px] px-3.5 py-1.5 text-[0.92rem] ${value === o.value ? 'border-accent bg-accent-soft font-medium text-accent' : 'border-line bg-surface'}`}
+          className={`min-h-11 cursor-pointer rounded-2xl border-2 px-4 py-2 text-[0.92rem] font-extrabold active:translate-y-[3px] active:shadow-none ${value === o.value ? 'border-accent bg-accent-soft text-accent shadow-[0_3px_0_var(--accent)]' : 'border-line bg-surface text-ink-2 shadow-[0_3px_0_var(--line)]'}`}
         >
           {o.label}
         </button>
@@ -52,5 +52,5 @@ export function Toggle<T extends string>({
 }
 
 export function Readout({ children }: { children: React.ReactNode }) {
-  return <div className="mt-2.5 min-h-[2.6em] rounded-xl bg-surface-2 p-2.5 text-center text-[1.05rem]">{children}</div>;
+  return <div className="mt-3 min-h-[2.6em] rounded-2xl bg-surface-2 p-3 text-center text-[1.05rem]">{children}</div>;
 }

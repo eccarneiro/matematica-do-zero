@@ -1,5 +1,6 @@
 export const NAV_ITEMS = [
-  { href: '/', label: 'Trilha', match: (p: string) => p === '/' || p.startsWith('/modulo') || p.startsWith('/aula') },
-  { href: '/treino', label: 'Treino', match: (p: string) => p.startsWith('/treino') },
-  { href: '/busca', label: 'Buscar', match: (p: string) => p.startsWith('/busca') },
+  { href: '/', label: 'Trilha', icon: 'trail', match: (p: string) => p === '/' || p.startsWith('/modulo') },
+  { href: '/treino', label: 'Treino', icon: 'practice', match: (p: string) => p === '/treino' },
+  { href: '/busca', label: 'Buscar', icon: 'search', match: (p: string) => p.startsWith('/busca') },
+  { href: '/perfil', label: 'Perfil', icon: 'user', match: (p: string) => p.startsWith('/perfil') },
 ] as const;
