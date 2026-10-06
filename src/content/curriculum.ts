@@ -11,7 +11,7 @@ export const curriculum: CourseModule[] = [
     tagline: 'Os números e as operações que sustentam todo o resto.',
     color: 'coral',
     lessons: [
-      { id: 'numeros-inteiros', title: 'Números naturais e inteiros', topic: 'inteiros',
+      { id: 'numeros-inteiros', title: 'Números naturais e inteiros', topic: 'inteiros', ready: true,
         summary: 'Contar, ordenar e ir além do zero com os negativos.',
         keywords: 'naturais inteiros negativos reta numérica sinais soma subtração comparar oposto módulo' },
       { id: 'operacoes', title: 'As quatro operações',

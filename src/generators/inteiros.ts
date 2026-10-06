@@ -65,6 +65,30 @@ function expression(terms: Term[]): Question {
   };
 }
 
+/** Multiplicação ou divisão exata (montada de trás para frente: dividendo = divisor × quociente). */
+function product(rng: Rng, max: number): Question {
+  const a = rng.nonZero(-max, max);
+  const b = rng.nonZero(-max, max);
+  const isDiv = rng.chance(0.45);
+  const [x, y, result] = isDiv ? [a * b, b, a] : [a, b, a * b];
+  const sym = isDiv ? '\\div' : '\\cdot';
+  const expr = `${par(x)} ${sym} ${par(y)}`;
+  const same = x < 0 === y < 0;
+  return {
+    prompt: `Calcule: ${M(expr)}`,
+    answer: intAnswer(result),
+    answerText: pn(result),
+    answerDisplay: m(tn(result)),
+    hint: `Primeiro faça a conta sem os sinais. Depois o jogo de sinais: sinais iguais dão ${m('+')}, sinais diferentes dão ${m('-')}.`,
+    steps: [
+      `Sem os sinais: ${m(`${Math.abs(x)} ${sym} ${Math.abs(y)} = ${Math.abs(result)}`)}.`,
+      `Sinais: ${m(x < 0 ? '-' : '+')} e ${m(y < 0 ? '-' : '+')} são ${same ? 'iguais, então o resultado é positivo' : 'diferentes, então o resultado é negativo'}.`,
+      `Resultado: ${m(`${expr} = ${tn(result)}`)}.`,
+    ],
+    data: { kind: isDiv ? 'div' : 'mul', x, y, result },
+  };
+}
+
 const CITIES = ['Urupema (SC)', 'São Joaquim (SC)', 'uma estação na Antártida', 'Gramado (RS)', 'uma câmara frigorífica'];
 
 function temperature(rng: Rng): Question {
@@ -122,13 +146,16 @@ const inteiros: Generator = {
       return expression([{ op: '+', v: a }, { op: rng.pick(['+', '-'] as const), v: rng.int(1, 10) }]);
     }
     if (level === 2) {
-      const kind = rng.pick(['cmp', 'sum', 'sum', 'temp', 'temp'] as const);
+      const kind = rng.pick(['cmp', 'sum', 'sum', 'temp', 'temp', 'prod', 'prod'] as const);
       if (kind === 'cmp') return compare(rng, 60);
+      if (kind === 'prod') return product(rng, 9);
       if (kind === 'temp') return temperature(rng);
       const b = rng.int(1, 20) * (rng.chance(0.75) ? -1 : 1);
       return expression([{ op: '+', v: rng.nonZero(-20, 20) }, { op: rng.pick(['+', '-'] as const), v: b }]);
     }
-    if (rng.chance(0.25)) return bank(rng);
+    const kind = rng.pick(['bank', 'prod', 'sum', 'sum'] as const);
+    if (kind === 'bank') return bank(rng);
+    if (kind === 'prod') return product(rng, 15);
     const terms: Term[] = [{ op: '+', v: rng.nonZero(-30, 30) }];
     for (let i = rng.int(3, 4); i > 1; i--) terms.push({ op: rng.pick(['+', '-'] as const), v: rng.nonZero(-30, 30) });
     return expression(terms);

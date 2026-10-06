@@ -26,6 +26,18 @@ const verifiers: Record<string, (q: Question) => void> = {
     expect(signed.reduce((s, x) => s + x, 0)).toBe(result);
     expect(eq(expectedValue(q), R(result))).toBe(true);
   },
+  mul(q) {
+    const { x, y, result } = q.data as unknown as { x: number; y: number; result: number };
+    expect(x * y).toBe(result);
+    expect(eq(expectedValue(q), R(result))).toBe(true);
+  },
+  div(q) {
+    const { x, y, result } = q.data as unknown as { x: number; y: number; result: number };
+    expect(y).not.toBe(0);
+    expect(x / y).toBe(result);
+    expect(Number.isInteger(result)).toBe(true);
+    expect(eq(expectedValue(q), R(result))).toBe(true);
+  },
   max(q) {
     const { values, result } = q.data as unknown as { values: number[]; result: number };
     expect(Math.max(...values)).toBe(result);

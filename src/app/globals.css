@@ -129,6 +129,12 @@
   .prose li::marker { color: var(--accent); }
   .prose blockquote { @apply rounded-xl bg-accent-soft px-4 py-3; }
   .prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+  .prose-history > p:first-child::first-letter {
+    float: left;
+    margin: 0.35rem 0.5rem 0 0;
+    font: 650 3.2em/0.8 var(--font-serif);
+    color: var(--accent);
+  }
 
   /* Cores de SVG que acompanham o tema */
   .s-ink { stroke: var(--ink); } .f-ink { fill: var(--ink); }
