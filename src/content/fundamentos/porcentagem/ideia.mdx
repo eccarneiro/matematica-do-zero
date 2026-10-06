@@ -1,0 +1,78 @@
+import { BarraPorcentagem } from '@/components/interactives/BarraPorcentagem';
+
+### Porcentagem é "por cem"
+
+O símbolo **%** quer dizer **"de cada 100"**. Dizer que $25\%$ dos alunos usam óculos é dizer que, de cada 100 alunos, 25 usam. Por isso toda porcentagem é uma **fração com denominador 100**, e pode ser escrita de três jeitos:
+
+$$
+25\% = \frac{25}{100} = \frac{1}{4} = 0{,}25
+$$
+
+Para passar de porcentagem para decimal, divida por 100 (a vírgula anda duas casas para a esquerda): $7\% = 0{,}07$ e $120\% = 1{,}2$. Para voltar, multiplique por 100: $0{,}6 = 60\%$.
+
+Algumas porcentagens valem a pena decorar, porque viram frações simples:
+
+- $50\%$ é a **metade**;
+- $25\%$ é a **quarta parte** (metade da metade);
+- $10\%$ é dividir por **10**;
+- $1\%$ é dividir por **100**.
+
+### Calcular x% de um número
+
+"De", em matemática, vira **multiplicação**. Então $x\%$ de $N$ é a fração vezes o número:
+
+$$
+\begin{aligned}
+15\%\text{ de }80 &= \frac{15}{100}\cdot 80\\
+&= 0{,}15 \cdot 80 = 12
+\end{aligned}
+$$
+
+De cabeça, dá para montar quase tudo com os atalhos: $10\%$ de $80$ é $8$, e $5\%$ é a metade disso, $4$. Então $15\% = 10\% + 5\%$ dá $8 + 4 = 12$.
+
+Mexa na barra abaixo. O contorno grosso é o **total**, os $100\%$. Mude a porcentagem e o total, e depois troque para os modos de aumento e desconto.
+
+<BarraPorcentagem />
+
+### Que porcentagem é uma parte do todo?
+
+Agora o caminho inverso: numa turma de 40 alunos, 14 usam óculos. Que porcentagem é essa? Escreva a fração **parte sobre todo** e transforme em "quantos em cada 100":
+
+$$
+\frac{14}{40} = 0{,}35 = 35\%
+$$
+
+### Aumento e desconto: o fator multiplicador
+
+Um produto de R\$ 200 sobe $20\%$. Você pode calcular $20\%$ de $200$ (dá $40$) e somar: $240$. Mas há um jeito mais rápido. Depois do aumento, o preço novo é $100\% + 20\% = 120\%$ do antigo, ou seja:
+
+$$
+\text{aumento de }20\% \;\Longrightarrow\; \times\, 1{,}20
+$$
+
+Com desconto é igual. Um desconto de $15\%$ deixa você pagando $100\% - 15\% = 85\%$ do preço:
+
+$$
+\text{desconto de }15\% \;\Longrightarrow\; \times\, 0{,}85
+$$
+
+Esse número ($1{,}20$ ou $0{,}85$) se chama **fator multiplicador**. Ele resolve três coisas de uma vez:
+
+- **Valor novo:** multiplique pelo fator. $200 \cdot 1{,}2 = 240$.
+- **Valor original:** se você já sabe o preço depois da mudança, **divida** pelo fator. Um tênis com $15\%$ de desconto saiu por R\$ 170; antes custava $170 \div 0{,}85 = 200$.
+- **Mudanças seguidas:** os fatores **se multiplicam**. Um aumento de $10\%$ seguido de outro de $10\%$ dá $1{,}1 \cdot 1{,}1 = 1{,}21$: um aumento total de $21\%$, e não de $20\%$.
+
+### Juros: porcentagem ao longo do tempo
+
+Quando você pega dinheiro emprestado, paga **juros**: uma porcentagem do valor por mês (ou por ano). Nos **juros simples**, os juros de cada mês são sempre calculados sobre o valor inicial. R\$ 1.000 a $2\%$ ao mês por 5 meses:
+
+$$
+\begin{aligned}
+\text{juros} &= 5 \cdot (2\%\text{ de }1{.}000)\\
+&= 5 \cdot 20 = 100
+\end{aligned}
+$$
+
+Bancos e cartões de crédito, porém, costumam usar **juros compostos**: cada mês a porcentagem incide sobre o valor já aumentado, como nas mudanças seguidas acima ($\times 1{,}02$ todo mês). Isso faz a dívida crescer cada vez mais rápido. Esse crescimento, chamado **exponencial**, é assunto do Módulo 3.
+
+> **Cuidado com o erro comum:** porcentagens seguidas **não se somam**. Se algo aumenta $50\%$ e depois cai $50\%$, não volta ao valor inicial: $100 \cdot 1{,}5 \cdot 0{,}5 = 75$. A queda é calculada sobre um valor maior, então tira mais do que o aumento colocou. E atenção a **pontos percentuais**: se a taxa de juros sobe de $10\%$ para $12\%$, ela subiu **2 pontos percentuais**, mas isso é um aumento de $20\%$ na taxa, já que $2$ é $20\%$ de $10$.

@@ -7,6 +7,7 @@ export const generatorLoaders = {
   zero: () => import('./zero'),
   fracoes: () => import('./fracoes'),
   decimais: () => import('./decimais'),
+  porcentagem: () => import('./porcentagem'),
 } satisfies Record<string, () => Promise<{ default: Generator }>>;
 
 export type TopicId = keyof typeof generatorLoaders;

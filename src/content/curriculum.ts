@@ -26,7 +26,7 @@ export const curriculum: CourseModule[] = [
       { id: 'decimais', topic: 'decimais', ready: true, title: 'Números decimais',
         summary: 'A vírgula que conecta frações, dinheiro e medidas.',
         keywords: 'decimais vírgula décimos centésimos dinheiro Stevin dízima' },
-      { id: 'porcentagem', title: 'Porcentagem',
+      { id: 'porcentagem', topic: 'porcentagem', ready: true, title: 'Porcentagem',
         summary: 'Uma fração com denominador 100 que está em todo lugar.',
         keywords: 'porcentagem por cento desconto aumento juros taxa' },
       { id: 'potencias-raizes', title: 'Potências e raízes',
