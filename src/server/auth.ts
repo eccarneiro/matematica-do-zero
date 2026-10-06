@@ -4,7 +4,11 @@ import Google from 'next-auth/providers/google';
 import { db, schema } from './db';
 
 /** Login só fica disponível com Google e banco configurados. */
-export const authEnabled = Boolean(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET && process.env.AUTH_SECRET && db);
+// Remove espaços e quebras de linha que às vezes vêm junto ao colar as credenciais.
+const googleId = process.env.AUTH_GOOGLE_ID?.trim();
+const googleSecret = process.env.AUTH_GOOGLE_SECRET?.trim();
+
+export const authEnabled = Boolean(googleId && googleSecret && process.env.AUTH_SECRET && db);
 
 declare module 'next-auth' {
   interface Session {
@@ -13,7 +17,7 @@ declare module 'next-auth' {
 }
 
 export const { handlers, auth } = NextAuth({
-  providers: [Google],
+  providers: [Google({ clientId: googleId, clientSecret: googleSecret })],
   session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, account, profile }) {
