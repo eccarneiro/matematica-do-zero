@@ -23,7 +23,7 @@ export const curriculum: CourseModule[] = [
       { id: 'fracoes', topic: 'fracoes', ready: true, title: 'Frações',
         summary: 'Partes de um todo: dividir, comparar e operar.',
         keywords: 'frações numerador denominador equivalentes simplificar soma mmc pizza egito' },
-      { id: 'decimais', title: 'Números decimais',
+      { id: 'decimais', topic: 'decimais', ready: true, title: 'Números decimais',
         summary: 'A vírgula que conecta frações, dinheiro e medidas.',
         keywords: 'decimais vírgula décimos centésimos dinheiro Stevin dízima' },
       { id: 'porcentagem', title: 'Porcentagem',

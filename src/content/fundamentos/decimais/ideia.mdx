@@ -1,0 +1,101 @@
+import { GradeDecimal } from '@/components/interactives/GradeDecimal';
+
+### A vírgula continua as posições
+
+No número $352$, cada casa vale **10 vezes** a casa da sua direita: centenas, dezenas, unidades. Os decimais seguem a mesma regra **depois da unidade**: cada casa vale **10 vezes menos** que a anterior. A vírgula só marca onde termina a parte inteira.
+
+- **Décimos** ($0{,}1 = \frac{1}{10}$): a unidade dividida em 10 partes.
+- **Centésimos** ($0{,}01 = \frac{1}{100}$): a unidade dividida em 100 partes.
+- **Milésimos** ($0{,}001 = \frac{1}{1000}$): a unidade dividida em 1000 partes.
+
+Assim, $25{,}375$ é 2 dezenas, 5 unidades, 3 décimos, 7 centésimos e 5 milésimos:
+
+$$
+\begin{aligned}
+25{,}375 &= 20 + 5\\
+&\quad + \tfrac{3}{10} + \tfrac{7}{100} + \tfrac{5}{1000}
+\end{aligned}
+$$
+
+### Enxergando décimos e centésimos
+
+Pense num quadrado dividido em 100 quadradinhos. O quadrado inteiro vale 1. Cada **quadradinho** é um centésimo ($0{,}01$) e cada **coluna** de 10 quadradinhos é um décimo ($0{,}1$). Pinte e veja o mesmo número escrito como decimal, fração, dinheiro e porcentagem:
+
+<GradeDecimal />
+
+Repare: 10 centésimos completam uma coluna, ou seja, $0{,}10 = 0{,}1$. Zeros **no fim** da parte decimal não mudam nada.
+
+### Decimal e fração são o mesmo número
+
+Para transformar decimal em fração, leia o número: o denominador é 10, 100 ou 1000, conforme o número de casas. Depois simplifique:
+
+$$
+0{,}75 = \frac{75}{100} = \frac{3}{4}
+$$
+
+No caminho contrário, **a fração é uma divisão**: $\frac{3}{4} = 3 \div 4 = 0{,}75$. Às vezes dá para trocar por uma fração equivalente com denominador 10 ou 100: $\frac{2}{5} = \frac{4}{10} = 0{,}4$.
+
+### Comparar: complete com zeros
+
+Para comparar, iguale o número de casas acrescentando zeros no fim e compare como inteiros:
+
+$$
+0{,}5 = 0{,}50 \quad\text{e}\quad 0{,}50 > 0{,}25
+$$
+
+### Somar e subtrair: vírgula embaixo de vírgula
+
+Décimos se somam com décimos, centésimos com centésimos. Por isso, arme a conta com a **vírgula embaixo da vírgula** e complete com zeros:
+
+$$
+\begin{aligned}
+3{,}4 + 1{,}25 &= 3{,}40 + 1{,}25 = 4{,}65\\
+7 - 2{,}35 &= 7{,}00 - 2{,}35 = 4{,}65
+\end{aligned}
+$$
+
+### Multiplicar: conte as casas
+
+Multiplique **sem as vírgulas** e, no fim, dê ao resultado tantas casas decimais quanto os dois fatores têm juntos:
+
+$$
+\begin{aligned}
+2{,}5 \times 1{,}3:\quad 25 \times 13 &= 325\\
+\text{1 casa} + \text{1 casa} &= \text{2 casas}\\
+2{,}5 \times 1{,}3 &= 3{,}25
+\end{aligned}
+$$
+
+Faz sentido: $2{,}5 \times 1{,}3$ é um pouco mais que $2{,}5$, e $3{,}25$ é exatamente isso.
+
+### Dividir: tire a vírgula do divisor
+
+Multiplicar os **dois** números de uma divisão por 10, 100 ou 1000 não muda o resultado (é como trocar reais por centavos dos dois lados). Use isso para sumir com a vírgula do divisor:
+
+$$
+\begin{aligned}
+1{,}8 \div 0{,}3 &= 18 \div 3 = 6\\
+4{,}5 \div 0{,}15 &= 450 \div 15 = 30
+\end{aligned}
+$$
+
+### Por 10, 100, 1000: a vírgula anda
+
+Multiplicar por 10 anda com a vírgula **uma casa para a direita**; por 100, duas; por 1000, três. Dividir faz o mesmo para a **esquerda**, completando com zeros se faltar algarismo:
+
+$$
+\begin{aligned}
+3{,}475 \times 100 &= 347{,}5\\
+42 \div 1000 &= 0{,}042
+\end{aligned}
+$$
+
+### Dinheiro é decimal
+
+Um real tem 100 centavos, então **centavo é centésimo**. R\$ 12,50 são 12 reais e 50 centésimos de real. É por isso que preços sempre têm duas casas depois da vírgula, e que dá para fazer qualquer conta de dinheiro pensando em centavos: $12{,}50 \div 5$ é o mesmo que $1250 \div 5 = 250$ centavos, ou seja, R\$ 2,50.
+
+### E quando a divisão não acaba?
+
+Algumas frações viram decimais que **nunca terminam**: $\frac{1}{3} = 1 \div 3 = 0{,}333\ldots$, com o 3 se repetindo para sempre. Isso se chama **dízima periódica**. Acontece quando o denominador (já simplificado) tem algum fator primo diferente de 2 e 5. Já $\frac{3}{8}$ termina, porque $8 = 2 \cdot 2 \cdot 2$: $\frac{3}{8} = 0{,}375$.
+
+> **Cuidado com o erro mais comum:** "mais algarismos" não quer dizer "maior". $0{,}5 > 0{,}25$, mesmo com $25 > 5$, porque 5 décimos são 50 centésimos. Na hora de somar, também não alinhe pela direita: $1{,}5 + 0{,}25$ é $1{,}50 + 0{,}25 = 1{,}75$. **Vírgula embaixo de vírgula, sempre.**

@@ -6,6 +6,7 @@ export const generatorLoaders = {
   operacoes: () => import('./operacoes'),
   zero: () => import('./zero'),
   fracoes: () => import('./fracoes'),
+  decimais: () => import('./decimais'),
 } satisfies Record<string, () => Promise<{ default: Generator }>>;
 
 export type TopicId = keyof typeof generatorLoaders;
