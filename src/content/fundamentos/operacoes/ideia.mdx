@@ -1,0 +1,72 @@
+import { AreaMultiplicacao } from '@/components/interactives/AreaMultiplicacao';
+
+### O que cada operação quer dizer
+
+Antes de qualquer regra, vale lembrar o **sentido** de cada operação:
+
+- **Adição ($+$): juntar.** Tenho 8 figurinhas e ganho 5: fico com $8 + 5 = 13$.
+- **Subtração ($-$): tirar** (ou comparar quanto falta). Tinha 13 e dei 5: sobram $13 - 5 = 8$.
+- **Multiplicação ($\times$): grupos iguais.** 4 pacotes com 6 biscoitos cada: $4 \times 6 = 24$ biscoitos.
+- **Divisão ($\div$): repartir em partes iguais.** 24 biscoitos para 6 pessoas: $24 \div 6 = 4$ para cada uma.
+
+Repare que elas andam em pares: a subtração **desfaz** a adição, e a divisão **desfaz** a multiplicação. É por isso que dá para conferir uma conta usando a outra:
+
+$$
+\begin{aligned}
+13 - 5 = 8 &\iff 8 + 5 = 13\\
+24 \div 6 = 4 &\iff 4 \times 6 = 24
+\end{aligned}
+$$
+
+### Multiplicar é calcular uma área
+
+Arrume $4 \times 7$ como **4 fileiras de 7 quadradinhos**. Você forma um retângulo, e o produto é o número de quadradinhos dentro dele: a **área**.
+
+Agora gire o retângulo: ele vira 7 fileiras de 4. A quantidade de quadradinhos não mudou! Por isso a ordem dos fatores não altera o produto:
+
+$$
+4 \times 7 = 7 \times 4 = 28
+$$
+
+O mesmo vale para a adição ($3 + 9 = 9 + 3$). Já na subtração e na divisão a ordem importa: $9 - 3$ não é $3 - 9$.
+
+### Dividir: quantos grupos cabem, e o que sobra
+
+Dividir $23$ por $5$ é perguntar: quantos grupos de 5 consigo formar com 23 coisas? Formo **4 grupos** (que usam 20) e **sobram 3**. O 4 é o **quociente** e o 3 é o **resto**:
+
+$$
+\underbrace{23}_{\text{dividendo}} = \underbrace{5}_{\text{divisor}} \times \underbrace{4}_{\text{quociente}} + \underbrace{3}_{\text{resto}}
+$$
+
+O resto é sempre **menor que o divisor** (se sobrassem 5 ou mais, daria para formar mais um grupo). Quando o resto é zero, a divisão é **exata**.
+
+Experimente: no modo multiplicar, mude as fileiras e colunas e veja a área. No modo dividir, escolha um total e o tamanho dos grupos, e veja o resto aparecer em destaque.
+
+<AreaMultiplicacao />
+
+### A ordem das operações
+
+Quanto vale $2 + 3 \times 4$? Quem faz da esquerda para a direita chega em $20$. Quem faz a multiplicação primeiro chega em $14$. Só pode haver uma resposta, então o mundo inteiro combinou uma **ordem**:
+
+1. **Parênteses** (e outros sinais de agrupamento) primeiro, de dentro para fora.
+2. **Potências** (você verá numa aula própria).
+3. **Multiplicação e divisão**, da esquerda para a direita.
+4. **Adição e subtração**, da esquerda para a direita.
+
+Pelo combinado, $2 + 3 \times 4 = 2 + 12 = 14$. E se quisermos somar antes, usamos parênteses: $(2 + 3) \times 4 = 20$.
+
+Veja um exemplo completo, um passo de cada vez:
+
+$$
+\begin{aligned}
+&18 + 6 \times (7 - 4) \div 2\\
+&= 18 + 6 \times 3 \div 2\\
+&= 18 + 18 \div 2\\
+&= 18 + 9\\
+&= 27
+\end{aligned}
+$$
+
+Por que a multiplicação vem antes? Não há nada de "natural" nisso: é uma **convenção**, como dirigir do lado direito da rua. Mas é uma convenção útil: a multiplicação é uma soma repetida resumida, então faz sentido "desembrulhá-la" primeiro. E a regra permite escrever coisas como "3 cadernos de R\$ 12 e 2 canetas de R\$ 4" como $3 \times 12 + 2 \times 4$, sem encher a conta de parênteses.
+
+> **Cuidado com o erro comum:** "multiplicação antes da divisão" e "adição antes da subtração" **não** são regras. Elas têm a mesma prioridade e vão da esquerda para a direita. Assim, $20 - 5 + 3 = 18$ (e não $12$), e $24 \div 4 \times 2 = 12$ (e não $3$).

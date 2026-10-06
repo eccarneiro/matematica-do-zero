@@ -3,6 +3,7 @@ import type { Generator } from './types';
 // Cada tópico é carregado sob demanda, só quando o treino dele é aberto.
 export const generatorLoaders = {
   inteiros: () => import('./inteiros'),
+  operacoes: () => import('./operacoes'),
 } satisfies Record<string, () => Promise<{ default: Generator }>>;
 
 export type TopicId = keyof typeof generatorLoaders;

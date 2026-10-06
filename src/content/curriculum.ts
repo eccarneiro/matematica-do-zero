@@ -14,7 +14,7 @@ export const curriculum: CourseModule[] = [
       { id: 'numeros-inteiros', title: 'Números naturais e inteiros', topic: 'inteiros', ready: true,
         summary: 'Contar, ordenar e ir além do zero com os negativos.',
         keywords: 'naturais inteiros negativos reta numérica sinais soma subtração comparar oposto módulo' },
-      { id: 'operacoes', title: 'As quatro operações',
+      { id: 'operacoes', topic: 'operacoes', ready: true, title: 'As quatro operações',
         summary: 'Somar, subtrair, multiplicar, dividir e a ordem certa de fazer as contas.',
         keywords: 'adição subtração multiplicação divisão resto expressões numéricas ordem das operações parênteses tabuada' },
       { id: 'zero', title: 'O zero',
