@@ -143,11 +143,6 @@
   svg text { font-family: var(--font-sans); }
 }
 
-@keyframes shake {
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-3px); }
-}
 @keyframes pop {
   0% { transform: scale(0.9); opacity: 0; }
   60% { transform: scale(1.04); }
