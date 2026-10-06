@@ -1,0 +1,58 @@
+### Só numerador 1
+
+Na aula de frações vimos que os escribas do Egito escreviam quase tudo com **frações unitárias**, as de numerador 1, como $\tfrac{1}{3}$ ou $\tfrac{1}{15}$. A exceção mais famosa era $\tfrac{2}{3}$, que tinha sinal próprio. Qualquer outra quantidade virava uma **soma de frações unitárias diferentes**:
+
+$$
+\frac{3}{4} = \frac{1}{2} + \frac{1}{4}
+\qquad
+\frac{9}{10} = \frac{2}{3} + \frac{1}{5} + \frac{1}{30}
+$$
+
+Repare na palavra **diferentes**. Escrever $\tfrac{2}{5} = \tfrac{1}{5} + \tfrac{1}{5}$ seria fácil demais, e os escribas não faziam assim.
+
+### A tabela de $\tfrac{2}{n}$ do papiro de Rhind
+
+O problema aparece logo que se dobra uma fração. O dobro de $\tfrac{1}{4}$ é fácil, é $\tfrac{1}{2}$. Mas e o dobro de $\tfrac{1}{5}$? Por isso o papiro de Rhind começa com uma **tabela pronta**: $\tfrac{2}{n}$ para todo $n$ ímpar de 5 a 101, já escrito como soma de frações unitárias diferentes. As primeiras linhas são:
+
+$$
+\begin{aligned}
+\frac{2}{5} &= \frac{1}{3} + \frac{1}{15} \\[4pt]
+\frac{2}{7} &= \frac{1}{4} + \frac{1}{28} \\[4pt]
+\frac{2}{9} &= \frac{1}{6} + \frac{1}{18}
+\end{aligned}
+$$
+
+Confira a primeira: $\tfrac{1}{3} + \tfrac{1}{15} = \tfrac{5}{15} + \tfrac{1}{15} = \tfrac{6}{15} = \tfrac{2}{5}$. Como os escribas escolhiam cada decomposição, entre tantas possíveis, ainda é estudado pelos historiadores; não sabemos a regra exata que usavam.
+
+### O método guloso de Fibonacci
+
+Quase 3 mil anos depois, em 1202, **Leonardo de Pisa** (o Fibonacci) apresentou no *Liber Abaci* um jeito de decompor **qualquer** fração. Hoje ele se chama **método guloso**, porque a cada passo pega o maior pedaço possível:
+
+1. Ache a **maior** fração unitária que cabe na fração (que seja menor ou igual a ela).
+2. Subtraia.
+3. Repita com o que sobrou, até o resto ser uma fração unitária.
+
+Vamos fazer com $\tfrac{4}{13}$. Como $13 \div 4 = 3{,}25$, a maior fração unitária que cabe é $\tfrac{1}{4}$ (a $\tfrac{1}{3}$ já passa):
+
+$$
+\begin{aligned}
+\frac{4}{13} - \frac{1}{4} &= \frac{16 - 13}{52} = \frac{3}{52} \\[4pt]
+\frac{3}{52} - \frac{1}{18} &= \frac{54 - 52}{936} = \frac{2}{936} = \frac{1}{468}
+\end{aligned}
+$$
+
+Resultado: $\tfrac{4}{13} = \tfrac{1}{4} + \tfrac{1}{18} + \tfrac{1}{468}$. Funciona, mas os denominadores podem crescer muito.
+
+### Por que o método sempre termina?
+
+Olhe os numeradores dos restos: $4$, depois $3$, depois $2$ (que simplificou para $1$). Isso não é sorte. Se $\tfrac{1}{m}$ é a maior fração unitária que cabe em $\tfrac{n}{d}$, o resto é
+
+$$
+\frac{n}{d} - \frac{1}{m} = \frac{nm - d}{dm},
+$$
+
+e dá para mostrar que $nm - d$ é **sempre menor que** $n$. O numerador diminui a cada passo; como ele é um número natural, não pode diminuir para sempre e acaba chegando a 1. Em 1880, o matemático inglês **J. J. Sylvester** redescobriu e estudou o mesmo método; por isso ele também é chamado de método de **Fibonacci–Sylvester**.
+
+Nem sempre o guloso dá a resposta mais curta. Mas para $\tfrac{2}{5}$ e $\tfrac{2}{7}$ ele reproduz exatamente a tabela do papiro (experimente!). Já para $\tfrac{2}{9}$ ele dá $\tfrac{1}{5} + \tfrac{1}{45}$, diferente da escolha do escriba.
+
+> Toda fração positiva menor que 1 pode ser escrita como soma de frações unitárias diferentes. Os egípcios faziam isso na prática; Fibonacci mostrou um método que sempre funciona.

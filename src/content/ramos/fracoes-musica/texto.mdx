@@ -1,0 +1,56 @@
+import { Monocordio } from '@/components/interactives/Monocordio';
+
+### Uma corda, várias notas
+
+Pegue uma corda esticada, como a de um violão, e faça ela vibrar: sai uma nota. Agora aperte a corda bem no meio e toque só uma das metades. A nota fica mais aguda, mas soa como **a mesma nota, só que mais alta**. Os músicos chamam esse intervalo de **oitava**.
+
+Repare na fração escondida aí: a parte que vibra é $\tfrac{1}{2}$ da corda. Comparando a corda inteira com a parte que vibra, a razão é $2:1$.
+
+E se a parte que vibra for $\tfrac{2}{3}$ da corda? Ou $\tfrac{3}{4}$? Aparecem outros dois intervalos que soam "bem", que combinam quando tocados juntos:
+
+- parte que vibra $\tfrac{1}{2}$: razão $2:1$, a **oitava**;
+- parte que vibra $\tfrac{2}{3}$: razão $3:2$, a **quinta**;
+- parte que vibra $\tfrac{3}{4}$: razão $4:3$, a **quarta**.
+
+Experimente no **monocórdio**, um instrumento de uma corda só com um cavalete que se move:
+
+<Monocordio />
+
+### Tudo é número
+
+A tradição grega atribui essa descoberta a **Pitágoras** (século VI a.C.). Os historiadores discutem o quanto dela é mesmo dele, mas é certo que as razões $2:1$, $3:2$ e $4:3$ eram centrais para os pitagóricos. Repare que só aparecem os números $1, 2, 3$ e $4$. Para eles, isso era sinal de que o mundo inteiro era organizado por números inteiros e suas razões: a música era a prova que se podia **ouvir**.
+
+Nos fragmentos do pitagórico **Filolau** (século V a.C.), a escala já aparece descrita por essas razões. E há algo curioso nelas: intervalos se combinam **multiplicando** as razões, não somando. Subir uma quinta e depois uma quarta dá uma oitava:
+
+$$
+\frac{3}{2} \cdot \frac{4}{3} = \frac{12}{6} = 2
+$$
+
+A diferença entre a quinta e a quarta virou o **tom inteiro**:
+
+$$
+\frac{3}{2} \div \frac{4}{3} = \frac{3}{2} \cdot \frac{3}{4} = \frac{9}{8}
+$$
+
+### A afinação pitagórica
+
+Com isso dá para montar uma escala inteira só com quintas: suba uma quinta (multiplique por $\tfrac{3}{2}$); se a nota ficar alta demais, desça uma oitava (divida por $2$). Isso é a **afinação pitagórica**.
+
+Mas há um problema. Depois de **12 quintas**, você esperaria voltar à mesma nota, 7 oitavas acima. Só que
+
+$$
+\begin{aligned}
+\left(\tfrac{3}{2}\right)^{12} &= \tfrac{531441}{4096} \approx 129{,}7 \\[4pt]
+2^{7} &= 128
+\end{aligned}
+$$
+
+Quase, mas não exatamente. Uma potência de 3 nunca é igual a uma potência de 2 (uma é ímpar, a outra é par), então essa volta **nunca fecha**. A sobra, cerca de $1{,}4\%$, se chama **coma pitagórica**. Os pianos de hoje "dividem o erro" entre as 12 notas, usando $\sqrt[12]{2}$, um número que não é fração nenhuma, assim como $\sqrt{2}$ (assunto de outro ramo).
+
+### A lenda dos martelos
+
+Uma história famosa, contada séculos depois por autores como Nicômaco, diz que Pitágoras passou por uma ferraria, ouviu martelos batendo em harmonia e descobriu que os pesos dos martelos estavam nas razões $2:1$, $3:2$ e $4:3$.
+
+É uma **lenda**, e fisicamente errada: a altura do som de um martelo **não** é proporcional ao seu peso, então o experimento contado não funcionaria. Já com cordas ou com discos de bronze de espessuras diferentes (como num experimento atribuído ao pitagórico Hípaso) as razões aparecem de verdade.
+
+> Pense: por que as razões de números pequenos soam "bem" juntas? Os gregos achavam que era a harmonia do cosmos. A física de hoje fala em ondas que se encaixam. Qual explicação é mais bonita? E qual se pode testar?

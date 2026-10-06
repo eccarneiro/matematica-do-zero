@@ -1,0 +1,71 @@
+### A lenda
+
+Conta uma **lenda** antiga que um sábio indiano inventou o xadrez para divertir o seu rei. Encantado, o rei mandou que ele pedisse o que quisesse. O sábio pediu só trigo: **um grão** na primeira casa do tabuleiro, **dois** na segunda, **quatro** na terceira, e assim por diante, sempre **dobrando**, até a 64ª casa.
+
+O rei achou o pedido modesto demais. Mas, quando os contadores do palácio fizeram as contas, voltaram dizendo que **todo o trigo do mundo** não bastaria.
+
+A história já aparece registrada no século XIII, no dicionário biográfico do erudito **Ibn Khallikan**, no verbete sobre as-Suli, um célebre jogador de xadrez. Lá o inventor se chama Sissa ibn Dahir e o rei, Shihram. É uma história, não um registro histórico: o próprio tradutor do texto para o inglês observa que nada se sabe com certeza sobre esses personagens.
+
+### Quantos grãos em cada casa?
+
+Cada casa tem o dobro da anterior, então a casa $n$ tem $2^{n-1}$ grãos:
+
+$$
+\begin{aligned}
+\text{casa 1}&: 2^0 = 1\\
+\text{casa 2}&: 2^1 = 2\\
+\text{casa 3}&: 2^2 = 4\\
+&\ \,\vdots\\
+\text{casa 64}&: 2^{63}
+\end{aligned}
+$$
+
+Ibn Khallikan conta que só acreditou na história depois que um contador de Alexandria lhe mostrou as dobras no papel: na **16ª casa** já eram $2^{15} = 32\,768$ grãos.
+
+### O truque da soma
+
+Quanto dá o total $S = 1 + 2 + 4 + \dots + 2^{63}$? Em vez de somar 64 números enormes, use um truque: **dobre a soma** e compare.
+
+$$
+\begin{aligned}
+2S &= 2 + 4 + \dots + 2^{63} + 2^{64}\\
+S &= 1 + 2 + 4 + \dots + 2^{63}
+\end{aligned}
+$$
+
+Quase tudo é igual nas duas linhas. Subtraindo, sobra só o último termo de cima e o primeiro de baixo:
+
+$$
+2S - S = 2^{64} - 1
+$$
+
+Então o total é $S = 2^{64} - 1$, ou seja:
+
+$$
+18\,446\,744\,073\,709\,551\,615 \text{ grãos}
+$$
+
+Dá para ver o padrão com poucas casas: $1 + 2 = 3 = 4 - 1$, $1 + 2 + 4 = 7 = 8 - 1$, $1 + 2 + 4 + 8 = 15 = 16 - 1$. **A soma das potências de 2 é sempre a próxima potência menos 1.** Cada casa tem um grão a mais do que todas as anteriores juntas. (Euclides já sabia somar progressões assim: é a Proposição 35 do Livro IX dos *Elementos*.)
+
+Em binário, isso fica quase óbvio: $1 + 2 + 4 + 8$ se escreve $1111$, e somando 1 vira $10000$, que é $16$.
+
+### Estimar de cabeça: 2¹⁰ ≈ 1000
+
+Como $2^{10} = 1024$, que é quase $1000$, cada 10 dobras multiplicam por cerca de mil. Então:
+
+$$
+\begin{aligned}
+2^{64} &= 2^4 \cdot (2^{10})^6\\
+&\approx 16 \cdot (10^3)^6 = 1{,}6 \times 10^{19}
+\end{aligned}
+$$
+
+Bem perto do valor exato, que é cerca de $1{,}8 \times 10^{19}$.
+
+### E isso é muito trigo?
+
+Uma estimativa de ordem de grandeza: segundo a Embrapa Trigo, **mil grãos** de trigo pesam algo entre 26 e 45 gramas, dependendo da variedade. Com isso, os $1{,}8 \times 10^{19}$ grãos pesariam entre **480 e 830 bilhões de toneladas**.
+
+Já a produção mundial de trigo, segundo a FAO (a agência da ONU para alimentação e agricultura), anda na casa de **800 milhões de toneladas por ano**. Ou seja, o prêmio do sábio equivale a algo entre **600 e 1.000 anos** de toda a colheita mundial de trigo de hoje. Os contadores do rei tinham razão.
+
+> É a mesma bola de neve dos juros compostos, só que com uma taxa de $100\%$ por casa: dobrar 64 vezes leva de um grão a montanhas que não cabem no planeta.

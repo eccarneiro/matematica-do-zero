@@ -1,0 +1,75 @@
+import { DobrarSomar } from '@/components/interactives/DobrarSomar';
+
+### Só é preciso saber dobrar
+
+No **Papiro de Rhind**, copiado pelo escriba **Ahmes** por volta de 1650 a.C. (a partir de um texto uns 200 anos mais antigo, segundo ele mesmo), não há tabuada do 7 nem do 8. Para multiplicar, os egípcios precisavam saber só duas coisas: **dobrar** um número e **somar**.
+
+Veja como fazer $13 \times 21$. Montamos duas colunas: a da esquerda começa em $1$, a da direita começa em $21$, e dobramos as duas a cada linha. Paramos antes de a coluna da esquerda passar de $13$:
+
+$$
+\begin{array}{rr}
+1 & 21\\
+2 & 42\\
+4 & 84\\
+8 & 168
+\end{array}
+$$
+
+Agora escolhemos linhas da esquerda que **somem 13**: $13 = 8 + 4 + 1$. Somamos as linhas correspondentes da direita:
+
+$$
+\begin{aligned}
+13 \times 21 &= (8 + 4 + 1) \times 21\\
+&= 168 + 84 + 21\\
+&= 273
+\end{aligned}
+$$
+
+Nenhuma conta "difícil": só dobros e somas. Experimente com outros números:
+
+<DobrarSomar />
+
+### Por que sempre dá certo
+
+A conta funciona porque a multiplicação **se distribui** pela soma: multiplicar $21$ por $8 + 4 + 1$ é o mesmo que multiplicar por cada parte e juntar. E a coluna da direita já guarda $8 \times 21$, $4 \times 21$ e $1 \times 21$ prontinhos.
+
+Mas sempre dá para escrever o multiplicador como soma de números da coluna $1, 2, 4, 8, 16, \dots$, **sem repetir nenhum**? Sim. Pegue o maior que cabe, tire, e repita com o que sobrou:
+
+$$
+\begin{aligned}
+23 &= 16 + 7\\
+7 &= 4 + 3\\
+3 &= 2 + 1
+\end{aligned}
+$$
+
+Logo, $23 = 16 + 4 + 2 + 1$.
+
+O que sobra é sempre menor que o número que você tirou, então nunca precisa usar a mesma linha duas vezes. Essas somas de potências de 2 são exatamente o **sistema binário**, o mesmo que os computadores usam. Marcando $1$ para linha usada e $0$ para linha pulada, de baixo para cima:
+
+$$
+\begin{aligned}
+23 &= 1\cdot 16 + 0\cdot 8 + 1\cdot 4\\
+&\quad + 1\cdot 2 + 1\cdot 1\\
+&= 10111_{\text{dois}}
+\end{aligned}
+$$
+
+Os egípcios não pensavam em "base 2", claro. Mas o método deles usa, na prática, a ideia de que todo número inteiro positivo tem uma escrita binária, e uma só.
+
+### Um primo do método: metades e dobros
+
+Existe uma variação, muitas vezes chamada de **multiplicação do camponês russo**. Em vez de montar a coluna $1, 2, 4, \dots$, você vai **dividindo o primeiro número por 2** (jogando fora o resto) e **dobrando o segundo**. Depois, soma os dobros das linhas em que o primeiro número é **ímpar**:
+
+$$
+\begin{array}{rrl}
+13 & 21 & \text{ímpar: usa}\\
+6 & 42 & \text{par: risca}\\
+3 & 84 & \text{ímpar: usa}\\
+1 & 168 & \text{ímpar: usa}
+\end{array}
+$$
+
+De novo, $21 + 84 + 168 = 273$. Dividir ao meio e olhar se é ímpar é justamente o jeito de descobrir os algarismos binários de $13$, de baixo para cima.
+
+> Pense: o método egípcio troca uma tabuada inteira por uma única habilidade, dobrar. O que se ganha e o que se perde com essa troca? Por que será que os computadores, que só "pensam" em 0 e 1, fazem algo parecido?

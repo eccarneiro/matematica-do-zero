@@ -1,0 +1,72 @@
+### A diagonal do quadrado
+
+Desenhe um quadrado de lado 1. Pelo teorema de Pitágoras, a diagonal $d$ satisfaz
+
+$$
+d^2 = 1^2 + 1^2 = 2, \qquad d = \sqrt{2}
+$$
+
+A diagonal existe: dá para medir com uma régua. A pergunta é se esse comprimento pode ser escrito como **fração**, uma razão entre dois números inteiros.
+
+Na aula vimos a tábua babilônica **YBC 7289**, em que um escriba anotou, em base 60, o número $\text{1;24,51,10}$, ou seja
+
+$$
+1 + \frac{24}{60} + \frac{51}{60^2} + \frac{10}{60^3} \approx 1{,}414213
+$$
+
+Uma aproximação excelente, mas ainda uma aproximação. Será que, com paciência, daria para achar uma fração **exata**? Não dá, e não é por falta de esforço: ela não existe.
+
+### A demonstração por absurdo
+
+A ideia é supor o contrário do que queremos provar e mostrar que isso leva a uma contradição.
+
+**Passo 1. Suponha que dá.** Suponha que $\sqrt{2} = \dfrac{a}{b}$, com $a$ e $b$ inteiros positivos e a fração **já simplificada ao máximo**. Em particular, $a$ e $b$ **não são os dois pares** (senão daria para dividir os dois por 2).
+
+**Passo 2. Eleve ao quadrado.**
+
+$$
+\begin{aligned}
+2 &= \frac{a^2}{b^2}\\
+a^2 &= 2b^2
+\end{aligned}
+$$
+
+Então $a^2$ é o dobro de um inteiro: **$a^2$ é par**.
+
+**Passo 3. Então $a$ é par.** Se $a$ fosse ímpar, $a = 2k + 1$, teríamos $a^2 = 4k^2 + 4k + 1$, que é ímpar. Ímpar ao quadrado dá ímpar. Como $a^2$ é par, $a$ só pode ser par: $a = 2k$ para algum inteiro $k$.
+
+**Passo 4. Substitua.**
+
+$$
+\begin{aligned}
+(2k)^2 &= 2b^2\\
+4k^2 &= 2b^2\\
+b^2 &= 2k^2
+\end{aligned}
+$$
+
+Agora é $b^2$ que é o dobro de um inteiro. Pelo mesmo argumento do passo 3, **$b$ também é par**.
+
+**Passo 5. Contradição!** Chegamos a $a$ par e $b$ par, mas tínhamos combinado que a fração estava simplificada. As duas coisas não podem ser verdade ao mesmo tempo. O único ponto que escolhemos sem provar foi a suposição do passo 1, então ela é falsa: **$\sqrt{2}$ não é uma fração**.
+
+Números assim se chamam **irracionais** (de *razão*, não de "sem juízo"). Seus decimais continuam para sempre, sem nunca entrar num padrão que se repete.
+
+Um argumento desse tipo já era conhecido na Grécia antiga: **Aristóteles**, no século IV a.C., cita como exemplo de prova por absurdo que a diagonal é incomensurável com o lado, "porque os ímpares ficariam iguais aos pares" se ela fosse comensurável.
+
+### Boas frações, nunca exatas
+
+Não existir fração exata não impede ótimas aproximações:
+
+$$
+\begin{aligned}
+\tfrac{7}{5} &= 1{,}4 & \left(\tfrac{7}{5}\right)^2 &= 1{,}96\\
+\tfrac{17}{12} &\approx 1{,}4167 & \left(\tfrac{17}{12}\right)^2 &\approx 2{,}0069\\
+\tfrac{99}{70} &\approx 1{,}41429 & \left(\tfrac{99}{70}\right)^2 &\approx 2{,}0002
+\end{aligned}
+$$
+
+Dá para chegar tão perto quanto se queira, e é isso que o escriba de YBC 7289 fez. Só não dá para chegar **exatamente**.
+
+### E Hípaso?
+
+Conta-se que o pitagórico **Hípaso de Metaponto** teria revelado essa descoberta e morrido afogado como castigo. É uma **lenda**: as fontes antigas são tardias, contraditórias e nem sempre ligam Hípaso aos irracionais. O que é seguro é que, no século V a.C., os gregos perceberam que nem tudo pode ser medido por razões entre inteiros, e a matemática teve de se reorganizar para lidar com isso.

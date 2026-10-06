@@ -1,0 +1,55 @@
+import { DivisorPequeno } from '@/components/interactives/DivisorPequeno';
+
+### Dividir é desfazer a multiplicação
+
+Toda divisão traz uma pergunta escondida. Dizer que $12 \div 3 = 4$ é dizer que $4$ é **o número que, vezes 3, dá 12**:
+
+$$
+12 \div 3 = 4 \iff 4 \times 3 = 12
+$$
+
+Por isso dá para conferir qualquer divisão multiplicando. E é justamente essa pergunta que revela o problema do zero.
+
+### Três casos com zero
+
+**Zero dividido por um número.** Quanto é $0 \div 7$? Procuramos um número que, vezes $7$, dê $0$. Só o próprio zero serve: $0 \times 7 = 0$. Então $0 \div 7 = 0$, sem mistério: repartir nada entre 7 pessoas dá nada para cada uma.
+
+**Um número dividido por zero.** Quanto é $7 \div 0$? Procuramos um número que, vezes $0$, dê $7$:
+
+$$
+? \times 0 = 7
+$$
+
+Mas **qualquer** número vezes zero dá zero, nunca $7$. Nenhum candidato passa no teste. A pergunta não tem resposta.
+
+**Zero dividido por zero.** E $0 \div 0$? Agora procuramos um número que, vezes $0$, dê $0$. O problema se inverte: $1 \times 0 = 0$, $5 \times 0 = 0$, $1000 \times 0 = 0$… **todos** passam no teste. Uma conta que aceita qualquer resposta não serve para nada, e por isso dizemos que $0 \div 0$ é **indeterminado**.
+
+Num caso falta resposta, no outro sobra. Nos dois, a divisão por zero fica **sem definição**. Não é uma regra arbitrária: qualquer valor que inventássemos para $7 \div 0$ quebraria o teste da multiplicação.
+
+### Até grandes matemáticos tropeçaram
+
+Quando o zero virou número, na Índia, as regras de conta com ele precisaram ser inventadas. **Brahmagupta**, em 628, acertou muitas (somar zero não muda nada; multiplicar por zero dá zero), mas escreveu que **zero dividido por zero é zero** e disse apenas que um número dividido por zero é "uma fração com zero no denominador".
+
+Uns cinco séculos depois, **Bhaskara II** (1114–1185) propôs que um número dividido por zero é uma **quantidade infinita**, que não muda por mais que se some ou tire dela. Parece razoável, mas não fecha: se $7 \div 0$ fosse "infinito", então "infinito vezes zero" teria de dar $7$, e também $8$, e também $9$… e todos os números seriam iguais.
+
+Essas tentativas mostram como a ideia era nova e difícil, e não diminuem o que esses matemáticos fizeram.
+
+### E por que a calculadora mostra "Erro"?
+
+A calculadora não é teimosa: ela simplesmente não tem um número para mostrar. Dividir por zero não dá "um número muito grande", dá **nenhum número**. Veja o que acontece quando o divisor vai ficando pequeno:
+
+$$
+\begin{aligned}
+12 \div 0{,}1 &= 120\\
+12 \div 0{,}01 &= 1{.}200\\
+12 \div 0{,}001 &= 12{.}000
+\end{aligned}
+$$
+
+O resultado cresce sem parar. E se o divisor chega perto de zero pelo lado **negativo**, o resultado despenca: $12 \div (-0{,}001) = -12{.}000$. Não há um único valor do qual o resultado se aproxime, nem mesmo "o infinito".
+
+<DivisorPequeno />
+
+Essa ideia de olhar o que acontece **perto** de um ponto, sem chegar nele, tem nome: **limite**. Ela é a base do cálculo, que você vai encontrar mais adiante no curso. Lá, expressões que "dão $0 \div 0$" voltam a aparecer, e aprender a lidar com elas é uma das ferramentas mais poderosas da matemática.
+
+> Pense: em matemática, "não existe" também é uma resposta. Que outras perguntas você conhece que parecem ter resposta, mas não têm?

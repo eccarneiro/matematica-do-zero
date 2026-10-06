@@ -1,0 +1,68 @@
+import { JurosCompostos } from '@/components/interactives/JurosCompostos';
+
+### Juros sobre juros
+
+Você empresta R\$ 1.000 a $10\%$ ao ano. Nos **juros simples**, os $10\%$ são sempre calculados sobre os R\$ 1.000 do começo: todo ano entram R\$ 100, nem mais nem menos.
+
+Nos **juros compostos**, os juros de cada ano entram no saldo e, no ano seguinte, **também rendem juros**. É a "porcentagem sobre porcentagem" da aula: cada ano o saldo é multiplicado pelo fator $1{,}10$.
+
+$$
+\begin{aligned}
+1\text{ ano}: &\ 1000 \cdot 1{,}1 = 1100\\
+2\text{ anos}: &\ 1100 \cdot 1{,}1 = 1210\\
+3\text{ anos}: &\ 1210 \cdot 1{,}1 = 1331
+\end{aligned}
+$$
+
+No segundo ano já entram R\$ 110, não R\$ 100: os R\$ 10 a mais são os juros dos juros. Depois de $n$ períodos, multiplicamos $n$ vezes pelo mesmo fator, o que é exatamente uma **potência**:
+
+$$
+M = C\,(1 + i)^n
+$$
+
+Aqui $C$ é o capital inicial, $i$ é a taxa (na forma decimal) e $M$ é o montante. O Banco Central usa um exemplo parecido no seu caderno de educação financeira: R\$ 1.000 a $5\%$ ao mês por 6 meses viram R\$ 1.300 com juros simples e R\$ 1.340,10 com juros compostos.
+
+### A diferença começa pequena e depois dispara
+
+$$
+\begin{array}{rrr}
+\text{anos} & \text{simples} & \text{compostos}\\ \hline
+1 & 1{.}100{,}00 & 1{.}100{,}00\\
+5 & 1{.}500{,}00 & 1{.}610{,}51\\
+10 & 2{.}000{,}00 & 2{.}593{,}74\\
+20 & 3{.}000{,}00 & 6{.}727{,}50\\
+30 & 4{.}000{,}00 & 17{.}449{,}40
+\end{array}
+$$
+
+Montante de R\$ 1.000 a $10\%$ ao ano. Os juros simples crescem em **linha reta**: somam sempre a mesma quantia. Os compostos **multiplicam** sempre pelo mesmo fator, e por isso a curva vai ficando cada vez mais inclinada. É a bola de neve: quanto maior ela fica, mais neve gruda em cada volta.
+
+<JurosCompostos />
+
+Isso vale para os dois lados. Numa aplicação, o tempo trabalha a seu favor. Numa dívida de cartão de crédito com juros altos ao mês, trabalha contra.
+
+### A regra do 72
+
+Quanto tempo leva para o dinheiro **dobrar**? Uma estimativa de cabeça muito usada é a **regra do 72**: divida 72 pela taxa (em %).
+
+$$
+\text{tempo para dobrar} \approx \frac{72}{\text{taxa}}
+$$
+
+A $10\%$ ao ano, $72 \div 10 = 7{,}2$ anos; a conta exata dá cerca de $7{,}3$. A $6\%$, a regra diz 12 anos e o valor exato é cerca de $11{,}9$. É só uma **aproximação**, boa para taxas entre uns $2\%$ e $20\%$; para taxas muito altas ela erra mais. A conta exata pede logaritmos, que aparecem mais adiante no curso.
+
+### Bernoulli e o número e
+
+Em 1683, **Jacob Bernoulli** se fez uma pergunta curiosa: e se os juros fossem somados ao saldo não uma vez por ano, mas a cada mês, a cada dia, a cada instante? Com uma taxa de $100\%$ ao ano dividida em $n$ partes, o montante de 1 vira
+
+$$
+\left(1 + \frac{1}{n}\right)^{n}
+$$
+
+Quando $n$ cresce, esse valor **não** explode: ele se aproxima de um número entre 2 e 3, que mais tarde **Euler** batizou de $e \approx 2{,}718$. Foi estudando juros compostos que esse número apareceu pela primeira vez.
+
+### Onde isso vai dar
+
+Repetir a mesma multiplicação muitas vezes é o coração da **função exponencial**, assunto do Módulo 3. E a mesma ideia está na lenda dos grãos de trigo no tabuleiro de xadrez, onde o fator é $2$: a cada casa, o dobro da anterior.
+
+> Pense: um aumento de $1\%$ ao mês parece pouco. Em 12 meses, ele dá mais ou menos que $12\%$? Use o fator: $1{,}01^{12} \approx 1{,}127$.

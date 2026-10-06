@@ -1,0 +1,55 @@
+import { NumeroMaia } from '@/components/interactives/NumeroMaia';
+
+### Do outro lado do oceano
+
+Enquanto o zero indiano fazia sua longa viagem até a Europa, os **maias**, que viviam onde hoje ficam o sul do México, a Guatemala e Belize, já tinham o seu próprio zero. Não havia contato entre os dois mundos: os historiadores consideram o zero maia uma **invenção independente**, uma das poucas da história. Ele também não influenciou outros povos: quando os europeus chegaram à América, o zero que trouxeram era o indiano.
+
+A civilização maia é muito antiga, mas floresceu sobretudo no chamado **período clássico**, mais ou menos entre os anos 250 e 900. Muito do que sabemos vem de inscrições em pedra e de uns poucos livros pintados que escaparam da destruição na época da conquista espanhola, como o **Códice de Dresden**, hoje guardado na Alemanha.
+
+### Três sinais e a base 20
+
+Os maias contavam em **base 20**, provavelmente porque contavam com os dedos das mãos **e dos pés**. Para escrever os "algarismos" de $0$ a $19$ bastavam três sinais:
+
+- um **ponto** vale $1$;
+- uma **barra** vale $5$;
+- uma **concha** vale $0$.
+
+Assim, $7$ é uma barra e dois pontos, e $19$ é três barras e quatro pontos. Com $20$, sobe-se um andar: os números eram escritos **de baixo para cima**, e cada andar vale 20 vezes o de baixo. O número $20$ é um ponto no andar de cima e uma **concha** embaixo, dizendo "nenhuma unidade". Sem a concha, esse ponto seria lido como $1$.
+
+<NumeroMaia />
+
+É a mesma ideia do nosso $305$, em que o zero segura o $3$ na casa das centenas. O valor de um sinal depende do lugar, e o zero guarda o lugar vazio.
+
+### Contar os dias desde o começo do mundo
+
+Onde o zero maia mais aparece é no calendário. A chamada **Conta Longa** registrava quantos dias tinham se passado desde uma data de criação do mundo, que a maioria dos estudiosos coloca em agosto de 3113 a.C. (nem todos concordam com essa correspondência).
+
+Aqui há uma surpresa: a Conta Longa **não é base 20 pura**. O terceiro andar vale $18 \times 20 = 360$ dias, perto de um ano, e só depois os andares voltam a multiplicar por 20:
+
+$$
+\begin{aligned}
+\text{andar 1} &: 1 \text{ dia}\\
+\text{andar 2} &: 20 \text{ dias}\\
+\text{andar 3} &: 18 \times 20 = 360\\
+\text{andar 4} &: 20 \times 360 = 7{.}200\\
+\text{andar 5} &: 20 \times 7{.}200 = 144{.}000
+\end{aligned}
+$$
+
+Uma data num edifício de **Palenque** é escrita, em notação moderna, como $9.8.9.13.0$. Ela termina num **zero**, exatamente como o nosso $130$:
+
+$$
+\begin{aligned}
+&9 \cdot 144{.}000 + 8 \cdot 7{.}200\\
+&\quad + 9 \cdot 360 + 13 \cdot 20 + 0\\
+&= 1{.}357{.}100 \text{ dias}
+\end{aligned}
+$$
+
+Contando desde 3113 a.C., isso cai no ano 603 da nossa era.
+
+### Desde quando?
+
+A data exata em que os maias passaram a usar o zero **não é consenso**. Há inscrições de Conta Longa anteriores ao período clássico, e os especialistas discutem quais delas já trazem um sinal próprio para o zero. O que é seguro é que, no período clássico, o zero aparece com frequência nas datas gravadas em pedra, e que no século VII ele já fazia parte de um sistema de numeração posicional.
+
+> Pense: os maias criaram um zero para **marcar o tempo**, e os indianos acabaram transformando o seu em um número com regras de conta. Será que o problema que você quer resolver muda o tipo de matemática que você inventa?

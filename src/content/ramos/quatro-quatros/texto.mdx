@@ -1,0 +1,51 @@
+### As regras do jogo
+
+O desafio é simples de explicar: escreva os números $0, 1, 2, 3, \dots$ usando **exatamente quatro algarismos 4**, nem mais, nem menos. Valem as quatro operações ($+$, $-$, $\times$, $\div$) e os parênteses. Nenhum outro algarismo pode aparecer: nada de $1$, $2$ ou $3$ escondidos na conta.
+
+É uma brincadeira antiga. O matemático inglês **W. W. Rouse Ball** incluiu o desafio em seu livro *Mathematical Recreations and Essays* (pelo menos desde a edição de 1914) e já o chamava de "recreação tradicional", ou seja, ele circulava antes disso.
+
+### Os primeiros números
+
+Veja algumas soluções. Confira cada uma com a **ordem das operações**: multiplicação e divisão antes de adição e subtração, parênteses primeiro.
+
+$$
+\begin{aligned}
+0 &= 4 - 4 + 4 - 4\\
+1 &= (4 + 4) \div (4 + 4)\\
+2 &= 4 \div 4 + 4 \div 4\\
+3 &= (4 + 4 + 4) \div 4\\
+4 &= (4 - 4) \times 4 + 4\\
+5 &= (4 \times 4 + 4) \div 4\\
+6 &= (4 + 4) \div 4 + 4\\
+7 &= 4 + 4 - 4 \div 4\\
+8 &= 4 + 4 + 4 - 4\\
+9 &= 4 + 4 + 4 \div 4
+\end{aligned}
+$$
+
+Repare no truque que aparece várias vezes: $4 \div 4 = 1$ e $4 - 4 = 0$. Gastando **dois** quatros você fabrica um $1$ ou um $0$, e com eles ajusta o resultado. Mas cuidado: se a conta já está pronta com três quatros, não dá para "gastar" o quarto sem mexer no valor. Somar $0$ ou multiplicar por $1$ custa **dois** quatros. É por isso que cada número pede um pouco de engenho.
+
+### Regras extras para ir mais longe
+
+Só com as quatro operações, a coisa trava rápido. Por isso muitas versões do desafio liberam mais ferramentas, sempre sem usar outros algarismos:
+
+- **Juntar dois 4**, formando $44$ (que gasta dois quatros): $\;10 = (44 - 4) \div 4$.
+- **Raiz quadrada**, já que $\sqrt{4} = 2$ (gasta um quatro): $\;11 = 44 \div (\sqrt{4} + \sqrt{4})$.
+- **Fatorial**, $4! = 4 \times 3 \times 2 \times 1 = 24$ (gasta um quatro): $\;27 = 4! + 4 - 4 \div 4$.
+
+Quem muda as regras muda o jogo. Na edição de 1917 do seu livro, Rouse Ball conta que, com as quatro operações, parênteses, números como $44$ e decimais (escrevendo $,4$ para $0{,}4$, sem gastar um zero), dá para escrever todos os números de $1$ a $22$; liberando a raiz quadrada, chega-se ao $30$; e com o fatorial, ao $112$.
+
+### Por que vale a pena brincar disso
+
+Parece só um passatempo, mas o desafio treina exatamente o que a aula de operações ensina: **ler uma expressão na ordem certa** e perceber que os parênteses mudam tudo. Compare:
+
+$$
+\begin{aligned}
+4 + 4 \div 4 + 4 &= 4 + 1 + 4 = 9\\
+(4 + 4) \div (4 + 4) &= 8 \div 8 = 1
+\end{aligned}
+$$
+
+Os mesmos quatro 4, os mesmos sinais, e resultados completamente diferentes.
+
+> Desafio: você consegue escrever $12$, $16$ e $17$ com quatro 4? E o $19$, usando também o fatorial? Há muitas respostas certas para cada um.

@@ -72,7 +72,7 @@ export function BranchView({
   const connections = (
     <div className="card p-5">
       <p className="mb-3 text-[0.75rem] font-extrabold tracking-[0.14em] text-ink-3 uppercase">Continue explorando</p>
-      <ul className="grid gap-2">
+      <ul className="grid grid-cols-[minmax(0,1fr)] gap-2">
         {links.map((l) => {
           const k = l.kind === 'aula' ? null : BRANCH_KINDS[l.kind];
           const body = (
@@ -139,7 +139,7 @@ export function BranchView({
             </ol>
           </section>
 
-          <div className="mt-8 grid gap-5 lg:hidden">
+          <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-5 lg:hidden">
             {doneBox}
             {connections}
           </div>
