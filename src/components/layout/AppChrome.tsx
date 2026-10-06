@@ -14,13 +14,13 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <Link href="/" className="flex items-center gap-2.5 text-ink no-underline" aria-label="Matemática do Zero, página inicial">
       <span
         aria-hidden
-        className="grid size-10 place-items-center rounded-xl border-2 border-edge bg-coral font-serif text-[1.35rem] font-bold text-white shadow-[2px_2px_0_var(--edge)]"
+        className="grid size-10 place-items-center rounded-xl border border-edge bg-indigo font-display text-[1.35rem] font-bold text-white shadow-card"
       >
         0
       </span>
       {!compact && (
-        <span className="font-serif text-[1.05rem] leading-none font-semibold whitespace-nowrap">
-          Matemática <em className="text-coral">do Zero</em>
+        <span className="font-display text-[1.05rem] leading-none font-semibold whitespace-nowrap">
+          Matemática <span className="text-indigo">do Zero</span>
         </span>
       )}
     </Link>
@@ -43,10 +43,10 @@ export function SideNav() {
               href={item.href}
               aria-current={active ? 'page' : undefined}
               className={`flex items-center gap-3.5 rounded-xl border-2 px-3.5 py-2.5 text-[1rem] font-extrabold no-underline ${
-                active ? 'border-edge bg-surface text-ink shadow-[3px_3px_0_var(--edge)]' : 'border-transparent text-ink-2 hover:bg-surface-2'
+                active ? 'border-edge bg-surface text-ink shadow-card' : 'border-transparent text-ink-2 hover:bg-surface-2'
               }`}
             >
-              <Icon className={`size-6 ${active ? 'text-coral' : ''}`} />
+              <Icon className={`size-6 ${active ? 'text-indigo' : ''}`} />
               {item.label}
             </Link>
           );
@@ -86,7 +86,7 @@ export function TabBar() {
             aria-label={item.label}
             className="flex flex-col items-center gap-0.5 py-1 text-[0.72rem] font-extrabold no-underline"
           >
-            <span className={`grid h-9 w-14 place-items-center rounded-xl border-2 ${active ? 'border-edge bg-coral-soft text-coral shadow-[2px_2px_0_var(--edge)]' : 'border-transparent text-ink-3'}`}>
+            <span className={`grid h-9 w-14 place-items-center rounded-xl border-2 ${active ? 'border-edge bg-indigo-soft text-indigo shadow-card' : 'border-transparent text-ink-3'}`}>
               <Icon className="size-6" />
             </span>
             <span className={active ? 'text-ink' : 'text-ink-3'}>{item.label}</span>

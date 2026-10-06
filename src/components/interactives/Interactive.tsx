@@ -1,8 +1,8 @@
 /** Moldura comum dos desenhos interativos. */
 export function Interactive({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <figure className="card not-prose my-7 p-4 shadow-[3px_3px_0_var(--edge-soft)]">
-      <figcaption className="mb-3 flex items-center gap-2 text-[0.75rem] font-black tracking-[0.14em] text-accent uppercase before:content-['✦']">
+    <figure className="card not-prose my-7 p-4 shadow-card">
+      <figcaption className="mb-3 flex items-center gap-2 text-[0.75rem] font-extrabold tracking-[0.14em] text-accent uppercase before:content-['✦']">
         {title}
       </figcaption>
       {children}
@@ -25,7 +25,7 @@ export function Slider({
         onChange={(e) => onChange(Number(e.target.value))}
         className="h-7 min-w-[140px] flex-1 accent-accent"
       />
-      <output className="min-w-[3ch] text-right font-black text-ink tabular-nums">{format(value)}</output>
+      <output className="min-w-[3ch] text-right font-extrabold text-ink tabular-nums">{format(value)}</output>
     </label>
   );
 }
@@ -42,7 +42,7 @@ export function Toggle<T extends string>({
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={`min-h-11 cursor-pointer rounded-2xl border-2 px-4 py-2 text-[0.92rem] font-extrabold active:translate-x-[3px] active:translate-y-[3px] active:shadow-none ${value === o.value ? 'border-accent bg-accent-soft text-accent shadow-[3px_3px_0_var(--edge)]' : 'border-line bg-surface text-ink-2 shadow-[3px_3px_0_var(--edge-soft)]'}`}
+          className={`min-h-11 cursor-pointer rounded-2xl border-2 px-4 py-2 text-[0.92rem] font-extrabold active:scale-[0.98] ${value === o.value ? 'border-accent bg-accent-soft text-accent shadow-card' : 'border-line bg-surface text-ink-2 shadow-card'}`}
         >
           {o.label}
         </button>

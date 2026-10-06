@@ -146,8 +146,8 @@ export function LessonPlayer({
             <div className="paper flex items-center gap-4 border-b-[1.5px] border-paper-line p-5">
               <Stamp lesson={stop} earned={alreadyDone} size={76} />
               <div className="min-w-0">
-                <p className="text-[0.7rem] font-black tracking-[0.16em] text-paper-ink-2 uppercase">{stop.place} · {stop.year}</p>
-                <p className="font-serif text-[1.4rem] leading-tight font-semibold text-paper-ink">{title}</p>
+                <p className="text-[0.7rem] font-extrabold tracking-[0.16em] text-paper-ink-2 uppercase">{stop.place} · {stop.year}</p>
+                <p className="font-display text-[1.4rem] leading-tight font-semibold text-paper-ink">{title}</p>
               </div>
             </div>
             <ol className="p-3">
@@ -162,7 +162,7 @@ export function LessonPlayer({
                       aria-current={on ? 'step' : undefined}
                       className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-[0.95rem] font-bold ${on ? 'bg-accent-soft text-ink' : 'text-ink-2 hover:bg-surface-2'}`}
                     >
-                      <span className={`grid size-7 flex-none place-items-center rounded-full border-2 text-[0.75rem] font-black ${on ? 'border-edge bg-accent text-on-accent' : seen ? 'border-accent text-accent' : 'border-edge-soft text-ink-3'}`}>
+                      <span className={`grid size-7 flex-none place-items-center rounded-full border-2 text-[0.75rem] font-extrabold ${on ? 'border-edge bg-accent text-on-accent' : seen ? 'border-accent text-accent' : 'border-edge-soft text-ink-3'}`}>
                         {seen ? <IconCheck className="size-3.5" /> : i + 1}
                       </span>
                       {st.label.replace(/^\d+ · /, '')}
@@ -193,19 +193,19 @@ function Celebration({ xpToday, onClose, nextLesson }: { xpToday: number; onClos
     <div className="fixed inset-0 z-50 flex flex-col bg-bg" role="dialog" aria-label="Aula concluída">
       <Confetti />
       <div className="mx-auto flex w-full max-w-[520px] flex-1 flex-col items-center justify-center px-6 text-center">
-        <div className="c-gold mb-6 grid size-28 animate-[pop_.5s_ease] place-items-center rounded-full bg-accent border-2 border-edge shadow-[5px_5px_0_var(--edge)]">
+        <div className="c-gold mb-6 grid size-28 animate-[pop_.5s_ease] place-items-center rounded-full bg-accent border border-edge shadow-card">
           <IconStar className="size-16" />
         </div>
         <h2 className="text-[2.2rem] text-gold">Aula concluída!</h2>
         <p className="mt-2 text-lg font-semibold text-ink-2">Mais uma ideia da história da matemática é sua.</p>
         <div className="mt-8 grid w-full grid-cols-2 gap-3">
           <div className="c-gold overflow-hidden rounded-2xl border-2 border-accent">
-            <p className="bg-accent py-1 text-[0.75rem] font-black tracking-widest text-on-accent uppercase">XP nesta aula</p>
-            <p className="flex items-center justify-center gap-1.5 py-3 text-2xl font-black text-accent"><IconStar className="size-6" />{xpToday}</p>
+            <p className="bg-accent py-1 text-[0.75rem] font-extrabold tracking-widest text-on-accent uppercase">XP nesta aula</p>
+            <p className="flex items-center justify-center gap-1.5 py-3 text-2xl font-extrabold text-accent"><IconStar className="size-6" />{xpToday}</p>
           </div>
           <div className="overflow-hidden rounded-2xl border-2 border-flame">
-            <p className="bg-flame py-1 text-[0.75rem] font-black tracking-widest text-white uppercase">Sequência</p>
-            <p className="flex items-center justify-center gap-1.5 py-3 text-2xl font-black text-flame"><IconFlame className="size-6" />{streak} {streak === 1 ? 'dia' : 'dias'}</p>
+            <p className="bg-flame py-1 text-[0.75rem] font-extrabold tracking-widest text-white uppercase">Sequência</p>
+            <p className="flex items-center justify-center gap-1.5 py-3 text-2xl font-extrabold text-flame"><IconFlame className="size-6" />{streak} {streak === 1 ? 'dia' : 'dias'}</p>
           </div>
         </div>
       </div>

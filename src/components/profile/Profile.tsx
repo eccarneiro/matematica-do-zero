@@ -39,7 +39,7 @@ export function Profile() {
             <div key={label} className="card flex items-center gap-3 p-4">
               {icon}
               <div>
-                <p className="text-[1.4rem] leading-none font-black">{mounted ? value : '–'}</p>
+                <p className="text-[1.4rem] leading-none font-extrabold">{mounted ? value : '–'}</p>
                 <p className="mt-1 text-[0.8rem] font-bold text-ink-3">{label}</p>
               </div>
             </div>
@@ -55,7 +55,7 @@ export function Profile() {
             const ratio = t?.total ? t.correct / t.total : 0;
             return (
               <div key={lesson.id} className={`c-${mod.color} flex items-center gap-3 px-4 py-3`}>
-                <span className="grid size-10 flex-none place-items-center rounded-full bg-accent font-serif font-bold text-on-accent">{lesson.symbol}</span>
+                <span className="grid size-10 flex-none place-items-center rounded-full bg-accent font-display font-bold text-on-accent">{lesson.symbol}</span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <p className="truncate font-extrabold">{lesson.title}</p>

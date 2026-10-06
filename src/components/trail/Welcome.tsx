@@ -14,7 +14,7 @@ export function Welcome() {
       <div className="paper border-b-2 border-paper-line px-5 pt-5 pb-4">
         <p className="text-[0.72rem] font-extrabold tracking-[0.14em] text-paper-ink-2 uppercase">Curso gratuito · do básico ao cálculo</p>
         <h1 className="mt-1.5 text-[1.9rem] text-paper-ink">
-          Matemática do zero, <em className="text-coral">com história e sentido.</em>
+          Matemática do zero, <span className="text-indigo">com história e sentido.</span>
         </h1>
       </div>
       <div className="px-5 py-4 text-[0.98rem] text-ink-2">

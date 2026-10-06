@@ -41,16 +41,16 @@ export function SearchBox() {
         placeholder="Ex.: frações, Pitágoras, derivada…"
         aria-label="Buscar assunto"
         autoComplete="off"
-        className="w-full rounded-2xl border-2 border-line bg-surface px-5 py-4 text-[1.15rem] font-bold text-ink shadow-[3px_3px_0_var(--edge-soft)] outline-none placeholder:text-ink-3 focus:border-coral"
+        className="w-full rounded-2xl border-2 border-line bg-surface px-5 py-4 text-[1.15rem] font-bold text-ink shadow-card outline-none placeholder:text-ink-3 focus:border-indigo"
       />
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" aria-live="polite">
         {results.length === 0 && <li className="text-ink-2">Nada encontrado. Tente outra palavra.</li>}
         {results.map(({ module, lesson }) => {
           const body = (
             <>
-              <span className={`grid size-12 flex-none place-items-center rounded-full font-serif text-[1.15rem] font-bold ${lesson.ready ? 'bg-accent text-on-accent' : 'bg-surface-2 text-ink-3'}`}>{lesson.symbol}</span>
+              <span className={`grid size-12 flex-none place-items-center rounded-full font-display text-[1.15rem] font-bold ${lesson.ready ? 'bg-accent text-on-accent' : 'bg-surface-2 text-ink-3'}`}>{lesson.symbol}</span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.7rem] font-black tracking-[0.12em] text-accent uppercase">{module.title}</span>
+                <span className="block text-[0.7rem] font-extrabold tracking-[0.12em] text-accent uppercase">{module.title}</span>
                 <span className="block font-extrabold">{lesson.title}</span>
               </span>
               {!lesson.ready && <span className="badge">em breve</span>}

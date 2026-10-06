@@ -37,13 +37,13 @@ function ChapterHeader({ unit }: { unit: TrailUnit }) {
   const { module, done, ready } = unit;
   return (
     <header className="mb-8 flex items-end gap-5 border-b-[1.5px] border-edge-soft pb-5">
-      <span className={`font-serif text-[clamp(3.5rem,8vw,5.5rem)] leading-[0.8] font-bold ${ready ? 'text-accent' : 'text-ink-3/40'}`} aria-hidden>
+      <span className={`font-serif text-[clamp(3.5rem,8vw,5.5rem)] leading-[0.8] font-semibold ${ready ? 'text-accent' : 'text-ink-3/40'}`} aria-hidden>
         {ROMAN[module.number - 1]}
       </span>
       <div className="min-w-0 flex-1">
-        <p className="text-[0.72rem] font-black tracking-[0.18em] text-ink-3 uppercase">Capítulo {module.number}</p>
+        <p className="text-[0.72rem] font-extrabold tracking-[0.18em] text-ink-3 uppercase">Capítulo {module.number}</p>
         <h2 className="text-[clamp(1.7rem,3.5vw,2.4rem)]">{module.title}</h2>
-        <p className="mt-0.5 font-serif text-[1rem] text-ink-2 italic">{module.eras}</p>
+        <p className="mt-0.5 font-display text-[1rem] text-ink-2">{module.eras}</p>
       </div>
       {ready ? (
         <Link href={`/modulo/${module.id}`} className="btn btn-ghost hidden min-h-10 flex-none px-4 py-2 text-[0.9rem] sm:inline-flex">
@@ -94,19 +94,19 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
     <article
       className={`card relative p-4 sm:p-5 ${current ? 'border-2 border-accent [animation:glow_2.4s_ease-in-out_infinite]' : ''} ${state === 'open' || state === 'soon' ? 'opacity-80' : ''}`}
     >
-      <p className="font-serif text-[0.95rem] text-ink-2 italic md:hidden">{lesson.place} · {lesson.year}</p>
-      <h3 className="font-sans text-[1.15rem] font-black">{lesson.title}</h3>
+      <p className="font-display text-[0.95rem] text-ink-2 md:hidden">{lesson.place} · {lesson.year}</p>
+      <h3 className="font-sans text-[1.15rem] font-extrabold">{lesson.title}</h3>
       {lesson.summary && <p className="mt-0.5 text-[0.93rem] text-ink-2">{lesson.summary}</p>}
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {current && (
           <>
             <Link href={`/aula/${lesson.id}`} className="btn btn-primary min-h-11 py-2">Começar · +{XP.lessonDone} XP</Link>
-            <span className="text-[0.8rem] font-black tracking-wide text-accent uppercase">Você está aqui</span>
+            <span className="text-[0.8rem] font-extrabold tracking-wide text-accent uppercase">Você está aqui</span>
           </>
         )}
         {done && (
           <>
-            <span className="mr-auto text-[0.8rem] font-black tracking-wide text-success uppercase">✓ Selo conquistado</span>
+            <span className="basis-full text-[0.8rem] font-extrabold tracking-wide text-success uppercase">✓ Selo conquistado</span>
             <Link href={`/aula/${lesson.id}`} className="btn btn-ghost min-h-9 px-3 py-1.5 text-[0.85rem]">Rever</Link>
             <Link href={`/treino/${lesson.id}`} className="btn btn-ghost min-h-9 px-3 py-1.5 text-[0.85rem]">Treinar</Link>
           </>
@@ -119,8 +119,8 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
   );
   const place = (
     <div className={`hidden md:block ${side === 'left' ? 'text-left' : 'text-right'}`}>
-      <p className={`font-serif text-[2.2rem] leading-none font-bold ${isWalked(state) ? 'text-ink' : 'text-ink-3'}`}>{lesson.year}</p>
-      <p className="mt-1 text-[0.75rem] font-black tracking-[0.2em] text-ink-3 uppercase">{lesson.place}</p>
+      <p className={`font-display text-[2.2rem] leading-none font-bold ${isWalked(state) ? 'text-ink' : 'text-ink-3'}`}>{lesson.year}</p>
+      <p className="mt-1 text-[0.75rem] font-extrabold tracking-[0.2em] text-ink-3 uppercase">{lesson.place}</p>
     </div>
   );
 
@@ -153,13 +153,13 @@ function ReviewStop({ node, walkedBelow, last }: { node: Extract<TrailNode, { ki
       <div className="relative row-span-2 grid h-full min-h-24 place-items-center md:col-start-2 md:row-span-1 md:row-start-1">
         <RouteLine walked={node.state === 'done'} half="top" />
         {!last && <RouteLine walked={walkedBelow} half="bottom" />}
-        <span className="c-gold relative grid size-12 rotate-45 place-items-center rounded-lg border-2 border-edge bg-accent shadow-[3px_3px_0_var(--edge)]">
-          <span className="-rotate-45 text-[1.2rem] font-black text-on-accent">✦</span>
+        <span className="c-gold relative grid size-12 rotate-45 place-items-center rounded-lg border border-edge bg-accent shadow-card">
+          <span className="-rotate-45 text-[1.2rem] font-extrabold text-on-accent">✦</span>
         </span>
       </div>
       <div className="col-start-2 self-end md:col-start-1 md:row-start-1 md:self-center md:text-right">
-        <p className="text-[0.72rem] font-black tracking-[0.16em] text-ink-3 uppercase">Parada de revisão</p>
-        <p className="font-serif text-[1.15rem]">{lessons.map((l) => l.symbol).join('  ·  ')}</p>
+        <p className="text-[0.72rem] font-extrabold tracking-[0.16em] text-ink-3 uppercase">Parada de revisão</p>
+        <p className="font-display text-[1.15rem]">{lessons.map((l) => l.symbol).join('  ·  ')}</p>
       </div>
       <div className="col-start-2 self-start md:col-start-3 md:row-start-1 md:self-center">
         {soon ? (
@@ -183,7 +183,7 @@ function Upcoming({ unit }: { unit: TrailUnit }) {
           <Stamp lesson={l} earned={false} size={46} />
           <div className="min-w-0">
             <p className="truncate font-extrabold text-ink-2">{l.title}</p>
-            <p className="font-serif text-[0.85rem] italic">{l.place} · {l.year}</p>
+            <p className="font-display text-[0.85rem]">{l.place} · {l.year}</p>
           </div>
         </li>
       ))}

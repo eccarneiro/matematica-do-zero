@@ -102,7 +102,7 @@ export function Practice({
                   role="radio"
                   aria-checked={singleStats.level === level}
                   onClick={() => p.setLevel(level)}
-                  className={`cursor-pointer rounded-lg px-3 py-1.5 text-[0.88rem] font-extrabold ${singleStats.level === level ? 'bg-surface text-accent shadow-[2px_2px_0_var(--edge)]' : 'text-ink-3'}`}
+                  className={`cursor-pointer rounded-lg px-3 py-1.5 text-[0.88rem] font-extrabold ${singleStats.level === level ? 'bg-surface text-accent shadow-card' : 'text-ink-3'}`}
                 >
                   {LEVEL_NAMES[level]}
                 </button>
@@ -130,7 +130,7 @@ export function Practice({
                     aria-label={`inserir ${key}`}
                     onMouseDown={(e) => e.preventDefault() /* mantém o teclado do celular aberto */}
                     onClick={() => insertKey(key)}
-                    className="h-12 min-w-14 cursor-pointer rounded-xl border-2 border-edge bg-surface px-3 text-[1.15rem] font-extrabold shadow-[3px_3px_0_var(--edge-soft)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none disabled:opacity-40"
+                    className="h-12 min-w-14 cursor-pointer rounded-xl border border-edge bg-surface px-3 text-[1.15rem] font-extrabold shadow-card active:scale-[0.98] disabled:opacity-40"
                   >
                     {KEY_LABEL[key]}
                   </button>
@@ -166,7 +166,7 @@ export function Practice({
 function Combo({ streak }: { streak: number }) {
   if (streak < 3) return null;
   return (
-    <span key={streak} className="flex animate-[pop_.35s_ease] items-center gap-1 rounded-full bg-[color-mix(in_srgb,var(--flame)_15%,transparent)] px-3 py-1 text-[0.8rem] font-black tracking-wide text-flame uppercase">
+    <span key={streak} className="flex animate-[pop_.35s_ease] items-center gap-1 rounded-full bg-[color-mix(in_srgb,var(--flame)_15%,transparent)] px-3 py-1 text-[0.8rem] font-extrabold tracking-wide text-flame uppercase">
       <IconFlame className="size-5" /> {streak} seguidos
     </span>
   );
@@ -222,28 +222,28 @@ function FeedbackBody({ feedback, state }: { feedback: Feedback; state: Practice
     <div className="mb-4 animate-[fade-in_.25s_ease]">
       <div className="flex items-start gap-3">
         <span className="grid size-10 flex-none place-items-center rounded-full bg-surface text-accent">
-          {feedback.tone === 'right' ? <IconCheck className="size-6" /> : feedback.tone === 'wrong' ? <IconClose className="size-6" /> : <span className="text-xl font-black">!</span>}
+          {feedback.tone === 'right' ? <IconCheck className="size-6" /> : feedback.tone === 'wrong' ? <IconClose className="size-6" /> : <span className="text-xl font-extrabold">!</span>}
         </span>
         <div className="min-w-0 flex-1">
-          <p className="flex flex-wrap items-center gap-x-3 text-[1.3rem] leading-tight font-black text-accent">
+          <p className="flex flex-wrap items-center gap-x-3 text-[1.3rem] leading-tight font-extrabold text-accent">
             {feedback.title}
             {!!feedback.xp && (
               <span className="flex items-center gap-1 text-[0.95rem] text-gold"><IconStar className="size-5" />+{feedback.xp} XP</span>
             )}
           </p>
           {feedback.text && <MathText as="p" text={feedback.text} className="mt-1 font-semibold text-ink" />}
-          {feedback.levelUp && <p className="mt-1.5 animate-[pop_.4s_ease] font-black text-ink">🎉 {feedback.levelUp}</p>}
+          {feedback.levelUp && <p className="mt-1.5 animate-[pop_.4s_ease] font-extrabold text-ink">🎉 {feedback.levelUp}</p>}
         </div>
       </div>
       {state.showSolution && (
         <div className="mt-3 max-h-[40dvh] overflow-y-auto rounded-2xl bg-surface p-4">
-          <ol className="list-decimal pl-5 marker:font-black marker:text-accent">
+          <ol className="list-decimal pl-5 marker:font-extrabold marker:text-accent">
             {q.steps.map((step, i) => (
               <MathText key={i} as="li" text={step} className="mb-2 pl-1" />
             ))}
           </ol>
           <p className="font-bold">
-            Resposta: <MathText text={q.answerDisplay} className="font-black" />
+            Resposta: <MathText text={q.answerDisplay} className="font-extrabold" />
           </p>
         </div>
       )}
@@ -266,8 +266,8 @@ function Choices({ state, onPick }: { state: PracticeState; onPick: (i: number) 
             type="button"
             disabled={state.finished}
             onClick={() => onPick(i)}
-            className={`${tone} min-h-16 cursor-pointer rounded-xl border-2 px-4 py-3 text-[1.15rem] font-bold active:translate-x-[3px] active:translate-y-[3px] active:shadow-none ${
-              tone ? 'border-edge bg-accent-soft text-accent shadow-[3px_3px_0_var(--edge)]' : 'border-edge bg-surface shadow-[3px_3px_0_var(--edge)]'
+            className={`${tone} min-h-16 cursor-pointer rounded-xl border-2 px-4 py-3 text-[1.15rem] font-bold active:scale-[0.98] ${
+              tone ? 'border-edge bg-accent-soft text-accent shadow-card' : 'border-edge bg-surface shadow-card'
             }`}
           >
             <MathText text={opt} />
@@ -298,7 +298,7 @@ function AnswerFields({
     onFocus: (e: React.FocusEvent<HTMLInputElement>) => onFocus(e.currentTarget),
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(i, e.target.value),
   });
-  const box = 'rounded-xl border-2 border-edge bg-surface shadow-[3px_3px_0_var(--edge-soft)] focus-within:shadow-[3px_3px_0_var(--accent)]';
+  const box = 'rounded-xl border border-edge bg-surface shadow-card focus-within:shadow-[3px_3px_0_var(--accent)]';
 
   if (q.answer.type === 'fields') {
     return (

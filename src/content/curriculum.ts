@@ -10,7 +10,7 @@ export const curriculum: CourseModule[] = [
     title: 'Fundamentos',
     tagline: 'Os números e as operações que sustentam todo o resto.',
     eras: 'Mesopotâmia · Egito · Índia · Bagdá',
-    color: 'coral',
+    color: 'indigo',
     lessons: [
       { id: 'numeros-inteiros', symbol: '±', year: '20 000 a.C.', place: 'Ishango', title: 'Números naturais e inteiros', topic: 'inteiros', ready: true,
         summary: 'Contar, ordenar e ir além do zero com os negativos.',
@@ -89,7 +89,7 @@ export const curriculum: CourseModule[] = [
     title: 'Cálculo',
     tagline: 'A matemática da mudança: intuição primeiro, fórmula depois.',
     eras: 'Inglaterra · Alemanha',
-    color: 'blue',
+    color: 'rose',
     lessons: [
       { id: 'limites', symbol: 'lim', year: 'séc. V a.C.', place: 'Eleia', title: 'Limites', keywords: 'limite tender infinito zenão' },
       { id: 'derivadas', symbol: 'f′', year: '1684', place: 'Leipzig', title: 'Derivadas', keywords: 'derivada taxa de variação reta tangente newton leibniz velocidade' },

@@ -21,7 +21,7 @@ export function VideoEmbed({ video }: { video: Video }) {
         <button type="button" onClick={() => setPlaying(true)} aria-label={`Assistir: ${video.title}`} className={`${frame} relative cursor-pointer overflow-hidden p-0`}>
           {/* eslint-disable-next-line @next/next/no-img-element -- miniatura externa do YouTube */}
           <img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading="lazy" className="size-full object-cover opacity-90" />
-          <span aria-hidden className="absolute inset-0 m-auto grid size-16 place-items-center rounded-full bg-white/95 border-2 border-edge shadow-[3px_3px_0_var(--edge)]">
+          <span aria-hidden className="absolute inset-0 m-auto grid size-16 place-items-center rounded-full bg-white/95 border border-edge shadow-card">
             <span className="ml-1.5 border-y-[11px] border-l-[18px] border-y-transparent border-l-[#e33]" />
           </span>
         </button>

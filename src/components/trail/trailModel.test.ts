@@ -5,7 +5,7 @@ import { buildTrail } from './trailModel';
 
 const lesson = (id: string, ready = true) => ({ id, title: id, symbol: id, year: '1', place: 'x', keywords: '', ready, topic: ready ? ('inteiros' as const) : undefined });
 const mod = (id: string, lessons: ReturnType<typeof lesson>[]): CourseModule => ({
-  id, number: 1, title: id, tagline: '', eras: '', color: 'coral', lessons,
+  id, number: 1, title: id, tagline: '', eras: '', color: 'indigo', lessons,
 });
 
 const course = [mod('m1', [lesson('a'), lesson('b'), lesson('c'), lesson('d'), lesson('e')]), mod('m2', [lesson('x', false)])];

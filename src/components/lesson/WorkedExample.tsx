@@ -12,7 +12,7 @@ export function WorkedExample({ n, example }: { n: number; example: LessonMeta['
   return (
     <div className="card overflow-hidden">
       <div className="border-b-2 border-line bg-surface-2/60 px-5 py-4">
-        <p className="text-[0.72rem] font-black tracking-[0.14em] text-accent uppercase">Exemplo {n}</p>
+        <p className="text-[0.72rem] font-extrabold tracking-[0.14em] text-accent uppercase">Exemplo {n}</p>
         <MathText as="div" text={example.problem} className="mt-1 text-[1.1rem] font-bold" />
       </div>
       <div className="px-5 py-4">
@@ -20,7 +20,7 @@ export function WorkedExample({ n, example }: { n: number; example: LessonMeta['
           <ol className="mb-4 grid gap-3">
             {example.steps.slice(0, shown).map((step, i) => (
               <li key={i} className="flex animate-[fade-in_.3s_ease] gap-3">
-                <span className={`grid size-7 flex-none place-items-center rounded-full text-[0.8rem] font-black ${i === total - 1 && done ? 'c-success bg-accent text-on-accent' : 'bg-accent-soft text-accent'}`}>
+                <span className={`grid size-7 flex-none place-items-center rounded-full text-[0.8rem] font-extrabold ${i === total - 1 && done ? 'c-success bg-accent text-on-accent' : 'bg-accent-soft text-accent'}`}>
                   {i + 1}
                 </span>
                 <MathText text={step} className="pt-0.5" />

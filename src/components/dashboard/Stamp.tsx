@@ -35,7 +35,7 @@ export function Stamp({
           {`${lesson.place.toUpperCase()} • ${lesson.year.toUpperCase()} •`}
         </textPath>
       </text>
-      <text x="50" y="50" textAnchor="middle" dominantBaseline="central" fontFamily="var(--font-serif)" fontWeight="700" fontSize={lesson.symbol.length > 2 ? 17 : 24} fill="currentColor">
+      <text x="50" y="50" textAnchor="middle" dominantBaseline="central" fontFamily="var(--font-display)" fontWeight="700" fontSize={lesson.symbol.length > 2 ? 17 : 24} fill="currentColor">
         {lesson.symbol}
       </text>
     </svg>

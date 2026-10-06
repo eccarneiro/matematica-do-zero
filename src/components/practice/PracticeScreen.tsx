@@ -47,13 +47,13 @@ export function PracticeScreen({ topics, closeHref = '/treino', title }: { topic
                 [session.best, 'maior combo'],
               ].map(([v, label]) => (
                 <div key={label} className="rounded-xl bg-surface-2 px-2 py-3">
-                  <dd className="text-[1.5rem] leading-none font-black"><CountUp value={v as number} duration={400} /></dd>
+                  <dd className="text-[1.5rem] leading-none font-extrabold"><CountUp value={v as number} duration={400} /></dd>
                   <dt className="mt-1 text-[0.72rem] font-bold text-ink-3">{label}</dt>
                 </div>
               ))}
             </dl>
             {session.run >= 3 && (
-              <p className="mt-4 flex animate-[pop_.3s_ease] items-center gap-2 font-black text-flame"><IconFlame className="size-6" /> {session.run} seguidas!</p>
+              <p className="mt-4 flex animate-[pop_.3s_ease] items-center gap-2 font-extrabold text-flame"><IconFlame className="size-6" /> {session.run} seguidas!</p>
             )}
           </div>
 
@@ -82,7 +82,7 @@ export function PracticeScreen({ topics, closeHref = '/treino', title }: { topic
           <div className="card flex items-center gap-4 p-5">
             <GoalRing ratio={stats.goalRatio} done={stats.goalDone} size={52} />
             <div>
-              <p className="font-black">Meta do dia</p>
+              <p className="font-extrabold">Meta do dia</p>
               <p className="text-[0.9rem] text-ink-2">{Math.min(stats.today, stats.goal)} de {stats.goal} XP</p>
             </div>
           </div>

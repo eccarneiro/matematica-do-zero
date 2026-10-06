@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Nunito } from 'next/font/google';
+import { Bricolage_Grotesque, Newsreader, Plus_Jakarta_Sans } from 'next/font/google';
 import { Providers } from '@/components/layout/Providers';
 import { authEnabled } from '@/server/auth';
 import './globals.css';
 
-const nunito = Nunito({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'], variable: '--font-nunito', display: 'swap' });
-const fraunces = Fraunces({ subsets: ['latin'], weight: ['500', '600', '700'], style: ['normal', 'italic'], variable: '--font-fraunces', display: 'swap' });
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'], variable: '--font-jakarta', display: 'swap' });
+const bricolage = Bricolage_Grotesque({ subsets: ['latin'], weight: ['500', '600', '700', '800'], variable: '--font-bricolage', display: 'swap' });
+const newsreader = Newsreader({ subsets: ['latin'], weight: ['400', '500', '600'], style: ['normal', 'italic'], variable: '--font-newsreader', display: 'swap' });
 
 export const metadata: Metadata = {
   title: { default: 'Matemática do Zero', template: '%s · Matemática do Zero' },
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#faf6ee' },
-    { media: '(prefers-color-scheme: dark)', color: '#12141c' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f7fb' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f1220' },
   ],
   viewportFit: 'cover',
 };
@@ -25,7 +26,7 @@ const themeScript = `(function(){try{var t=localStorage.getItem('mdz:theme');if(
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="pt-BR" className={`${nunito.variable} ${fraunces.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${jakarta.variable} ${bricolage.variable} ${newsreader.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

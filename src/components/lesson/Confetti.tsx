@@ -1,6 +1,6 @@
 'use client';
 
-const COLORS = ['var(--coral)', 'var(--violet)', 'var(--teal)', 'var(--gold)', 'var(--blue)', 'var(--right)'];
+const COLORS = ['var(--indigo)', 'var(--violet)', 'var(--teal)', 'var(--gold)', 'var(--blue)', 'var(--right)'];
 
 /** "Aleatório" determinístico (a renderização precisa ser pura). */
 const rand = (i: number, k: number) => {

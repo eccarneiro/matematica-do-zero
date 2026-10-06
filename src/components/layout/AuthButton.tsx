@@ -11,7 +11,7 @@ export function AccountCard() {
 function Card({ title, text, image, action }: { title: string; text: string; image?: string | null; action?: React.ReactNode }) {
   return (
     <div className="card flex flex-wrap items-center gap-4 p-5">
-      <span className="grid size-16 flex-none place-items-center overflow-hidden rounded-full bg-accent-soft font-serif text-2xl font-bold text-accent">
+      <span className="grid size-16 flex-none place-items-center overflow-hidden rounded-full bg-accent-soft font-display text-2xl font-bold text-accent">
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element -- avatar externo pequeno
           <img src={image} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
@@ -20,7 +20,7 @@ function Card({ title, text, image, action }: { title: string; text: string; ima
         )}
       </span>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[1.3rem] font-black">{title}</p>
+        <p className="truncate text-[1.3rem] font-extrabold">{title}</p>
         <p className="text-[0.92rem] text-ink-2">{text}</p>
       </div>
       {action && <div className="w-full sm:w-auto">{action}</div>}

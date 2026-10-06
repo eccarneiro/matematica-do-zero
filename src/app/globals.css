@@ -9,81 +9,86 @@
  * editorial de museu (serifa, papel envelhecido, placas de época).
  */
 :root {
-  --bg: #faf6ee;
+  --bg: #f6f7fb;
   --surface: #ffffff;
-  --surface-2: #f3ecdf;
-  --ink: #1e2235;
-  --ink-2: #565c70;
-  --ink-3: #8a8e9e;
-  --line: #e8dfd0;
-  /* tinta das bordas e sombras deslocadas (estilo impressão) */
-  --edge: #2b2f45;
-  --edge-soft: #d9ccb4;
-  --shadow-card: 0 1px 0 rgb(40 30 10 / 0.04), 0 10px 30px -18px rgb(40 30 10 / 0.35);
+  --surface-2: #f0f2f8;
+  --ink: #1b1f33;
+  --ink-2: #5b6177;
+  --ink-3: #9198ab;
+  --line: #e5e8f1;
+  /* bordas de elementos clicáveis e sombras suaves */
+  --edge: #d6dbe8;
+  --edge-soft: #e8ebf3;
+  --shadow-card: 0 1px 2px rgb(27 31 51 / 0.04), 0 8px 24px -14px rgb(27 31 51 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(27 31 51 / 0.05), 0 14px 32px -14px rgb(27 31 51 / 0.25);
 
-  /* "papel de museu" para a história */
-  --paper: #f5e9cf;
-  --paper-ink: #3b2f22;
-  --paper-ink-2: #6e5b43;
-  --paper-line: #dfc89c;
-  --paper-glow: rgb(255 255 255 / 0.35);
-  --paper-plaque: rgb(255 255 255 / 0.45);
+  /* papel claro para a história (toque de museu) */
+  --paper: #fbf8f1;
+  --paper-ink: #3a3328;
+  --paper-ink-2: #8a7b62;
+  --paper-line: #ece3d1;
+  --paper-glow: rgb(255 255 255 / 0.6);
+  --paper-plaque: rgb(255 255 255 / 0.7);
 
-  /* cor de cada unidade + tom escuro para a sombra 3D */
-  --coral: #f0603c; --coral-shade: #c4441f; --coral-soft: #fde7df; --coral-on: #ffffff;
-  --violet: #7c5cff; --violet-shade: #5a3ad8; --violet-soft: #ece7ff; --violet-on: #ffffff;
-  --teal: #12a594; --teal-shade: #0b7e71; --teal-soft: #d8f3ef; --teal-on: #ffffff;
-  --amber: #f5a524; --amber-shade: #c47f0a; --amber-soft: #fdf0d6; --amber-on: #2b1d00;
-  --blue: #3b82f6; --blue-shade: #2361c9; --blue-soft: #e0ecfe; --blue-on: #ffffff;
-  --right: #22b35e; --right-shade: #178a46; --right-soft: #dcf6e6;
-  --wrong: #ef4444; --wrong-shade: #c22f2f; --wrong-soft: #fde4e4;
-  --warn: #b7791f; --warn-soft: #fcf0d8;
-  --gold: #f6b21b; --gold-shade: #c98a06;
-  --flame: #ff7a1a;
+  /* cor de cada unidade: tom principal, tom escuro, fundo suave e texto sobre o tom */
+  --indigo: #5b6cf2; --indigo-shade: #4352d6; --indigo-soft: #eef0ff; --indigo-on: #ffffff;
+  --violet: #9b7bf7; --violet-shade: #7c58e6; --violet-soft: #f4effe; --violet-on: #ffffff;
+  --teal: #22b3a2; --teal-shade: #158d7f; --teal-soft: #e3f7f4; --teal-on: #ffffff;
+  --amber: #f3b443; --amber-shade: #d19317; --amber-soft: #fef6e3; --amber-on: #3a2800;
+  --rose: #ef6f93; --rose-shade: #d24f74; --rose-soft: #fdeef3; --rose-on: #ffffff;
+  --blue: #4c8ef7; --blue-shade: #2f6fd8; --blue-soft: #e8f1fe; --blue-on: #ffffff;
+  --right: #23b877; --right-shade: #178c5a; --right-soft: #e3f7ee;
+  --wrong: #f0586a; --wrong-shade: #cf3b4e; --wrong-soft: #fde9ec;
+  --warn: #b7791f; --warn-soft: #fdf3e0;
+  --gold: #f5b82b; --gold-shade: #d0950b;
+  --flame: #ff8a3d;
 
-  --accent: var(--coral);
-  --accent-shade: var(--coral-shade);
-  --accent-soft: var(--coral-soft);
-  --on-accent: var(--coral-on);
+  --accent: var(--indigo);
+  --accent-shade: var(--indigo-shade);
+  --accent-soft: var(--indigo-soft);
+  --on-accent: var(--indigo-on);
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --bg: #12141c;
-  --surface: #1b1e29;
-  --surface-2: #252938;
-  --ink: #eef0f6;
-  --ink-2: #a8adbd;
-  --ink-3: #7c8295;
-  --line: #2e3344;
-  --edge: #05060a;
-  --edge-soft: #0a0b11;
-  --shadow-card: 0 1px 0 rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.8);
+  --bg: #0f1220;
+  --surface: #171b2c;
+  --surface-2: #21263a;
+  --ink: #eef0f8;
+  --ink-2: #a7adc2;
+  --ink-3: #747b92;
+  --line: #262b40;
+  --edge: #30364d;
+  --edge-soft: #222738;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.7);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.3), 0 16px 36px -16px rgb(0 0 0 / 0.8);
 
-  --paper: #2a2418;
-  --paper-ink: #efe2c6;
-  --paper-ink-2: #c2ae8a;
-  --paper-line: #4c3f27;
-  --paper-glow: rgb(255 220 160 / 0.05);
-  --paper-plaque: rgb(255 230 190 / 0.05);
+  --paper: #1d1b19;
+  --paper-ink: #efe6d6;
+  --paper-ink-2: #b3a58c;
+  --paper-line: #35302a;
+  --paper-glow: rgb(255 240 210 / 0.03);
+  --paper-plaque: rgb(255 240 210 / 0.04);
 
-  --coral: #ff7650; --coral-shade: #c4441f; --coral-soft: #3a221b; --coral-on: #1b0d07;
-  --violet: #9b82ff; --violet-shade: #5a3ad8; --violet-soft: #29234a; --violet-on: #120a33;
-  --teal: #2cc9b5; --teal-shade: #0b7e71; --teal-soft: #13322e; --teal-on: #04201c;
-  --amber: #f8b440; --amber-shade: #b0700a; --amber-soft: #382b12; --amber-on: #2b1d00;
-  --blue: #5d9bff; --blue-shade: #2361c9; --blue-soft: #1b2a45; --blue-on: #061430;
-  --right: #3fd17c; --right-shade: #178a46; --right-soft: #15321f;
-  --wrong: #ff6b6b; --wrong-shade: #c22f2f; --wrong-soft: #3d1c1f;
+  --indigo: #7e8bff; --indigo-shade: #5b6cf2; --indigo-soft: #1f2445; --indigo-on: #0b0e24;
+  --violet: #b39cff; --violet-shade: #8f6ff0; --violet-soft: #2a2347; --violet-on: #150c33;
+  --teal: #3fd0be; --teal-shade: #22b3a2; --teal-soft: #142f2c; --teal-on: #04201c;
+  --amber: #f7c25e; --amber-shade: #d19317; --amber-soft: #352a14; --amber-on: #2b1d00;
+  --rose: #ff8aab; --rose-shade: #ef6f93; --rose-soft: #3a1d29; --rose-on: #2a0714;
+  --blue: #73a7ff; --blue-shade: #4c8ef7; --blue-soft: #1a2944; --blue-on: #061430;
+  --right: #45d690; --right-shade: #23b877; --right-soft: #14301f;
+  --wrong: #ff7a8a; --wrong-shade: #f0586a; --wrong-soft: #3a1c22;
   --warn: #f2b247; --warn-soft: #382c16;
-  --gold: #ffc53d; --gold-shade: #b37b05;
+  --gold: #ffc94d; --gold-shade: #d0950b;
   color-scheme: dark;
 }
 
 /* Cor de destaque por unidade */
-.c-coral { --accent: var(--coral); --accent-shade: var(--coral-shade); --accent-soft: var(--coral-soft); --on-accent: var(--coral-on); }
+.c-indigo { --accent: var(--indigo); --accent-shade: var(--indigo-shade); --accent-soft: var(--indigo-soft); --on-accent: var(--indigo-on); }
 .c-violet { --accent: var(--violet); --accent-shade: var(--violet-shade); --accent-soft: var(--violet-soft); --on-accent: var(--violet-on); }
 .c-teal { --accent: var(--teal); --accent-shade: var(--teal-shade); --accent-soft: var(--teal-soft); --on-accent: var(--teal-on); }
 .c-amber { --accent: var(--amber); --accent-shade: var(--amber-shade); --accent-soft: var(--amber-soft); --on-accent: var(--amber-on); }
+.c-rose { --accent: var(--rose); --accent-shade: var(--rose-shade); --accent-soft: var(--rose-soft); --on-accent: var(--rose-on); }
 .c-blue { --accent: var(--blue); --accent-shade: var(--blue-shade); --accent-soft: var(--blue-soft); --on-accent: var(--blue-on); }
 .c-success { --accent: var(--right); --accent-shade: var(--right-shade); --accent-soft: var(--right-soft); --on-accent: #ffffff; }
 .c-danger { --accent: var(--wrong); --accent-shade: var(--wrong-shade); --accent-soft: var(--wrong-soft); --on-accent: #ffffff; }
@@ -118,11 +123,13 @@
   --color-warn-soft: var(--warn-soft);
   --color-gold: var(--gold);
   --color-flame: var(--flame);
-  --color-coral: var(--coral);
-  --color-coral-soft: var(--coral-soft);
+  --color-indigo: var(--indigo);
+  --color-indigo-soft: var(--indigo-soft);
+  --shadow-lift: var(--shadow-lift);
   --shadow-card: var(--shadow-card);
-  --font-sans: var(--font-nunito), system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-jakarta), system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
 }
 
 @layer base {
@@ -139,10 +146,10 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3 {
-    font-family: var(--font-serif);
-    font-weight: 650;
+    font-family: var(--font-display);
+    font-weight: 700;
     line-height: 1.12;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
   b, strong { font-weight: 800; }
   a { color: var(--accent); text-underline-offset: 3px; }
@@ -150,26 +157,28 @@
 }
 
 @layer components {
-  /*
-   * Botões e cartões "de impressão": borda de tinta e sombra deslocada,
-   * que some quando o elemento é pressionado (como um carimbo).
-   */
+  /* Botões e cartões leves: cantos suaves, sombra difusa, leve elevação ao passar o mouse. */
   .btn {
-    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-edge px-5 py-3 text-[1rem] leading-tight font-extrabold no-underline select-none disabled:cursor-not-allowed;
-    box-shadow: 3px 3px 0 var(--edge);
-    transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl px-5 py-3 text-[1rem] leading-tight font-bold no-underline select-none disabled:cursor-not-allowed;
+    transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   }
-  .btn:not(:disabled):active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--edge); }
-  .btn-primary { background: var(--accent); color: var(--on-accent); }
-  .btn-primary:disabled { background: var(--surface-2); color: var(--ink-3); border-color: var(--line); box-shadow: 3px 3px 0 var(--line); }
-  .btn-ghost { background: var(--surface); color: var(--ink); }
-  .btn-text { @apply min-h-10 border-0 px-3 text-accent shadow-none; }
+  .btn:not(:disabled):active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+    box-shadow: 0 8px 18px -10px var(--accent);
+  }
+  @media (hover: hover) { .btn-primary:not(:disabled):hover { background: var(--accent-shade); } }
+  .btn-primary:disabled { background: var(--surface-2); color: var(--ink-3); box-shadow: none; }
+  .btn-ghost { background: var(--surface); color: var(--ink); border: 1.5px solid var(--edge); }
+  @media (hover: hover) { .btn-ghost:not(:disabled):hover { border-color: var(--accent); color: var(--accent); } }
+  .btn-text { @apply min-h-10 px-3 text-accent; }
 
-  .card { @apply rounded-2xl border-[1.5px] border-edge-soft bg-surface; box-shadow: 4px 4px 0 var(--edge-soft); }
-  /* cartão clicável: afunda ao tocar */
-  .tile { @apply cursor-pointer rounded-2xl border-2 border-edge bg-surface text-ink no-underline; box-shadow: 4px 4px 0 var(--edge); transition: transform 0.08s ease, box-shadow 0.08s ease; }
-  .tile:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--edge); }
-  @media (hover: hover) { .tile:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--edge); } }
+  .card { @apply rounded-2xl border border-line bg-surface; box-shadow: var(--shadow-card); }
+  /* cartão clicável */
+  .tile { @apply cursor-pointer rounded-2xl border border-line bg-surface text-ink no-underline; box-shadow: var(--shadow-card); transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
+  .tile:active { transform: scale(0.99); }
+  @media (hover: hover) { .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); } }
   .eyebrow { @apply mb-2 text-[0.75rem] font-extrabold tracking-[0.14em] text-accent uppercase; }
   .badge { @apply rounded-full bg-surface-2 px-2.5 py-0.5 text-[0.7rem] font-extrabold tracking-[0.08em] whitespace-nowrap text-ink-3 uppercase; }
   .pill { @apply inline-block rounded-full bg-accent-soft px-3 py-0.5 text-[0.8rem] font-extrabold text-accent; }
@@ -183,7 +192,7 @@
   .prose ol { list-style: decimal; }
   .prose li + li { margin-top: 0.4em; }
   .prose li::marker { color: var(--accent); }
-  .prose blockquote { @apply rounded-2xl border-2 border-accent bg-accent-soft px-4 py-3; }
+  .prose blockquote { @apply rounded-2xl border-l-4 border-accent bg-accent-soft px-4 py-3; }
   .prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
 
   /* História: página de livro antigo */

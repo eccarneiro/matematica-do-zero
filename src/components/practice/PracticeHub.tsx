@@ -36,10 +36,10 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[400px_minmax(0,1fr)]">
-      <section className="c-gold overflow-hidden rounded-2xl border-2 border-edge bg-accent text-on-accent shadow-[4px_4px_0_var(--edge)] lg:sticky lg:top-8">
+      <section className="c-gold overflow-hidden rounded-2xl border border-edge bg-accent text-on-accent shadow-card lg:sticky lg:top-8">
         <div className="relative px-5 pt-5 pb-4">
           <IconStar className="absolute -top-4 -right-4 size-28 opacity-25" />
-          <p className="text-[0.72rem] font-black tracking-[0.14em] uppercase opacity-80">Revisão</p>
+          <p className="text-[0.72rem] font-extrabold tracking-[0.14em] uppercase opacity-80">Revisão</p>
           <h2 className="mt-1 text-[1.7rem]">Treino misto</h2>
           <p className="mt-1 max-w-[42ch] font-semibold opacity-90">
             Questões sorteadas entre os tópicos escolhidos, cada um no nível que você já alcançou.
@@ -80,11 +80,11 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
           const accuracy = s?.total ? Math.round((100 * s.correct) / s.total) : null;
           return (
             <Link key={l.id} href={`/treino/${l.id}`} className={`c-${l.color} tile flex items-center gap-4 p-4`}>
-              <span className="grid size-14 flex-none place-items-center rounded-full border-2 border-edge bg-accent font-serif text-[1.4rem] font-bold text-on-accent">
+              <span className="grid size-14 flex-none place-items-center rounded-full border border-edge bg-accent font-display text-[1.4rem] font-bold text-on-accent">
                 {l.symbol}
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block font-black">{l.title}</span>
+                <span className="block font-extrabold">{l.title}</span>
                 <span className="mt-1 flex items-center gap-2 text-[0.8rem] font-bold text-ink-3">
                   {s?.total ? (
                     <>

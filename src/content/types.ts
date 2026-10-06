@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import type { TopicId } from '@/generators/registry';
 
-export type ModuleColor = 'coral' | 'violet' | 'teal' | 'amber' | 'blue';
+export type ModuleColor = 'indigo' | 'violet' | 'teal' | 'amber' | 'rose';
 
 export interface LessonRef {
   id: string;
