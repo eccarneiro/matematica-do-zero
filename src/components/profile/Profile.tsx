@@ -82,6 +82,9 @@ export function Profile() {
           </button>
         </div>
       </section>
+      <p className="text-[0.85rem] text-ink-3 lg:col-span-2">
+        <a href="/privacidade">Política de privacidade</a> · <a href="/termos">Termos de uso</a>
+      </p>
     </div>
   );
 }
