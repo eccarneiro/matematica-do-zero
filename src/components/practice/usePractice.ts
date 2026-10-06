@@ -12,7 +12,9 @@ export interface PracticeTopic {
   title: string;
 }
 
-export type Feedback = { tone: 'right' | 'wrong' | 'warn'; title: string; text?: string; levelUp?: string };
+export type Feedback = { tone: 'right' | 'wrong' | 'warn'; title: string; text?: string; levelUp?: string; xp?: number };
+
+export type Outcome = 'first' | 'retry' | 'miss';
 
 export interface PracticeState {
   topicIndex: number;
@@ -31,7 +33,7 @@ export interface PracticeState {
   shake: number;
 }
 
-const PRAISE = ['Acertou!', 'Mandou bem!', 'Isso aí!', 'Perfeito!', 'Exato!', 'Certinho!'];
+const PRAISE = ['Acertou!', 'Mandou bem!', 'Isso aí!', 'Perfeito!', 'Excelente!', 'Certinho!', 'Que beleza!'];
 
 /**
  * Sessão de treino infinito: sorteia questões, corrige, dá dica no primeiro
@@ -39,7 +41,7 @@ const PRAISE = ['Acertou!', 'Mandou bem!', 'Isso aí!', 'Perfeito!', 'Exato!', '
  * O placar é gravado nos handlers (nunca dentro de setState), para não contar
  * em dobro no modo estrito do React.
  */
-export function usePractice(topics: PracticeTopic[]) {
+export function usePractice(topics: PracticeTopic[], onResult?: (outcome: Outcome) => void) {
   const rng = useMemo(() => makeRng(), []);
   const [generators, setGenerators] = useState<Generator[] | null>(null);
   const [current, setCurrent] = useState<PracticeState | null>(null);
@@ -85,11 +87,17 @@ export function usePractice(topics: PracticeTopic[]) {
     if (generators) setCurrent(makeQuestion(generators));
   }, [generators, makeQuestion]);
 
+  const onResultRef = useRef(onResult);
+  useEffect(() => {
+    onResultRef.current = onResult;
+  });
+
   const record = useCallback(
-    (c: PracticeState, firstTry: boolean): string | undefined => {
-      const { leveledUp, stats } = progressStore.recordResult(topicIds[c.topicIndex], firstTry);
-      setSession((s) => ({ correct: s.correct + (firstTry ? 1 : 0), total: s.total + 1 }));
-      return leveledUp ? `Subiu de nível! Agora: ${LEVEL_NAMES[stats.level]}` : undefined;
+    (c: PracticeState, outcome: Outcome): { levelUp?: string; xp: number } => {
+      const { leveledUp, stats, xp } = progressStore.recordResult(topicIds[c.topicIndex], outcome);
+      setSession((s) => ({ correct: s.correct + (outcome === 'first' ? 1 : 0), total: s.total + 1 }));
+      onResultRef.current?.(outcome);
+      return { xp, levelUp: leveledUp ? `Subiu para o nível ${LEVEL_NAMES[stats.level]}!` : undefined };
     },
     [topicIds],
   );
@@ -115,12 +123,12 @@ export function usePractice(topics: PracticeTopic[]) {
           return update({ ...c, choice, feedback: { tone: 'warn', title: 'Quase lá.', text: result.message } });
         case 'right': {
           const firstTry = c.attempts === 0;
-          const levelUp = record(c, firstTry);
+          const { levelUp, xp } = record(c, firstTry ? 'first' : 'retry');
           return update({
             ...c, choice, finished: true,
             feedback: firstTry
-              ? { tone: 'right', title: rng.pick(PRAISE), levelUp }
-              : { tone: 'right', title: 'Agora sim!', text: 'Na próxima, de primeira.' },
+              ? { tone: 'right', title: rng.pick(PRAISE), levelUp, xp }
+              : { tone: 'right', title: 'Agora sim!', text: 'Na próxima, de primeira.', xp },
           });
         }
         case 'wrong':
@@ -128,10 +136,10 @@ export function usePractice(topics: PracticeTopic[]) {
             return update({
               ...c, attempts: 1, choice: null,
               wrongChoices: q.answer.type === 'choice' && choice !== null ? [choice] : [],
-              feedback: { tone: 'wrong', title: 'Quase.', text: `Dica: ${q.hint}` },
+              feedback: { tone: 'wrong', title: 'Quase! Uma dica:', text: q.hint },
             });
           }
-          record(c, false);
+          record(c, 'miss');
           return update({
             ...c, attempts: c.attempts + 1, choice, finished: true, showSolution: true,
             feedback: { tone: 'wrong', title: 'Não foi dessa vez.', text: 'Veja como resolver:' },
@@ -145,9 +153,18 @@ export function usePractice(topics: PracticeTopic[]) {
   const reveal = useCallback(() => {
     const c = ref.current;
     if (!c) return;
-    if (!c.finished) record(c, false);
-    update({ ...c, finished: true, showSolution: true, feedback: c.finished ? c.feedback : null });
+    if (!c.finished) record(c, 'miss');
+    update({
+      ...c, finished: true, showSolution: true,
+      feedback: c.finished ? c.feedback : { tone: 'wrong', title: 'Tudo bem, assim se aprende.', text: 'Veja como resolver:' },
+    });
   }, [record]);
+
+  /** Fecha o aviso (ex.: depois da dica, para tentar de novo). */
+  const dismiss = useCallback(() => {
+    const c = ref.current;
+    if (c && !c.finished) update({ ...c, feedback: null });
+  }, []);
 
   const setValue = useCallback((index: number, value: string) => {
     const c = ref.current;
@@ -162,5 +179,5 @@ export function usePractice(topics: PracticeTopic[]) {
     [next, topicIds],
   );
 
-  return { current, session, topicIds, submit, next, reveal, setValue, setLevel };
+  return { current, session, topicIds, submit, next, reveal, dismiss, setValue, setLevel };
 }

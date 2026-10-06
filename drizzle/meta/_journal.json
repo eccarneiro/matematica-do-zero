@@ -8,6 +8,13 @@
       "when": 1791264887900,
       "tag": "0000_inicial",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791299155960,
+      "tag": "0001_xp_diario",
+      "breakpoints": true
     }
   ]
 }

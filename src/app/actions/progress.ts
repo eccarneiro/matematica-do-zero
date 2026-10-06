@@ -21,6 +21,7 @@ const progressInput = z.object({
       levelStreak: count, updatedAt: ms,
     }),
   ),
+  days: z.record(z.string().regex(/^\d{4}-\d{2}-\d{2}$/), count).optional(),
 });
 
 /**
@@ -35,6 +36,7 @@ export async function syncProgress(input: Progress): Promise<Progress | null> {
   const data = progressInput.parse(input);
   const lessons = Object.entries(data.lessons).map(([lessonId, l]) => ({ userId, lessonId, ...l }));
   const topics = Object.entries(data.topics).map(([topicId, t]) => ({ userId, topicId, ...t }));
+  const days = Object.entries(data.days ?? {}).map(([day, xp]) => ({ userId, day, xp }));
 
   if (lessons.length) {
     const t = schema.lessonProgress;
@@ -57,9 +59,18 @@ export async function syncProgress(input: Progress): Promise<Progress | null> {
     });
   }
 
-  const [lessonRows, topicRows] = await Promise.all([
+  if (days.length) {
+    const t = schema.dailyXp;
+    await db.insert(t).values(days).onConflictDoUpdate({
+      target: [t.userId, t.day],
+      set: { xp: sql`greatest(${t.xp}, excluded.xp)` },
+    });
+  }
+
+  const [lessonRows, topicRows, dayRows] = await Promise.all([
     db.select().from(schema.lessonProgress).where(eq(schema.lessonProgress.userId, userId)),
     db.select().from(schema.topicStats).where(eq(schema.topicStats.userId, userId)),
+    db.select().from(schema.dailyXp).where(eq(schema.dailyXp.userId, userId)),
   ]);
 
   return {
@@ -70,5 +81,6 @@ export async function syncProgress(input: Progress): Promise<Progress | null> {
         { correct: r.correct, total: r.total, streak: r.streak, best: r.best, level: r.level as 1 | 2 | 3, levelStreak: r.levelStreak, updatedAt: r.updatedAt },
       ]),
     ),
+    days: Object.fromEntries(dayRows.map((r) => [r.day, r.xp])),
   };
 }

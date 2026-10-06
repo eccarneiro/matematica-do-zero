@@ -36,3 +36,14 @@ export const topicStats = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.topicId] })],
 );
+
+/** XP ganho por dia (data local do aluno, AAAA-MM-DD). Em conflito, fica o maior. */
+export const dailyXp = pgTable(
+  'daily_xp',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    day: text('day').notNull(),
+    xp: integer('xp').notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.day] })],
+);

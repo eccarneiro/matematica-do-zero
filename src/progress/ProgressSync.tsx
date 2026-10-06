@@ -18,7 +18,7 @@ export function ProgressSync() {
   useEffect(() => {
     if (status !== 'authenticated') return;
     let alive = true;
-    const pending = { lessons: new Set<string>(), topics: new Set<string>() };
+    const pending = { lessons: new Set<string>(), topics: new Set<string>(), days: false };
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     async function send(payload: Progress) {
@@ -32,13 +32,15 @@ export function ProgressSync() {
 
     function flush() {
       clearTimeout(timer);
-      if (!pending.lessons.size && !pending.topics.size) return;
+      if (!pending.lessons.size && !pending.topics.size && !pending.days) return;
       const all = progressStore.get();
       const payload = emptyProgress();
       pending.lessons.forEach((id) => { if (all.lessons[id]) payload.lessons[id] = all.lessons[id]; });
       pending.topics.forEach((id) => { if (all.topics[id]) payload.topics[id] = all.topics[id]; });
+      if (pending.days) payload.days = all.days;
       pending.lessons.clear();
       pending.topics.clear();
+      pending.days = false;
       void send(payload);
     }
 
@@ -46,7 +48,8 @@ export function ProgressSync() {
     void send(progressStore.get());
 
     const off = progressStore.onChange((change) => {
-      (change.kind === 'lesson' ? pending.lessons : pending.topics).add(change.id);
+      if (change.kind === 'day') pending.days = true;
+      else (change.kind === 'lesson' ? pending.lessons : pending.topics).add(change.id);
       clearTimeout(timer);
       timer = setTimeout(flush, DEBOUNCE_MS);
     });

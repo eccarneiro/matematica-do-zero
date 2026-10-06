@@ -5,12 +5,12 @@
 
 import { useSyncExternalStore } from 'react';
 import type { Level } from '@/generators/types';
-import { emptyProgress, emptyStats, mergeProgress, recordResult, type Progress, type TopicStats } from './model';
+import { addXp, emptyProgress, emptyStats, mergeProgress, recordResult, XP, type Progress, type TopicStats } from './model';
 
 const KEY = 'mdz:progress:v1';
 const SERVER_SNAPSHOT = emptyProgress();
 
-type Change = { kind: 'lesson'; id: string } | { kind: 'topic'; id: string };
+type Change = { kind: 'lesson'; id: string } | { kind: 'topic'; id: string } | { kind: 'day'; id: string };
 type Listener = () => void;
 
 let state: Progress | null = null;
@@ -22,6 +22,7 @@ function read(): Progress {
   try {
     const raw = localStorage.getItem(KEY);
     state = raw ? { ...emptyProgress(), ...JSON.parse(raw) } : emptyProgress();
+    state!.days ??= {};
   } catch {
     state = emptyProgress();
   }
@@ -62,20 +63,30 @@ export const progressStore = {
     return () => changeListeners.delete(l);
   },
 
-  setLessonDone(id: string, done: boolean) {
+  /** Marca a aula; a primeira conclusão vale XP. Devolve o XP ganho. */
+  setLessonDone(id: string, done: boolean): number {
     const p = read();
-    write({ ...p, lessons: { ...p.lessons, [id]: { done, updatedAt: Date.now() } } }, { kind: 'lesson', id });
+    const xp = done && !p.lessons[id]?.done ? XP.lessonDone : 0;
+    write(
+      { ...p, lessons: { ...p.lessons, [id]: { done, updatedAt: Date.now() } }, days: xp ? addXp(p.days, xp) : p.days },
+      { kind: 'lesson', id },
+    );
+    if (xp) changeListeners.forEach((l) => l({ kind: 'day', id: '' }));
+    return xp;
   },
 
   topic(id: string): TopicStats {
     return read().topics[id] ?? emptyStats();
   },
 
-  recordResult(id: string, firstTry: boolean) {
+  /** Registra uma questão: 'first' (acertou de primeira), 'retry' (acertou depois da dica) ou 'miss'. */
+  recordResult(id: string, outcome: 'first' | 'retry' | 'miss') {
     const p = read();
-    const { stats, leveledUp } = recordResult(p.topics[id] ?? emptyStats(), firstTry);
-    write({ ...p, topics: { ...p.topics, [id]: stats } }, { kind: 'topic', id });
-    return { stats, leveledUp };
+    const { stats, leveledUp } = recordResult(p.topics[id] ?? emptyStats(), outcome === 'first');
+    const xp = outcome === 'first' ? XP.firstTry : outcome === 'retry' ? XP.secondTry : 0;
+    write({ ...p, topics: { ...p.topics, [id]: stats }, days: xp ? addXp(p.days, xp) : p.days }, { kind: 'topic', id });
+    if (xp) changeListeners.forEach((l) => l({ kind: 'day', id: '' }));
+    return { stats, leveledUp, xp };
   },
 
   setLevel(id: string, level: Level) {
