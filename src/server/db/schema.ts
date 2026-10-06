@@ -1,0 +1,38 @@
+import { bigint, boolean, integer, pgTable, primaryKey, smallint, text, timestamp } from 'drizzle-orm/pg-core';
+
+/** Alunos que entraram com Google. id = "google:<sub>". */
+export const users = pgTable('users', {
+  id: text('id').primaryKey(),
+  email: text('email'),
+  name: text('name'),
+  image: text('image'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const lessonProgress = pgTable(
+  'lesson_progress',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    lessonId: text('lesson_id').notNull(),
+    done: boolean('done').notNull(),
+    /** Momento da mudança no aparelho do aluno (ms). Em conflito, vence o mais recente. */
+    updatedAt: bigint('updated_at', { mode: 'number' }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.lessonId] })],
+);
+
+export const topicStats = pgTable(
+  'topic_stats',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    topicId: text('topic_id').notNull(),
+    correct: integer('correct').notNull(),
+    total: integer('total').notNull(),
+    streak: integer('streak').notNull(),
+    best: integer('best').notNull(),
+    level: smallint('level').notNull(),
+    levelStreak: integer('level_streak').notNull(),
+    updatedAt: bigint('updated_at', { mode: 'number' }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.topicId] })],
+);

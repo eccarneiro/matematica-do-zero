@@ -3,6 +3,8 @@ import { Fraunces, Lexend } from 'next/font/google';
 import { Topbar } from '@/components/layout/Topbar';
 import { TabBar } from '@/components/layout/TabBar';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { Providers } from '@/components/layout/Providers';
+import { authEnabled } from '@/server/auth';
 import './globals.css';
 
 const lexend = Lexend({ subsets: ['latin'], weight: ['300', '400', '500', '600'], variable: '--font-lexend', display: 'swap' });
@@ -34,12 +36,14 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-3 focus:py-2">
           Pular para o conteúdo
         </a>
-        <Topbar />
-        <main id="conteudo" className="mx-auto max-w-[820px] px-4 pt-5 pb-10">
-          {children}
-        </main>
-        <SiteFooter />
-        <TabBar />
+        <Providers authEnabled={authEnabled}>
+          <Topbar />
+          <main id="conteudo" className="mx-auto max-w-[820px] px-4 pt-5 pb-10">
+            {children}
+          </main>
+          <SiteFooter />
+          <TabBar />
+        </Providers>
       </body>
     </html>
   );

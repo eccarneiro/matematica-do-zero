@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from './nav';
 import { ThemeToggle } from './ThemeToggle';
+import { AuthButton } from './AuthButton';
 
 export function Topbar() {
   const pathname = usePathname();
@@ -36,6 +37,7 @@ export function Topbar() {
         })}
       </nav>
       <ThemeToggle />
+      <AuthButton />
     </header>
   );
 }
