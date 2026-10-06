@@ -35,8 +35,8 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
   }
 
   return (
-    <div className="grid items-start gap-8 lg:grid-cols-[400px_minmax(0,1fr)]">
-      <section className="c-gold overflow-hidden rounded-2xl border border-edge bg-accent text-on-accent shadow-card lg:sticky lg:top-8">
+    <div className="grid items-start gap-8 xl:grid-cols-[400px_minmax(0,1fr)]">
+      <section className="c-gold overflow-hidden rounded-2xl border border-edge bg-accent text-on-accent shadow-card xl:sticky xl:top-8">
         <div className="relative px-5 pt-5 pb-4">
           <IconStar className="absolute -top-4 -right-4 size-28 opacity-25" />
           <p className="text-[0.72rem] font-extrabold tracking-[0.14em] uppercase opacity-80">Revisão</p>

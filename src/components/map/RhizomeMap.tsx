@@ -149,9 +149,9 @@ function Flow() {
     >
       <Background gap={28} size={1.4} color="var(--edge)" />
       <Controls showInteractive={false} position="bottom-right" />
-      <div className="absolute top-3 right-3 z-10 flex gap-2">
-        <button type="button" onClick={focusCurrent} className="btn btn-primary min-h-10 px-4 py-2 text-[0.9rem]">Onde estou</button>
-        <button type="button" onClick={() => flow.fitView({ duration: 600, padding: 0.1 })} className="btn btn-ghost min-h-10 px-4 py-2 text-[0.9rem]">Ver tudo</button>
+      <div className="absolute top-2 right-2 z-10 flex gap-1.5 md:top-3 md:right-3 md:gap-2">
+        <button type="button" onClick={focusCurrent} className="btn btn-primary min-h-9 px-3 py-1.5 text-[0.8rem] md:min-h-10 md:px-4 md:text-[0.9rem]">Onde estou</button>
+        <button type="button" onClick={() => flow.fitView({ duration: 600, padding: 0.1 })} className="btn btn-ghost min-h-9 px-3 py-1.5 text-[0.8rem] md:min-h-10 md:px-4 md:text-[0.9rem]">Ver tudo</button>
       </div>
     </ReactFlow>
   );

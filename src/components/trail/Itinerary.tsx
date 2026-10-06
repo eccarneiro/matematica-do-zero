@@ -37,7 +37,7 @@ export function Itinerary() {
 function ChapterHeader({ unit }: { unit: TrailUnit }) {
   const { module, done, ready } = unit;
   return (
-    <header className="mb-8 flex items-end gap-5 border-b-[1.5px] border-edge-soft pb-5">
+    <header className="mb-8 flex flex-wrap items-end gap-x-5 gap-y-3 border-b-[1.5px] border-edge-soft pb-5">
       <span className={`font-serif text-[clamp(3.5rem,8vw,5.5rem)] leading-[0.8] font-semibold ${ready ? 'text-accent' : 'text-ink-3/40'}`} aria-hidden>
         {ROMAN[module.number - 1]}
       </span>
@@ -95,7 +95,7 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
     <article
       className={`card relative p-4 sm:p-5 ${current ? 'border-2 border-accent [animation:glow_2.4s_ease-in-out_infinite]' : ''} ${state === 'open' || state === 'soon' ? 'opacity-80' : ''}`}
     >
-      <p className="font-display text-[0.95rem] text-ink-2 md:hidden">{lesson.place} · {lesson.year}</p>
+      <p className="font-display text-[0.95rem] text-ink-2 lg:hidden">{lesson.place} · {lesson.year}</p>
       <h3 className="font-sans text-[1.15rem] font-extrabold">{lesson.title}</h3>
       {lesson.summary && <p className="mt-0.5 text-[0.93rem] text-ink-2">{lesson.summary}</p>}
       <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -116,11 +116,11 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
           <Link href={`/aula/${lesson.id}`} className="text-[0.9rem] font-extrabold no-underline">Visitar fora de ordem ›</Link>
         )}
       </div>
-      <div className="md:hidden"><BranchChips lessonId={lesson.id} align="start" /></div>
+      <div className="lg:hidden"><BranchChips lessonId={lesson.id} align="start" /></div>
     </article>
   );
   const place = (
-    <div className={`hidden md:block ${side === 'left' ? 'text-left' : 'text-right'}`}>
+    <div className={`hidden lg:block ${side === 'left' ? 'text-left' : 'text-right'}`}>
       <p className={`font-display text-[2.2rem] leading-none font-bold ${isWalked(state) ? 'text-ink' : 'text-ink-3'}`}>{lesson.year}</p>
       <p className="mt-1 text-[0.75rem] font-extrabold tracking-[0.2em] text-ink-3 uppercase">{lesson.place}</p>
       <BranchChips lessonId={lesson.id} align={side === 'left' ? 'start' : 'end'} />
@@ -128,9 +128,9 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
   );
 
   return (
-    <li className="relative grid grid-cols-[64px_1fr] items-center gap-x-4 [animation:fade-in_.6s_ease_both] md:grid-cols-[1fr_96px_1fr] md:gap-x-6">
-      <div className={side === 'left' ? 'order-2 md:order-1' : 'order-2 md:order-3'}>{card}</div>
-      <div className="relative order-1 grid h-full min-h-24 place-items-center md:order-2">
+    <li className="relative grid grid-cols-[64px_minmax(0,1fr)] items-center gap-x-4 [animation:fade-in_.6s_ease_both] lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:gap-x-6">
+      <div className={side === 'left' ? 'order-2 lg:order-1' : 'order-2 lg:order-3'}>{card}</div>
+      <div className="relative order-1 grid h-full min-h-24 place-items-center lg:order-2">
         <RouteLine walked={isWalked(state)} half="top" />
         {!last && <RouteLine walked={walkedBelow} half="bottom" />}
         <Link
@@ -138,12 +138,12 @@ function Stop({ lesson, state, side, walkedBelow, last }: { lesson: LessonRef; s
           aria-label={lesson.title}
           className={`relative grid place-items-center rounded-full bg-bg p-1 ${state === 'soon' ? 'pointer-events-none' : ''}`}
         >
-          <span className="md:hidden"><Stamp lesson={lesson} earned={done} size={60} /></span>
-          <span className="hidden md:block"><Stamp lesson={lesson} earned={done} size={90} /></span>
+          <span className="lg:hidden"><Stamp lesson={lesson} earned={done} size={60} /></span>
+          <span className="hidden lg:block"><Stamp lesson={lesson} earned={done} size={90} /></span>
           {current && <span className="absolute inset-0 animate-ping rounded-full border-2 border-accent opacity-40" aria-hidden />}
         </Link>
       </div>
-      <div className={side === 'left' ? 'order-3 hidden md:block' : 'order-1 hidden md:block'}>{place}</div>
+      <div className={side === 'left' ? 'order-3 hidden lg:block' : 'order-1 hidden lg:block'}>{place}</div>
     </li>
   );
 }
@@ -152,19 +152,19 @@ function ReviewStop({ node, walkedBelow, last }: { node: Extract<TrailNode, { ki
   const lessons = curriculum.flatMap((m) => m.lessons).filter((l) => node.lessonIds.includes(l.id));
   const soon = node.state === 'soon';
   return (
-    <li className="relative grid grid-cols-[64px_1fr] items-center gap-x-4 md:grid-cols-[1fr_96px_1fr] md:gap-x-6">
-      <div className="relative row-span-2 grid h-full min-h-24 place-items-center md:col-start-2 md:row-span-1 md:row-start-1">
+    <li className="relative grid grid-cols-[64px_minmax(0,1fr)] items-center gap-x-4 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:gap-x-6">
+      <div className="relative row-span-2 grid h-full min-h-24 place-items-center lg:col-start-2 lg:row-span-1 lg:row-start-1">
         <RouteLine walked={node.state === 'done'} half="top" />
         {!last && <RouteLine walked={walkedBelow} half="bottom" />}
         <span className="c-gold relative grid size-12 rotate-45 place-items-center rounded-lg border border-edge bg-accent shadow-card">
           <span className="-rotate-45 text-[1.2rem] font-extrabold text-on-accent">✦</span>
         </span>
       </div>
-      <div className="col-start-2 self-end md:col-start-1 md:row-start-1 md:self-center md:text-right">
+      <div className="col-start-2 self-end lg:col-start-1 lg:row-start-1 lg:self-center lg:text-right">
         <p className="text-[0.72rem] font-extrabold tracking-[0.16em] text-ink-3 uppercase">Parada de revisão</p>
         <p className="font-display text-[1.15rem]">{lessons.map((l) => l.symbol).join('  ·  ')}</p>
       </div>
-      <div className="col-start-2 self-start md:col-start-3 md:row-start-1 md:self-center">
+      <div className="col-start-2 self-start lg:col-start-3 lg:row-start-1 lg:self-center">
         {soon ? (
           <p className="text-[0.85rem] font-bold text-ink-3">Abre com duas aulas publicadas.</p>
         ) : (
@@ -190,12 +190,12 @@ function BranchChips({ lessonId, align }: { lessonId: string; align: 'start' | '
         const label = (
           <>
             <span aria-hidden>{done ? '✓' : k.icon}</span>
-            <span className="max-w-[220px] truncate">{b.title}</span>
+            <span className="max-w-[220px] min-w-0 truncate">{b.title}</span>
           </>
         );
-        const cls = 'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.78rem] font-bold';
+        const cls = 'inline-flex max-w-full items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.78rem] font-bold';
         return (
-          <li key={b.id} className={`c-${k.color}`}>
+          <li key={b.id} className={`c-${k.color} max-w-full min-w-0`}>
             {b.ready ? (
               <Link href={`/ramo/${b.id}`} title={`${k.label}: ${b.title}`} className={`${cls} no-underline transition hover:-translate-y-px ${done ? 'border-accent bg-accent text-on-accent' : 'border-accent/40 bg-accent-soft text-accent'}`}>{label}</Link>
             ) : (
