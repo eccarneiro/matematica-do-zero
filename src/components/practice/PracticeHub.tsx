@@ -35,8 +35,8 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
   }
 
   return (
-    <>
-      <section className="c-gold overflow-hidden rounded-3xl bg-accent text-on-accent shadow-[0_5px_0_var(--accent-shade)]">
+    <div className="grid items-start gap-8 lg:grid-cols-[400px_minmax(0,1fr)]">
+      <section className="c-gold overflow-hidden rounded-2xl border-2 border-edge bg-accent text-on-accent shadow-[4px_4px_0_var(--edge)] lg:sticky lg:top-8">
         <div className="relative px-5 pt-5 pb-4">
           <IconStar className="absolute -top-4 -right-4 size-28 opacity-25" />
           <p className="text-[0.72rem] font-black tracking-[0.14em] uppercase opacity-80">Revisão</p>
@@ -63,7 +63,7 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
             })}
           </div>
           {chosen.length >= 2 ? (
-            <Link href={`/treino/revisao?aulas=${chosen.map((l) => l.id).join(',')}`} className="flex min-h-12 items-center justify-center rounded-2xl bg-surface px-4 font-extrabold tracking-wide text-ink uppercase no-underline shadow-[0_4px_0_rgb(0_0_0/0.2)] active:translate-y-1 active:shadow-none">
+            <Link href={`/treino/revisao?aulas=${chosen.map((l) => l.id).join(',')}`} className="btn btn-ghost w-full">
               Começar treino misto
             </Link>
           ) : (
@@ -72,14 +72,15 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
         </div>
       </section>
 
-      <h2 className="mt-10 mb-4 text-[1.5rem]">Por tópico</h2>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div>
+      <h2 className="mb-4 text-[1.5rem]">Por tópico</h2>
+      <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-3">
         {lessons.map((l) => {
           const s = mounted ? progress.topics[l.topic] : undefined;
           const accuracy = s?.total ? Math.round((100 * s.correct) / s.total) : null;
           return (
-            <Link key={l.id} href={`/treino/${l.id}`} className={`c-${l.color} card flex items-center gap-4 p-4 text-ink no-underline shadow-[0_4px_0_var(--line)] active:translate-y-1 active:shadow-none`}>
-              <span className="grid size-14 flex-none place-items-center rounded-2xl bg-accent font-serif text-[1.4rem] font-bold text-on-accent shadow-[0_4px_0_var(--accent-shade)]">
+            <Link key={l.id} href={`/treino/${l.id}`} className={`c-${l.color} tile flex items-center gap-4 p-4`}>
+              <span className="grid size-14 flex-none place-items-center rounded-full border-2 border-edge bg-accent font-serif text-[1.4rem] font-bold text-on-accent">
                 {l.symbol}
               </span>
               <span className="min-w-0 flex-1">
@@ -99,6 +100,7 @@ export function PracticeHub({ lessons }: { lessons: HubLesson[] }) {
           );
         })}
       </div>
-    </>
+      </div>
+    </div>
   );
 }

@@ -116,3 +116,44 @@ export function recordResult(prev: TopicStats, firstTry: boolean, now = Date.now
   }
   return { stats: s, leveledUp };
 }
+
+/** Títulos do nível do aluno, inspirados na própria história do curso. */
+export const LEVEL_TITLES = [
+  'Contador de pedrinhas',
+  'Aprendiz de escriba',
+  'Escriba',
+  'Calculista',
+  'Mestre do ábaco',
+  'Guardião do zero',
+  'Algebrista',
+  'Geômetra',
+  'Astrônomo',
+  'Analista',
+  'Sábio de Alexandria',
+] as const;
+
+/** XP total necessário para chegar ao nível n (n ≥ 1): 0, 60, 180, 360, 600… */
+export const xpForLevel = (n: number) => 30 * n * (n - 1);
+
+/** Nível do aluno a partir do XP total, com o progresso até o próximo. */
+export function playerLevel(xp: number) {
+  let level = 1;
+  while (xp >= xpForLevel(level + 1)) level++;
+  const from = xpForLevel(level);
+  const to = xpForLevel(level + 1);
+  return {
+    level,
+    title: LEVEL_TITLES[Math.min(level, LEVEL_TITLES.length) - 1],
+    into: xp - from,
+    needed: to - from,
+    ratio: (xp - from) / (to - from),
+  };
+}
+
+/** XP de cada um dos últimos `n` dias (do mais antigo para hoje). */
+export function recentDays(days: Record<string, number>, n = 7, today = new Date()) {
+  return Array.from({ length: n }, (_, i) => {
+    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (n - 1 - i));
+    return { key: dayKey(d), date: d, xp: days[dayKey(d)] ?? 0 };
+  });
+}

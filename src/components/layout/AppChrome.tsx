@@ -14,7 +14,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <Link href="/" className="flex items-center gap-2.5 text-ink no-underline" aria-label="Matemática do Zero, página inicial">
       <span
         aria-hidden
-        className="grid size-10 place-items-center rounded-2xl bg-coral font-serif text-[1.35rem] font-bold text-white shadow-[0_3px_0_var(--coral-shade)]"
+        className="grid size-10 place-items-center rounded-xl border-2 border-edge bg-coral font-serif text-[1.35rem] font-bold text-white shadow-[2px_2px_0_var(--edge)]"
       >
         0
       </span>
@@ -42,11 +42,11 @@ export function SideNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? 'page' : undefined}
-              className={`flex items-center gap-3.5 rounded-2xl border-2 px-3.5 py-2.5 text-[0.95rem] font-extrabold tracking-wide uppercase no-underline ${
-                active ? 'c-blue border-accent bg-accent-soft text-accent' : 'border-transparent text-ink-2 hover:bg-surface-2'
+              className={`flex items-center gap-3.5 rounded-xl border-2 px-3.5 py-2.5 text-[1rem] font-extrabold no-underline ${
+                active ? 'border-edge bg-surface text-ink shadow-[3px_3px_0_var(--edge)]' : 'border-transparent text-ink-2 hover:bg-surface-2'
               }`}
             >
-              <Icon className="size-7" />
+              <Icon className={`size-6 ${active ? 'text-coral' : ''}`} />
               {item.label}
             </Link>
           );
@@ -84,9 +84,9 @@ export function TabBar() {
             href={item.href}
             aria-current={active ? 'page' : undefined}
             aria-label={item.label}
-            className="flex flex-col items-center gap-0.5 py-1 text-[0.7rem] font-extrabold tracking-wide uppercase no-underline"
+            className="flex flex-col items-center gap-0.5 py-1 text-[0.72rem] font-extrabold no-underline"
           >
-            <span className={`grid h-9 w-14 place-items-center rounded-xl border-2 ${active ? 'c-blue border-accent bg-accent-soft text-accent' : 'border-transparent text-ink-3'}`}>
+            <span className={`grid h-9 w-14 place-items-center rounded-xl border-2 ${active ? 'border-edge bg-coral-soft text-coral shadow-[2px_2px_0_var(--edge)]' : 'border-transparent text-ink-3'}`}>
               <Icon className="size-6" />
             </span>
             <span className={active ? 'text-ink' : 'text-ink-3'}>{item.label}</span>

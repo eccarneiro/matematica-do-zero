@@ -50,8 +50,3 @@ export function buildTrail(curriculum: CourseModule[], progress: Progress): Trai
     return { module, nodes, ready: ready.length, done: ready.filter(isDone).length };
   });
 }
-
-/** Deslocamento horizontal (px) de cada bolinha: o zigue-zague da trilha. */
-export function nodeOffset(index: number): number {
-  return Math.round(Math.sin((index * Math.PI) / 4) * 72);
-}

@@ -6,7 +6,10 @@ export function FocusHeader({
   closeHref = '/',
   progress,
   right,
+  wide = false,
 }: {
+  /** Ocupa a largura do conteúdo em duas colunas (computador). */
+  wide?: boolean;
   closeHref?: string;
   /** 0 a 1 */
   progress?: number;
@@ -14,7 +17,7 @@ export function FocusHeader({
 }) {
   return (
     <header className="sticky top-0 z-20 bg-bg/95 pt-[env(safe-area-inset-top)] backdrop-blur">
-      <div className="mx-auto flex max-w-[680px] items-center gap-4 px-4 py-3">
+      <div className={`mx-auto flex items-center gap-4 px-4 py-3 ${wide ? 'max-w-[1320px] lg:px-8' : 'max-w-[680px]'}`}>
         <Link href={closeHref} aria-label="Sair" className="grid size-10 flex-none place-items-center rounded-xl text-ink-3 hover:bg-surface-2">
           <IconClose className="size-7" />
         </Link>

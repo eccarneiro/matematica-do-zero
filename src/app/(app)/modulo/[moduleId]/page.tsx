@@ -19,7 +19,7 @@ export default async function ModulePage({ params }: PageProps<'/modulo/[moduleI
   const courseModule = getModule((await params).moduleId);
   if (!courseModule) notFound();
   return (
-    <div className="mx-auto max-w-[620px]">
+    <div>
       <Link href="/" className="mb-4 inline-block text-[0.85rem] font-extrabold tracking-wide text-ink-3 uppercase no-underline">‹ Trilha</Link>
       <ModuleGuide module={courseModule} />
     </div>

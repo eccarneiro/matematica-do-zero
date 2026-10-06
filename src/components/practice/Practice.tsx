@@ -94,7 +94,7 @@ export function Practice({
               <span className="pill bg-surface-2 text-ink-2">{LEVEL_NAMES[c.level]}</span>
             </span>
           ) : showLevels ? (
-            <div role="radiogroup" aria-label="Nível" className="inline-flex gap-1 rounded-2xl bg-surface-2 p-1">
+            <div role="radiogroup" aria-label="Nível" className="inline-flex gap-1 rounded-xl border-[1.5px] border-edge-soft bg-surface-2 p-1">
               {LEVELS.map((level) => (
                 <button
                   key={level}
@@ -102,7 +102,7 @@ export function Practice({
                   role="radio"
                   aria-checked={singleStats.level === level}
                   onClick={() => p.setLevel(level)}
-                  className={`cursor-pointer rounded-xl px-3 py-1.5 text-[0.8rem] font-extrabold tracking-wide uppercase ${singleStats.level === level ? 'bg-surface text-accent shadow-[0_2px_0_var(--line)]' : 'text-ink-3'}`}
+                  className={`cursor-pointer rounded-lg px-3 py-1.5 text-[0.88rem] font-extrabold ${singleStats.level === level ? 'bg-surface text-accent shadow-[2px_2px_0_var(--edge)]' : 'text-ink-3'}`}
                 >
                   {LEVEL_NAMES[level]}
                 </button>
@@ -130,7 +130,7 @@ export function Practice({
                     aria-label={`inserir ${key}`}
                     onMouseDown={(e) => e.preventDefault() /* mantém o teclado do celular aberto */}
                     onClick={() => insertKey(key)}
-                    className="h-12 min-w-14 cursor-pointer rounded-2xl border-2 border-line bg-surface px-3 text-[1.15rem] font-extrabold shadow-[0_3px_0_var(--line)] active:translate-y-[3px] active:shadow-none disabled:opacity-40"
+                    className="h-12 min-w-14 cursor-pointer rounded-xl border-2 border-edge bg-surface px-3 text-[1.15rem] font-extrabold shadow-[3px_3px_0_var(--edge-soft)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none disabled:opacity-40"
                   >
                     {KEY_LABEL[key]}
                   </button>
@@ -266,8 +266,8 @@ function Choices({ state, onPick }: { state: PracticeState; onPick: (i: number) 
             type="button"
             disabled={state.finished}
             onClick={() => onPick(i)}
-            className={`${tone} min-h-16 cursor-pointer rounded-2xl border-2 px-4 py-3 text-[1.15rem] font-bold active:translate-y-1 active:shadow-none ${
-              tone ? 'border-accent bg-accent-soft text-accent shadow-[0_4px_0_var(--accent)]' : 'border-line bg-surface shadow-[0_4px_0_var(--line)]'
+            className={`${tone} min-h-16 cursor-pointer rounded-xl border-2 px-4 py-3 text-[1.15rem] font-bold active:translate-x-[3px] active:translate-y-[3px] active:shadow-none ${
+              tone ? 'border-edge bg-accent-soft text-accent shadow-[3px_3px_0_var(--edge)]' : 'border-edge bg-surface shadow-[3px_3px_0_var(--edge)]'
             }`}
           >
             <MathText text={opt} />
@@ -298,7 +298,7 @@ function AnswerFields({
     onFocus: (e: React.FocusEvent<HTMLInputElement>) => onFocus(e.currentTarget),
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(i, e.target.value),
   });
-  const box = 'rounded-2xl border-2 border-line bg-surface shadow-[0_3px_0_var(--line)] focus-within:border-accent';
+  const box = 'rounded-xl border-2 border-edge bg-surface shadow-[3px_3px_0_var(--edge-soft)] focus-within:shadow-[3px_3px_0_var(--accent)]';
 
   if (q.answer.type === 'fields') {
     return (

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addXp, dayKey, dayStreak, emptyStats, mergeProgress, recordResult, totalXp, LEVEL_UP_STREAK, type Progress, type TopicStats } from './model';
+import { addXp, dayKey, dayStreak, emptyStats, mergeProgress, playerLevel, recentDays, recordResult, totalXp, LEVEL_UP_STREAK, type Progress, type TopicStats } from './model';
 
 describe('recordResult', () => {
   it('sobe de nível após acertos seguidos de primeira', () => {
@@ -61,5 +61,25 @@ describe('sequência de dias', () => {
   it('soma XP no dia local', () => {
     expect(dayKey(today)).toBe('2026-10-06');
     expect(addXp({ '2026-10-06': 10 }, 5, today)).toEqual({ '2026-10-06': 15 });
+  });
+});
+
+describe('nível do aluno', () => {
+  it('começa no nível 1 e sobe com o XP', () => {
+    expect(playerLevel(0)).toMatchObject({ level: 1, title: 'Contador de pedrinhas', into: 0, needed: 60 });
+    expect(playerLevel(59).level).toBe(1);
+    expect(playerLevel(60)).toMatchObject({ level: 2, into: 0, needed: 120 });
+    expect(playerLevel(200)).toMatchObject({ level: 3, into: 20, needed: 180 });
+  });
+  it('mantém o último título nos níveis muito altos', () => {
+    expect(playerLevel(1_000_000).title).toBe('Sábio de Alexandria');
+  });
+});
+
+describe('últimos dias', () => {
+  it('lista os 7 dias até hoje com o XP de cada um', () => {
+    const week = recentDays({ '2026-10-06': 20, '2026-10-01': 5 }, 7, new Date(2026, 9, 6));
+    expect(week.map((d) => d.key)).toEqual(['2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03', '2026-10-04', '2026-10-05', '2026-10-06']);
+    expect(week.map((d) => d.xp)).toEqual([0, 5, 0, 0, 0, 0, 20]);
   });
 });

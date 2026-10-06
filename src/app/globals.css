@@ -16,6 +16,9 @@
   --ink-2: #565c70;
   --ink-3: #8a8e9e;
   --line: #e8dfd0;
+  /* tinta das bordas e sombras deslocadas (estilo impressão) */
+  --edge: #2b2f45;
+  --edge-soft: #d9ccb4;
   --shadow-card: 0 1px 0 rgb(40 30 10 / 0.04), 0 10px 30px -18px rgb(40 30 10 / 0.35);
 
   /* "papel de museu" para a história */
@@ -53,6 +56,8 @@
   --ink-2: #a8adbd;
   --ink-3: #7c8295;
   --line: #2e3344;
+  --edge: #05060a;
+  --edge-soft: #0a0b11;
   --shadow-card: 0 1px 0 rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.8);
 
   --paper: #2a2418;
@@ -92,6 +97,8 @@
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-line: var(--line);
+  --color-edge: var(--edge);
+  --color-edge-soft: var(--edge-soft);
   --color-paper: var(--paper);
   --color-paper-ink: var(--paper-ink);
   --color-paper-ink-2: var(--paper-ink-2);
@@ -143,28 +150,26 @@
 }
 
 @layer components {
-  /* Botão "gordinho" com sombra 3D que afunda ao tocar */
+  /*
+   * Botões e cartões "de impressão": borda de tinta e sombra deslocada,
+   * que some quando o elemento é pressionado (como um carimbo).
+   */
   .btn {
-    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-2xl px-5 py-3 text-[0.95rem] leading-tight font-extrabold tracking-wide no-underline uppercase select-none disabled:cursor-not-allowed;
+    @apply relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-edge px-5 py-3 text-[1rem] leading-tight font-extrabold no-underline select-none disabled:cursor-not-allowed;
+    box-shadow: 3px 3px 0 var(--edge);
     transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: var(--on-accent);
-    box-shadow: 0 4px 0 var(--accent-shade);
-  }
-  .btn-primary:not(:disabled):active { transform: translateY(4px); box-shadow: 0 0 0 var(--accent-shade); }
-  .btn-primary:disabled { background: var(--surface-2); color: var(--ink-3); box-shadow: 0 4px 0 var(--line); }
-  .btn-ghost {
-    background: var(--surface);
-    color: var(--ink-2);
-    border: 2px solid var(--line);
-    box-shadow: 0 4px 0 var(--line);
-  }
-  .btn-ghost:not(:disabled):active { transform: translateY(4px); box-shadow: 0 0 0 var(--line); }
-  .btn-text { @apply min-h-10 px-3 text-accent; }
+  .btn:not(:disabled):active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--edge); }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:disabled { background: var(--surface-2); color: var(--ink-3); border-color: var(--line); box-shadow: 3px 3px 0 var(--line); }
+  .btn-ghost { background: var(--surface); color: var(--ink); }
+  .btn-text { @apply min-h-10 border-0 px-3 text-accent shadow-none; }
 
-  .card { @apply rounded-3xl border-2 border-line bg-surface; }
+  .card { @apply rounded-2xl border-[1.5px] border-edge-soft bg-surface; box-shadow: 4px 4px 0 var(--edge-soft); }
+  /* cartão clicável: afunda ao tocar */
+  .tile { @apply cursor-pointer rounded-2xl border-2 border-edge bg-surface text-ink no-underline; box-shadow: 4px 4px 0 var(--edge); transition: transform 0.08s ease, box-shadow 0.08s ease; }
+  .tile:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--edge); }
+  @media (hover: hover) { .tile:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--edge); } }
   .eyebrow { @apply mb-2 text-[0.75rem] font-extrabold tracking-[0.14em] text-accent uppercase; }
   .badge { @apply rounded-full bg-surface-2 px-2.5 py-0.5 text-[0.7rem] font-extrabold tracking-[0.08em] whitespace-nowrap text-ink-3 uppercase; }
   .pill { @apply inline-block rounded-full bg-accent-soft px-3 py-0.5 text-[0.8rem] font-extrabold text-accent; }
@@ -229,6 +234,23 @@
 }
 @keyframes bob {
   50% { transform: translate(-50%, -4px); }
+}
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+}
+@keyframes stamp {
+  0% { transform: scale(1.6) rotate(-14deg); opacity: 0; }
+  60% { transform: scale(0.94) rotate(-6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-8deg); }
+}
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+}
+@keyframes grow-y {
+  from { transform: scaleY(0); }
+}
+@keyframes glow {
+  50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 18%, transparent); }
 }
 @keyframes confetti-fall {
   0% { transform: translate3d(0, -20vh, 0) rotate(0); opacity: 1; }

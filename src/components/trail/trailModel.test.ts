@@ -3,7 +3,7 @@ import type { CourseModule } from '@/content/types';
 import { emptyProgress, type Progress } from '@/progress/model';
 import { buildTrail } from './trailModel';
 
-const lesson = (id: string, ready = true) => ({ id, title: id, symbol: id, keywords: '', ready, topic: ready ? ('inteiros' as const) : undefined });
+const lesson = (id: string, ready = true) => ({ id, title: id, symbol: id, year: '1', place: 'x', keywords: '', ready, topic: ready ? ('inteiros' as const) : undefined });
 const mod = (id: string, lessons: ReturnType<typeof lesson>[]): CourseModule => ({
   id, number: 1, title: id, tagline: '', eras: '', color: 'coral', lessons,
 });

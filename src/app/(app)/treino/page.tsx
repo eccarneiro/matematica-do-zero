@@ -13,8 +13,8 @@ export default function PracticeHubPage() {
     color: mod.color,
   }));
   return (
-    <div className="mx-auto max-w-[620px]">
-      <h1 className="mb-1 text-[2rem]">Treino</h1>
+    <div>
+      <h1 className="mb-1 text-[clamp(2rem,4vw,2.6rem)]">Treino</h1>
       <p className="mb-6 text-ink-2">Questões novas a cada vez, sem fim. Acertos de primeira valem 10 XP.</p>
       <PracticeHub lessons={lessons} />
     </div>

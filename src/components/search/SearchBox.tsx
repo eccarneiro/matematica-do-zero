@@ -41,9 +41,9 @@ export function SearchBox() {
         placeholder="Ex.: frações, Pitágoras, derivada…"
         aria-label="Buscar assunto"
         autoComplete="off"
-        className="w-full rounded-2xl border-2 border-line bg-surface px-5 py-4 text-[1.15rem] font-bold text-ink shadow-[0_3px_0_var(--line)] outline-none placeholder:text-ink-3 focus:border-coral"
+        className="w-full rounded-2xl border-2 border-line bg-surface px-5 py-4 text-[1.15rem] font-bold text-ink shadow-[3px_3px_0_var(--edge-soft)] outline-none placeholder:text-ink-3 focus:border-coral"
       />
-      <ul className="mt-5 grid gap-3" aria-live="polite">
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" aria-live="polite">
         {results.length === 0 && <li className="text-ink-2">Nada encontrado. Tente outra palavra.</li>}
         {results.map(({ module, lesson }) => {
           const body = (

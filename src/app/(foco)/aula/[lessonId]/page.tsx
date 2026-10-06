@@ -30,6 +30,7 @@ export default async function LessonPage({ params }: PageProps<'/aula/[lessonId]
       <LessonPlayer
         lessonId={lesson.id}
         title={lesson.title}
+        stop={{ symbol: lesson.symbol, year: lesson.year, place: lesson.place, title: lesson.title }}
         topic={lesson.topic ? { topic: lesson.topic, title: lesson.title } : undefined}
         nextLesson={next?.ready ? { id: next.id, title: next.title } : undefined}
         steps={[

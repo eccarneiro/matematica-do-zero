@@ -1,7 +1,7 @@
 /** Moldura comum dos desenhos interativos. */
 export function Interactive({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <figure className="card not-prose my-7 p-4 shadow-[0_4px_0_var(--line)]">
+    <figure className="card not-prose my-7 p-4 shadow-[3px_3px_0_var(--edge-soft)]">
       <figcaption className="mb-3 flex items-center gap-2 text-[0.75rem] font-black tracking-[0.14em] text-accent uppercase before:content-['✦']">
         {title}
       </figcaption>
@@ -42,7 +42,7 @@ export function Toggle<T extends string>({
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={`min-h-11 cursor-pointer rounded-2xl border-2 px-4 py-2 text-[0.92rem] font-extrabold active:translate-y-[3px] active:shadow-none ${value === o.value ? 'border-accent bg-accent-soft text-accent shadow-[0_3px_0_var(--accent)]' : 'border-line bg-surface text-ink-2 shadow-[0_3px_0_var(--line)]'}`}
+          className={`min-h-11 cursor-pointer rounded-2xl border-2 px-4 py-2 text-[0.92rem] font-extrabold active:translate-x-[3px] active:translate-y-[3px] active:shadow-none ${value === o.value ? 'border-accent bg-accent-soft text-accent shadow-[3px_3px_0_var(--edge)]' : 'border-line bg-surface text-ink-2 shadow-[3px_3px_0_var(--edge-soft)]'}`}
         >
           {o.label}
         </button>

@@ -29,8 +29,8 @@ export function Profile() {
   ];
 
   return (
-    <div className="grid gap-8">
-      <AccountCard />
+    <div className="grid items-start gap-8 lg:grid-cols-2">
+      <div className="lg:col-span-2"><AccountCard /></div>
 
       <section>
         <h2 className="mb-3 text-[1.5rem]">Estatísticas</h2>

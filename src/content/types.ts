@@ -14,8 +14,11 @@ export interface LessonRef {
   topic?: TopicId;
   /** Aula publicada. Aulas sem isso aparecem como "em breve". */
   ready?: boolean;
-  /** Símbolo curto desenhado na bolinha da trilha (ex.: "½", "x²"). */
+  /** Símbolo curto do selo da aula no itinerário (ex.: "½", "x²"). */
   symbol: string;
+  /** Época e lugar da parada no itinerário pela história (ex.: "628", "Índia"). */
+  year: string;
+  place: string;
 }
 
 export interface CourseModule {

@@ -6,8 +6,8 @@ export const metadata: Metadata = { title: 'Buscar' };
 
 export default function SearchPage() {
   return (
-    <div className="mx-auto max-w-[620px]">
-      <h1 className="mb-5 text-[2rem]">Buscar assunto</h1>
+    <div className="max-w-[1100px]">
+      <h1 className="mb-5 text-[clamp(2rem,4vw,2.6rem)]">Buscar assunto</h1>
       {/* useSearchParams exige Suspense para a página continuar estática */}
       <Suspense>
         <SearchBox />
