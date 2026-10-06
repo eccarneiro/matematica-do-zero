@@ -42,6 +42,8 @@
   --warn: #b7791f; --warn-soft: #fdf3e0;
   --gold: #f5b82b; --gold-shade: #d0950b;
   --flame: #ff8a3d;
+  /* cor dos gráficos (validada para contraste e luminosidade) */
+  --chart: #5b6cf2;
 
   --accent: var(--indigo);
   --accent-shade: var(--indigo-shade);
@@ -80,6 +82,7 @@
   --wrong: #ff7a8a; --wrong-shade: #f0586a; --wrong-soft: #3a1c22;
   --warn: #f2b247; --warn-soft: #382c16;
   --gold: #ffc94d; --gold-shade: #d0950b;
+  --chart: #7382fa;
   color-scheme: dark;
 }
 
@@ -123,6 +126,7 @@
   --color-warn-soft: var(--warn-soft);
   --color-gold: var(--gold);
   --color-flame: var(--flame);
+  --color-chart: var(--chart);
   --color-indigo: var(--indigo);
   --color-indigo-soft: var(--indigo-soft);
   --shadow-lift: var(--shadow-lift);

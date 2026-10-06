@@ -6,6 +6,7 @@ import { IconPractice, IconSearch, IconTrail, IconUser } from '@/components/ui/i
 import { NAV_ITEMS } from './nav';
 import { StatChips } from './GameStats';
 import { ThemeToggle } from './ThemeToggle';
+import { FeedbackButton } from '@/components/feedback/FeedbackButton';
 
 const ICONS = { trail: IconTrail, practice: IconPractice, search: IconSearch, user: IconUser } as const;
 
@@ -52,7 +53,10 @@ export function SideNav() {
           );
         })}
       </nav>
-      <div className="mt-auto px-2"><ThemeToggle /></div>
+      <div className="mt-auto grid gap-2 px-2">
+        <FeedbackButton className="btn btn-ghost w-full justify-start" label={<>💬 Enviar feedback</>} />
+        <ThemeToggle />
+      </div>
     </aside>
   );
 }

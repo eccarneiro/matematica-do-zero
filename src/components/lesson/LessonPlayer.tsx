@@ -12,6 +12,7 @@ import { progressStore, useProgress } from '@/progress/store';
 import { useGameStats } from '@/progress/useGameStats';
 import { Confetti } from './Confetti';
 import { Stamp } from '@/components/dashboard/Stamp';
+import { FeedbackButton } from '@/components/feedback/FeedbackButton';
 
 const todayXp = () => progressStore.get().days?.[dayKey()] ?? 0;
 
@@ -219,6 +220,7 @@ function Celebration({ xpToday, onClose, nextLesson }: { xpToday: number; onClos
           <Link href="/" className="btn btn-ghost">Trilha</Link>
           <button type="button" onClick={onClose} className="btn btn-ghost">Treinar mais</button>
         </div>
+        <FeedbackButton className="btn-text mx-auto text-[0.95rem] font-bold" label="Como foi esta aula? Conte para a gente" prompt="Como foi esta aula?" />
       </div>
     </div>
   );

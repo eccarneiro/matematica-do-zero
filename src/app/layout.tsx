@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Bricolage_Grotesque, Newsreader, Plus_Jakarta_Sans } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { Providers } from '@/components/layout/Providers';
 import { authEnabled } from '@/server/auth';
 import './globals.css';
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           Pular para o conteúdo
         </a>
         <Providers authEnabled={authEnabled}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

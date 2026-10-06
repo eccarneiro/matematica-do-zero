@@ -29,6 +29,14 @@ O site funciona sem nenhuma variável de ambiente: o progresso fica no `localSto
 Para o login com Google e a sincronização na nuvem, copie `.env.example` para `.env.local` e preencha.
 Depois de configurar o banco, crie as tabelas com `npm run db:migrate`.
 
+## Painel de administração
+
+Em `/admin` ficam as métricas (alunos ativos por dia, cadastros, distribuição por nível,
+funil das aulas, acerto por tópico, sequências) e os feedbacks enviados pelos alunos.
+O acesso exige login com Google e um e-mail listado em `ADMIN_EMAILS`. Para qualquer
+outra pessoa a página não existe (404). Visitas sem login são contadas pelo
+Vercel Web Analytics (aba Analytics do projeto na Vercel).
+
 ## Estrutura
 
 ```

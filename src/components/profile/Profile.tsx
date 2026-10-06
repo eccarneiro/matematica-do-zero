@@ -7,6 +7,7 @@ import { progressStore, useProgress } from '@/progress/store';
 import { useGameStats } from '@/progress/useGameStats';
 import { AccountCard } from '@/components/layout/AuthButton';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { FeedbackButton } from '@/components/feedback/FeedbackButton';
 import { IconFlame, IconStar } from '@/components/ui/icons';
 
 export function Profile() {
@@ -75,6 +76,7 @@ export function Profile() {
         <h2 className="mb-3 text-[1.5rem]">Ajustes</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <ThemeToggle />
+          <FeedbackButton className="btn btn-ghost justify-start" label={<>💬 Enviar feedback</>} />
           <button type="button" onClick={reset} className="btn btn-ghost justify-start normal-case text-danger">
             Apagar progresso deste aparelho
           </button>

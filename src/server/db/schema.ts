@@ -1,4 +1,4 @@
-import { bigint, boolean, integer, pgTable, primaryKey, smallint, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigint, boolean, integer, pgTable, primaryKey, serial, smallint, text, timestamp } from 'drizzle-orm/pg-core';
 
 /** Alunos que entraram com Google. id = "google:<sub>". */
 export const users = pgTable('users', {
@@ -47,3 +47,19 @@ export const dailyXp = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.day] })],
 );
+
+/** Feedback enviado pelos alunos (logados ou não). */
+export const feedback = pgTable('feedback', {
+  id: serial('id').primaryKey(),
+  userId: text('user_id').references(() => users.id, { onDelete: 'set null' }),
+  /** E-mail opcional de quem não está logado e quer resposta. */
+  email: text('email'),
+  /** Nota de 1 a 5 (opcional). */
+  rating: smallint('rating'),
+  message: text('message').notNull(),
+  /** Página de onde veio o feedback. */
+  page: text('page'),
+  /** 'novo' | 'lido' */
+  status: text('status').notNull().default('novo'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
